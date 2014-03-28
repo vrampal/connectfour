@@ -1,6 +1,6 @@
-package vrampal.connectFour.core.impl;
+package vrampal.connectfour.core.impl;
 
-import vrampal.connectFour.core.Player;
+import vrampal.connectfour.core.Player;
 
 interface GameEndListener {
 

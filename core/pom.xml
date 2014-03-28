@@ -4,11 +4,11 @@
 
 	<parent>
 		<groupId>vrampal</groupId>
-		<artifactId>connectFour</artifactId>
+		<artifactId>connectfour</artifactId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>vrampal.connectFour</groupId>
+	<groupId>vrampal.connectfour</groupId>
 	<artifactId>core</artifactId>
 
 	<dependencies>

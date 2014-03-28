@@ -1,4 +1,4 @@
-package vrampal.connectFour.core;
+package vrampal.connectfour.core;
 
 import java.awt.Color;
 

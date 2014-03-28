@@ -1,4 +1,4 @@
-package vrampal.connectFour.core.impl;
+package vrampal.connectfour.core.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -10,8 +10,10 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import org.junit.Before;
 import org.junit.Test;
 
-import vrampal.connectFour.core.ConnectFourException;
-import vrampal.connectFour.core.Player;
+import vrampal.connectfour.core.ConnectFourException;
+import vrampal.connectfour.core.Player;
+import vrampal.connectfour.core.impl.BoardImpl;
+import vrampal.connectfour.core.impl.PlayerImpl;
 
 public class BoardImplTest {
 

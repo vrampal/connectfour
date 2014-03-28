@@ -1,13 +1,13 @@
-package vrampal.connectFour.core.impl;
+package vrampal.connectfour.core.impl;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
-import vrampal.connectFour.core.Game;
-import vrampal.connectFour.core.GameStatus;
-import vrampal.connectFour.core.Player;
+import vrampal.connectfour.core.Game;
+import vrampal.connectfour.core.GameStatus;
+import vrampal.connectfour.core.Player;
 
 public class GameImpl implements Game, GameEndListener {
 

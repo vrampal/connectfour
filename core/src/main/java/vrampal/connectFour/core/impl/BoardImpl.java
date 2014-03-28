@@ -1,8 +1,8 @@
-package vrampal.connectFour.core.impl;
+package vrampal.connectfour.core.impl;
 
-import vrampal.connectFour.core.Board;
-import vrampal.connectFour.core.ConnectFourException;
-import vrampal.connectFour.core.Player;
+import vrampal.connectfour.core.Board;
+import vrampal.connectfour.core.ConnectFourException;
+import vrampal.connectfour.core.Player;
 
 public class BoardImpl implements Board {
 

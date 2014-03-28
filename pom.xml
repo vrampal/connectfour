@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>vrampal</groupId>
-	<artifactId>connectFour</artifactId>
+	<artifactId>connectfour</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
