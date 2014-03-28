@@ -12,8 +12,6 @@ import org.junit.Test;
 
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Player;
-import vrampal.connectfour.core.impl.BoardImpl;
-import vrampal.connectfour.core.impl.PlayerImpl;
 
 public class BoardImplTest {
 
@@ -57,8 +55,13 @@ public class BoardImplTest {
   }
 
   @Test(expected = ConnectFourException.class)
-  public void testBoardImplGameEndListenerIntIntInvalid() {
+  public void testBoardImplGameEndListenerIntIntInvalid1() {
     board = new BoardImpl(endGameListener, -2, 8);
+  }
+
+  @Test(expected = ConnectFourException.class)
+  public void testBoardImplGameEndListenerIntIntInvalid2() {
+    board = new BoardImpl(endGameListener, 3, 0);
   }
 
   @Test(expected = ConnectFourException.class)
@@ -104,6 +107,20 @@ public class BoardImplTest {
     assertSame(player1, board.getCell(6, 0));
 
     verifyZeroInteractions(endGameListener);
+  }
+
+  @Test(expected = ConnectFourException.class)
+  public void testDropDiscFull() {
+    Player player1 = mock(Player.class);
+    Player player2 = mock(Player.class);
+
+    board.dropDisc(player1, 3);
+    board.dropDisc(player2, 3);
+    board.dropDisc(player1, 3);
+    board.dropDisc(player2, 3);
+    board.dropDisc(player1, 3);
+    board.dropDisc(player2, 3);
+    board.dropDisc(player1, 3);
   }
 
   @Test
@@ -211,4 +228,5 @@ public class BoardImplTest {
     verify(endGameListener, never()).victory(player2);
     verify(endGameListener).draw();
   }
+
 }

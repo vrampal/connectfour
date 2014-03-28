@@ -30,7 +30,7 @@ public class BoardImpl implements Board {
     if (width <= 0) {
       throw new ConnectFourException("Invalid width: " + width);
     }
-    if (height < 0) {
+    if (height <= 0) {
       throw new ConnectFourException("Invalid height: " + height);
     }
 
@@ -122,20 +122,16 @@ public class BoardImpl implements Board {
     // Does the latest drop creates an horizontal line ?
     if (getHorizontalLength(colIdx, rowIdx) >= LENGTH_TO_WIN) {
       endGameListener.victory(player);
-    }
     // Does the latest drop creates a vertical line ?
-    else if (getVerticalLength(colIdx, rowIdx) >= LENGTH_TO_WIN) {
+    } else if (getVerticalLength(colIdx, rowIdx) >= LENGTH_TO_WIN) {
       endGameListener.victory(player);
-    }
     // Does the latest drop creates a diagonal line ?
-    else if (getDiagonalLength1(colIdx, rowIdx) >= LENGTH_TO_WIN) {
+    } else if (getDiagonalLength1(colIdx, rowIdx) >= LENGTH_TO_WIN) {
       endGameListener.victory(player);
-    }
     // Does the latest drop creates a diagonal line ?
-    else if (getDiagonalLength2(colIdx, rowIdx) >= LENGTH_TO_WIN) {
+    } else if (getDiagonalLength2(colIdx, rowIdx) >= LENGTH_TO_WIN) {
       endGameListener.victory(player);
-    }
-    else if (isFull()) {
+    } else if (isFull()) {
       endGameListener.draw();
     }
   }
@@ -155,8 +151,7 @@ public class BoardImpl implements Board {
       columnRight++;
     }
 
-    int length = columnRight - columnLeft + 1;
-    return length;
+    return columnRight - columnLeft + 1;
   }
 
   /**
@@ -174,8 +169,7 @@ public class BoardImpl implements Board {
       rowUp++;
     }
 
-    int length = rowUp - rowDown + 1;
-    return length;
+    return rowUp - rowDown + 1;
   }
 
   /**
@@ -198,8 +192,7 @@ public class BoardImpl implements Board {
       rowUp++;
     }
 
-    int length = columnRight - columnLeft + 1;
-    return length;
+    return columnRight - columnLeft + 1;
   }
 
   /**
@@ -221,8 +214,7 @@ public class BoardImpl implements Board {
       rowDown--;
     }
 
-    int length = columnRight - columnLeft + 1;
-    return length;
+    return columnRight - columnLeft + 1;
   }
 
 }
