@@ -1,6 +1,7 @@
 package vrampal.connectfour.core.impl;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import vrampal.connectfour.core.Player;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(of = { "name" })
-public class PlayerImpl implements Player {
+public class PlayerImpl implements Player, Serializable {
 
   public static final PlayerImpl EMPTY = new PlayerImpl("Empty", ' ', Color.WHITE);
 

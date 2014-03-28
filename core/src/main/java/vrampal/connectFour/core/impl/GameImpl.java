@@ -1,6 +1,7 @@
 package vrampal.connectfour.core.impl;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 
-public class GameImpl implements Game, GameEndListener {
+public class GameImpl implements Game, GameEndListener, Serializable {
 
   @Getter
   private final String id;
@@ -38,10 +39,11 @@ public class GameImpl implements Game, GameEndListener {
     players = new ArrayList<>(2);
     players.add(new PlayerImpl("Yellow", 'Y', Color.YELLOW));
     players.add(new PlayerImpl("Red", 'R', Color.RED));
+    status = GameStatus.ONGOING;
   }
 
   @Override
-  public void draw() {
+  public void drawGame() {
     status = GameStatus.FINISHED;
   }
 
@@ -53,13 +55,19 @@ public class GameImpl implements Game, GameEndListener {
 
   @Override
   public Player getCurrentPlayer() {
-    return players.get(currentPlayerIndex);
+    Player currentPlayer = null;
+    if (status == GameStatus.ONGOING) {
+      currentPlayer = players.get(currentPlayerIndex);
+    }
+    return currentPlayer;
   }
 
   @Override
   public void dropDisc(int colIdx) {
-    board.dropDisc(getCurrentPlayer(), colIdx);
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    if (status == GameStatus.ONGOING) {
+      board.dropDisc(getCurrentPlayer(), colIdx);
+      currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
   }
 
 }

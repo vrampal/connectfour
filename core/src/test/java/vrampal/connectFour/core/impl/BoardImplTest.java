@@ -133,7 +133,7 @@ public class BoardImplTest {
     board.dropDisc(player1, 3);
 
     verify(endGameListener).victory(player1);
-    verify(endGameListener, never()).draw();
+    verify(endGameListener, never()).drawGame();
   }
 
   @Test
@@ -146,7 +146,7 @@ public class BoardImplTest {
     board.dropDisc(player1, 3);
 
     verify(endGameListener).victory(player1);
-    verify(endGameListener, never()).draw();
+    verify(endGameListener, never()).drawGame();
   }
 
   @Test
@@ -168,7 +168,7 @@ public class BoardImplTest {
 
     verify(endGameListener).victory(player1);
     verify(endGameListener, never()).victory(player2);
-    verify(endGameListener, never()).draw();
+    verify(endGameListener, never()).drawGame();
   }
 
   @Test
@@ -226,7 +226,7 @@ public class BoardImplTest {
 
     verify(endGameListener, never()).victory(player1);
     verify(endGameListener, never()).victory(player2);
-    verify(endGameListener).draw();
+    verify(endGameListener).drawGame();
   }
 
 }

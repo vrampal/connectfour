@@ -1,8 +1,9 @@
 package vrampal.connectfour.core;
 
+/**
+ * Unchecked exception for ConnectFour. Message is mandatory.
+ */
 public class ConnectFourException extends RuntimeException {
-
-  private static final long serialVersionUID = -7258111692186320847L;
 
   public ConnectFourException(String message) {
     super(message);

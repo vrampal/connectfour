@@ -34,7 +34,7 @@ public class ConnectFourConsole {
 
     Player winner = game.getWinner();
     if (winner != null) {
-      System.out.println(winner.getName() + " win the game.");
+      System.out.println(winner.getName() + " won the game.");
     } else {
       System.out.println("It's a draw game.");
     }
@@ -58,8 +58,8 @@ public class ConnectFourConsole {
   }
 
   private void printBoard(Board board) {
-    int width = board.getWidth();
     int height = board.getHeight();
+    int width = board.getWidth();
 
     System.out.println();
     for (int rowIdx = height; rowIdx > 0; rowIdx--) {

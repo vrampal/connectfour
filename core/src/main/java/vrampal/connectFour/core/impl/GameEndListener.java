@@ -4,7 +4,7 @@ import vrampal.connectfour.core.Player;
 
 interface GameEndListener {
 
-  void draw();
+  void drawGame();
 
   void victory(Player player);
 

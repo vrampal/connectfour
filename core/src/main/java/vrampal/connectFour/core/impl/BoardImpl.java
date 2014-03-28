@@ -1,10 +1,12 @@
 package vrampal.connectfour.core.impl;
 
+import java.io.Serializable;
+
 import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Player;
 
-public class BoardImpl implements Board {
+public class BoardImpl implements Board, Serializable {
 
   private static final int DEFAULT_WIDTH = 7;
 
@@ -132,7 +134,7 @@ public class BoardImpl implements Board {
     } else if (getDiagonalLength2(colIdx, rowIdx) >= LENGTH_TO_WIN) {
       endGameListener.victory(player);
     } else if (isFull()) {
-      endGameListener.draw();
+      endGameListener.drawGame();
     }
   }
 
