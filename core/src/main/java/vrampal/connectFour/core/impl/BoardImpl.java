@@ -1,8 +1,8 @@
-package vrampal.demo.connectFour.core.impl;
+package vrampal.connectFour.core.impl;
 
-import vrampal.demo.connectFour.core.Board;
-import vrampal.demo.connectFour.core.ConnectFourException;
-import vrampal.demo.connectFour.core.Player;
+import vrampal.connectFour.core.Board;
+import vrampal.connectFour.core.ConnectFourException;
+import vrampal.connectFour.core.Player;
 
 public class BoardImpl implements Board {
 
@@ -151,7 +151,7 @@ public class BoardImpl implements Board {
       columnLeft--;
     }
     int columnRight = colIdx;
-    while ((columnRight < getWidth()) && (getCellFast(columnRight + 1, rowIdx) == player)) {
+    while ((columnRight < (getWidth() - 1)) && (getCellFast(columnRight + 1, rowIdx) == player)) {
       columnRight++;
     }
 
@@ -170,7 +170,7 @@ public class BoardImpl implements Board {
       rowDown--;
     }
     int rowUp = row;
-    while ((rowUp < getHeight()) && (getCellFast(column, rowUp + 1) == player)) {
+    while ((rowUp < (getHeight() - 1)) && (getCellFast(column, rowUp + 1) == player)) {
       rowUp++;
     }
 
@@ -192,7 +192,8 @@ public class BoardImpl implements Board {
     }
     int columnRight = column;
     int rowUp = row;
-    while ((columnRight < getWidth()) && (rowUp < getHeight()) && (getCell(columnRight + 1, rowUp + 1) == player)) {
+    while ((columnRight < (getWidth() - 1)) && (rowUp < (getHeight() - 1))
+        && (getCell(columnRight + 1, rowUp + 1) == player)) {
       columnRight++;
       rowUp++;
     }
@@ -209,13 +210,13 @@ public class BoardImpl implements Board {
 
     int columnLeft = column;
     int rowUp = row;
-    while ((columnLeft > 0) && (rowUp < getHeight()) && (getCell(columnLeft - 1, rowUp + 1) == player)) {
+    while ((columnLeft > 0) && (rowUp < (getHeight() - 1)) && (getCell(columnLeft - 1, rowUp + 1) == player)) {
       columnLeft--;
       rowUp++;
     }
     int columnRight = column;
     int rowDown = row;
-    while ((columnRight < getWidth()) && (rowDown > 0) && (getCell(columnRight + 1, rowDown - 1) == player)) {
+    while ((columnRight < (getWidth() - 1)) && (rowDown > 0) && (getCell(columnRight + 1, rowDown - 1) == player)) {
       columnRight++;
       rowDown--;
     }

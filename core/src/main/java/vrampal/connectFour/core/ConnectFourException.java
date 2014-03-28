@@ -1,4 +1,4 @@
-package vrampal.demo.connectFour.core;
+package vrampal.connectFour.core;
 
 public class ConnectFourException extends RuntimeException {
 

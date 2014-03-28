@@ -1,4 +1,4 @@
-package vrampal.demo.connectFour.core.impl;
+package vrampal.connectFour.core.impl;
 
 import java.awt.Color;
 
@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import vrampal.demo.connectFour.core.Player;
+import vrampal.connectFour.core.Player;
 
 @NoArgsConstructor
 @AllArgsConstructor

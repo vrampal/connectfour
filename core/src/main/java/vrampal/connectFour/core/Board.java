@@ -1,4 +1,4 @@
-package vrampal.demo.connectFour.core;
+package vrampal.connectFour.core;
 
 /**
  * 2D board implementation, 3D is not (yet) supported.
