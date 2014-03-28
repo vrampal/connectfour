@@ -2,27 +2,12 @@ package vrampal.demo.connectFour.core;
 
 import java.awt.Color;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+public interface Player {
 
-@NoArgsConstructor
-@AllArgsConstructor
-class Player {
+  String getName();
 
-  public static final Player EMPTY = new Player("Empty", 'O', Color.WHITE);
+  char getLetter();
 
-  @Getter
-  @Setter
-  private String name;
-
-  @Getter
-  @Setter
-  private char letter;
-
-  @Getter
-  @Setter
-  private Color color;
+  Color getColor();
 
 }

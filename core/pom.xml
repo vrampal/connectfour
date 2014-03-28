@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>vrampal.demo</groupId>
+		<groupId>vrampal</groupId>
 		<artifactId>connectFour</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>vrampal.demo.connectFour</groupId>
+	<groupId>vrampal.connectFour</groupId>
 	<artifactId>core</artifactId>
 
 	<dependencies>
@@ -17,6 +17,18 @@
 			<artifactId>lombok</artifactId>
 			<version>1.12.6</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.6</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
