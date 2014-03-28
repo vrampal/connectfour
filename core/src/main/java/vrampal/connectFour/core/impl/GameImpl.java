@@ -36,8 +36,8 @@ public class GameImpl implements Game, GameEndListener {
     this.id = id;
     board = new BoardImpl(this);
     players = new ArrayList<>(2);
-    players.add(new PlayerImpl("Player 1", 'Y', Color.YELLOW));
-    players.add(new PlayerImpl("Player 2", 'R', Color.RED));
+    players.add(new PlayerImpl("Yellow", 'Y', Color.YELLOW));
+    players.add(new PlayerImpl("Red", 'R', Color.RED));
   }
 
   @Override

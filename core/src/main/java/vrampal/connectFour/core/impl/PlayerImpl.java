@@ -14,7 +14,7 @@ import vrampal.connectfour.core.Player;
 @ToString(of = { "name" })
 public class PlayerImpl implements Player {
 
-  public static final PlayerImpl EMPTY = new PlayerImpl("Empty", 'O', Color.WHITE);
+  public static final PlayerImpl EMPTY = new PlayerImpl("Empty", ' ', Color.WHITE);
 
   @Getter
   @Setter
