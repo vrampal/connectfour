@@ -1,5 +1,6 @@
 package vrampal.connectfour.core.impl;
 
+import java.awt.Color;
 import java.io.Serializable;
 
 import vrampal.connectfour.core.Board;
@@ -7,6 +8,8 @@ import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Player;
 
 public class BoardImpl implements Board, Serializable {
+
+  static final Player EMPTY = new PlayerImpl("", ' ', Color.WHITE);
 
   private static final int DEFAULT_WIDTH = 7;
 
@@ -66,7 +69,7 @@ public class BoardImpl implements Board, Serializable {
   void reset() {
     for (Player[] column : content) {
       for (int rowIdx = 0; rowIdx < column.length; rowIdx++) {
-        column[rowIdx] = PlayerImpl.EMPTY;
+        column[rowIdx] = EMPTY;
       }
     }
   }
@@ -78,12 +81,12 @@ public class BoardImpl implements Board, Serializable {
     checkColIdx(colIdx);
 
     Player[] column = content[colIdx];
-    if (column[column.length - 1] != PlayerImpl.EMPTY) {
+    if (column[column.length - 1] != EMPTY) {
       throw new ConnectFourException("Column is full");
     }
 
     int rowIdx = column.length;
-    while ((rowIdx > 0) && (column[rowIdx - 1] == PlayerImpl.EMPTY)) {
+    while ((rowIdx > 0) && (column[rowIdx - 1] == EMPTY)) {
       rowIdx--;
     }
     column[rowIdx] = player;
@@ -111,7 +114,7 @@ public class BoardImpl implements Board, Serializable {
 
   private boolean isFull() {
     for (Player[] column : content) {
-      if (column[column.length - 1] == PlayerImpl.EMPTY) {
+      if (column[column.length - 1] == EMPTY) {
         return false;
       }
     }

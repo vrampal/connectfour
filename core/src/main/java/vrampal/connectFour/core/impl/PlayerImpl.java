@@ -15,8 +15,6 @@ import vrampal.connectfour.core.Player;
 @ToString(of = { "name" })
 public class PlayerImpl implements Player, Serializable {
 
-  public static final PlayerImpl EMPTY = new PlayerImpl("Empty", ' ', Color.WHITE);
-
   @Getter
   @Setter
   private String name = "";

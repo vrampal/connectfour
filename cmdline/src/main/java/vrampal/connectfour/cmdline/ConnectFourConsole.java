@@ -3,6 +3,7 @@ package vrampal.connectfour.cmdline;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.ConnectFourException;
@@ -17,26 +18,29 @@ public class ConnectFourConsole {
     new ConnectFourConsole().play();
   }
 
-  private final Game game = new GameImpl();
+  private final Game game = new GameImpl("");
 
   private final BufferedReader buffRead = new BufferedReader(new InputStreamReader(System.in));
 
+  private final PrintStream out = System.out;
+
   public void play() {
+    game.start();
     while (game.getStatus() != GameStatus.FINISHED) {
       try {
         int colIdx = readColIdx();
         game.dropDisc(colIdx - 1);
         printBoard(game.getBoard());
       } catch (ConnectFourException e) {
-        System.out.println(e.getMessage());
+        out.println(e.getMessage());
       }
     }
 
     Player winner = game.getWinner();
     if (winner != null) {
-      System.out.println(winner.getName() + " won the game.");
+      out.println(winner.getName() + " won the game.");
     } else {
-      System.out.println("It's a draw game.");
+      out.println("It's a draw game.");
     }
   }
 
@@ -44,14 +48,14 @@ public class ConnectFourConsole {
     int colIdx = -1;
     while (colIdx < 0) {
       try {
-        System.out.println("Now playing: " + game.getCurrentPlayer().getName());
-        System.out.print("Type a column number: ");
+        out.println("Now playing: " + game.getCurrentPlayer().getName());
+        out.print("Type a column number: ");
         String line = buffRead.readLine();
         if (line != null) {
           colIdx = Integer.parseInt(line);
         }
       } catch (IOException | NumberFormatException e) {
-        System.out.println("Error while reading your input.");
+        out.println("Error while reading your input.");
       }
     }
     return colIdx;
@@ -61,22 +65,22 @@ public class ConnectFourConsole {
     int height = board.getHeight();
     int width = board.getWidth();
 
-    System.out.println();
+    out.println();
     for (int rowIdx = height; rowIdx > 0; rowIdx--) {
-      System.out.print(rowIdx + " ");
+      out.print(rowIdx + " ");
       for (int colIdx = 1; colIdx <= width; colIdx++) {
         char c = board.getCell(colIdx - 1, rowIdx - 1).getLetter();
-        System.out.print(c + " ");
+        out.print(c + " ");
       }
-      System.out.println();
+      out.println();
     }
 
-    System.out.print("  ");
+    out.print("  ");
     for (int colIdx = 1; colIdx <= width; colIdx++) {
-      System.out.print(colIdx + " ");
+      out.print(colIdx + " ");
     }
-    System.out.println();
-    System.out.println();
+    out.println();
+    out.println();
   }
 
 }

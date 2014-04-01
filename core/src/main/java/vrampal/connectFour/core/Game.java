@@ -1,20 +1,22 @@
 package vrampal.connectfour.core;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface Game {
 
   String getId();
 
-  Collection<Player> getPlayers();
+  GameStatus getStatus();
 
   Board getBoard();
+
+  List<Player> getAllPlayers();
+
+  void start();
 
   Player getCurrentPlayer();
 
   void dropDisc(int colIdx);
-
-  GameStatus getStatus();
 
   Player getWinner();
 

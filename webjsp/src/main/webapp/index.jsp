@@ -5,7 +5,8 @@
 <%
 	Game game = (Game) session.getAttribute("game");
 	if (game == null) {
-	  game = new GameImpl();
+	  game = new GameImpl("");
+	  game.start();
 	  session.setAttribute("game", game);
 	}
 
