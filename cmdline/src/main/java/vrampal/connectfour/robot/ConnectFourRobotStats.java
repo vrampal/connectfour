@@ -8,7 +8,7 @@ public class ConnectFourRobotStats implements Runnable {
     new ConnectFourRobotStats().run();
   }
 
-  private static final int NB_TOTAL_GAME = 1000000;
+  private static final int NB_TOTAL_GAME = 100000;
 
   private int nbYellowWin = 0;
 
