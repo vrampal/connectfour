@@ -10,9 +10,9 @@ public class ConnectFourRobotStats implements Runnable {
 
   private static final int NB_TOTAL_GAME = 1000000;
 
-  private int nbRedWin = 0;
-
   private int nbYellowWin = 0;
+
+  private int nbRedWin = 0;
 
   private int nbDraw = 0;
 
@@ -26,18 +26,18 @@ public class ConnectFourRobotStats implements Runnable {
       Player winner = robotGame.getGame().getWinner();
       if (winner == null) {
         nbDraw++;
-      } else if (winner.getName().equals("Red")) {
-        nbRedWin++;
       } else if (winner.getName().equals("Yellow")) {
         nbYellowWin++;
+      } else if (winner.getName().equals("Red")) {
+        nbRedWin++;
       } else {
         throw new RuntimeException("Unknown winner");
       }
     }
     long endTime = System.currentTimeMillis();
 
-    System.out.println("Nb red win: " + nbRedWin);
     System.out.println("Nb yellow win: " + nbYellowWin);
+    System.out.println("Nb red win: " + nbRedWin);
     System.out.println("Nb draw: " + nbDraw);
     System.out.println("Elapsed time: " + (endTime - beginTime) + " ms");
   }
