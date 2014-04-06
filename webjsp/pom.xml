@@ -1,29 +1,28 @@
 <?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>vrampal</groupId>
-		<artifactId>connectfour</artifactId>
-		<version>0.1-SNAPSHOT</version>
-	</parent>
+  <parent>
+    <groupId>vrampal</groupId>
+    <artifactId>connectfour</artifactId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
 
-	<groupId>vrampal.connectfour</groupId>
-	<artifactId>webjsp</artifactId>
-	<packaging>war</packaging>
+  <groupId>vrampal.connectfour</groupId>
+  <artifactId>webjsp</artifactId>
+  <packaging>war</packaging>
 
-	<dependencies>
-		<dependency>
-			<groupId>vrampal.connectfour</groupId>
-			<artifactId>core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>vrampal.connectfour</groupId>
+      <artifactId>core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 
-	<build>
-		<finalName>connect-four-jsp</finalName>
-	</build>
+  <build>
+    <finalName>connect-four-jsp</finalName>
+  </build>
 
 </project>
