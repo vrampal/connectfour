@@ -12,7 +12,7 @@ public interface Game {
 
   List<Player> getAllPlayers();
 
-  void start();
+  void begin();
 
   Player getCurrentPlayer();
 

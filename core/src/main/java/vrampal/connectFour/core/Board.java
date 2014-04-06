@@ -13,4 +13,10 @@ public interface Board {
 
   Player getCell(int colIdx, int rowIdx);
 
+  Player getEmptyPlayer();
+
+  boolean isColumnFull(int colIdx);
+
+  boolean isFull();
+
 }

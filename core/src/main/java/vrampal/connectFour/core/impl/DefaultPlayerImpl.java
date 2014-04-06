@@ -13,7 +13,7 @@ import vrampal.connectfour.core.Player;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(of = { "name" })
-public class PlayerImpl implements Player, Serializable {
+public class DefaultPlayerImpl implements Player, Serializable {
 
   @Getter
   @Setter

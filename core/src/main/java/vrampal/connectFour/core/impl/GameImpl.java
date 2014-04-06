@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import lombok.Getter;
 import vrampal.connectfour.core.ConnectFourException;
@@ -30,25 +31,23 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   @Getter
   private Player winner = null;
 
-  public GameImpl(String id) {
-    this.id = id;
+  private GameImpl(int nbPlayers) {
+    id = UUID.randomUUID().toString();
     board = new BoardImpl(this);
-    players = new ArrayList<>(2);
-    createDefaultPlayers();
+    players = new ArrayList<>(nbPlayers);
   }
 
-  public GameImpl(String id, List<Player> players) {
-    this.id = id;
-    board = new BoardImpl(this);
-    this.players = new ArrayList<>(players.size());
-    this.players.addAll(players);
-  }
-
-  private void createDefaultPlayers() {
-    Player yellow = new PlayerImpl("Yellow", 'Y', Color.YELLOW);
+  public GameImpl() {
+    this(2);
+    Player yellow = new DefaultPlayerImpl("Yellow", 'Y', Color.YELLOW);
     players.add(yellow);
-    Player red = new PlayerImpl("Red", 'R', Color.RED);
+    Player red = new DefaultPlayerImpl("Red", 'R', Color.RED);
     players.add(red);
+  }
+
+  public GameImpl(List<Player> players) {
+    this(players.size());
+    this.players.addAll(players);
   }
 
   @Override
@@ -57,7 +56,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   }
 
   @Override
-  public void start() {
+  public void begin() {
     if (status != GameStatus.INIT) {
       throw new ConnectFourException("Invalid status: " + status);
     }

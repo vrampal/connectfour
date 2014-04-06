@@ -9,7 +9,7 @@ import vrampal.connectfour.core.Player;
 
 public class BoardImpl implements Board, Serializable {
 
-  static final Player EMPTY = new PlayerImpl("", ' ', Color.WHITE);
+  static final Player EMPTY = new DefaultPlayerImpl("", ' ', Color.WHITE);
 
   private static final int DEFAULT_WIDTH = 7;
 
@@ -66,6 +66,27 @@ public class BoardImpl implements Board, Serializable {
     return getCellFast(colIdx, rowIdx);
   }
 
+  @Override
+  public Player getEmptyPlayer() {
+    return EMPTY;
+  }
+
+  @Override
+  public boolean isColumnFull(int colIdx) {
+    Player[] column = content[colIdx];
+    return isColumnFull(column);
+  }
+
+  @Override
+  public boolean isFull() {
+    for (Player[] column : content) {
+      if (!isColumnFull(column)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   void reset() {
     for (Player[] column : content) {
       for (int rowIdx = 0; rowIdx < column.length; rowIdx++) {
@@ -79,12 +100,11 @@ public class BoardImpl implements Board, Serializable {
    */
   void dropDisc(Player player, int colIdx) {
     checkColIdx(colIdx);
-
-    Player[] column = content[colIdx];
-    if (column[column.length - 1] != EMPTY) {
+    if (isColumnFull(colIdx)) {
       throw new ConnectFourException("Column is full");
     }
 
+    Player[] column = content[colIdx];
     int rowIdx = column.length;
     while ((rowIdx > 0) && (column[rowIdx - 1] == EMPTY)) {
       rowIdx--;
@@ -108,17 +128,12 @@ public class BoardImpl implements Board, Serializable {
     }
   }
 
-  private Player getCellFast(int colIdx, int rowIdx) {
-    return content[colIdx][rowIdx];
+  private boolean isColumnFull(Player[] column) {
+    return column[column.length - 1] != EMPTY;
   }
 
-  private boolean isFull() {
-    for (Player[] column : content) {
-      if (column[column.length - 1] == EMPTY) {
-        return false;
-      }
-    }
-    return true;
+  private Player getCellFast(int colIdx, int rowIdx) {
+    return content[colIdx][rowIdx];
   }
 
   private void checkForGameEnd(int colIdx, int rowIdx) {
