@@ -3,10 +3,12 @@ package vrampal.connectfour.core.impl;
 import java.awt.Color;
 import java.io.Serializable;
 
+import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Player;
 
+@Slf4j
 public class BoardImpl implements Board, Serializable {
 
   static final Player EMPTY_PLAYER = new DefaultPlayerImpl("", ' ', Color.WHITE);
@@ -54,6 +56,10 @@ public class BoardImpl implements Board, Serializable {
     }
 
     reset();
+
+    if (log.isInfoEnabled()) {
+      log.info("Creating new board " + width + 'x' + height);
+    }
   }
 
   void reset() {

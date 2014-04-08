@@ -18,6 +18,8 @@ public class ConnectFourRobotStats implements Runnable {
 
   @Override
   public void run() {
+    System.out.println("Running for " + NB_TOTAL_GAME + " games");
+
     long beginTime = System.currentTimeMillis();
     for (int i = 0; i < NB_TOTAL_GAME; i++) {
       ConnectFourRobot robotGame = new ConnectFourRobot(false);
