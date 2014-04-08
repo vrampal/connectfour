@@ -1,0 +1,26 @@
+.board {
+	border-collapse: collapse;
+}
+
+.empty {
+	width: 30px;
+	height: 30px;
+	background-image: url('cell.png');
+	border: 1px solid black;
+}
+
+.red {
+	width: 30px;
+	height: 30px;
+	background-image: url('cell.png');
+	background-color: red;
+	border: 1px solid black;
+}
+
+.yellow {
+	width: 30px;
+	height: 30px;
+	background-image: url('cell.png');
+	background-color: yellow;
+	border: 1px solid black;
+}

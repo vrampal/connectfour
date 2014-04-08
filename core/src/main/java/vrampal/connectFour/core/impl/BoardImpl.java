@@ -9,7 +9,7 @@ import vrampal.connectfour.core.Player;
 
 public class BoardImpl implements Board, Serializable {
 
-  static final Player EMPTY = new DefaultPlayerImpl("", ' ', Color.WHITE);
+  static final Player EMPTY_PLAYER = new DefaultPlayerImpl("", ' ', Color.WHITE);
 
   private static final int DEFAULT_WIDTH = 7;
 
@@ -20,6 +20,13 @@ public class BoardImpl implements Board, Serializable {
   private final GameEndListener endGameListener;
 
   private final Player[][] content;
+
+  /**
+   * Create a board with default size, no listener (for serialization).
+   */
+  BoardImpl() {
+    this(null);
+  }
 
   /**
    * Create a board with default size (7x6).
@@ -49,6 +56,14 @@ public class BoardImpl implements Board, Serializable {
     reset();
   }
 
+  void reset() {
+    for (Player[] column : content) {
+      for (int rowIdx = 0; rowIdx < column.length; rowIdx++) {
+        column[rowIdx] = EMPTY_PLAYER;
+      }
+    }
+  }
+
   @Override
   public int getWidth() {
     return content.length;
@@ -68,11 +83,12 @@ public class BoardImpl implements Board, Serializable {
 
   @Override
   public Player getEmptyPlayer() {
-    return EMPTY;
+    return EMPTY_PLAYER;
   }
 
   @Override
   public boolean isColumnFull(int colIdx) {
+    checkColIdx(colIdx);
     Player[] column = content[colIdx];
     return isColumnFull(column);
   }
@@ -87,18 +103,13 @@ public class BoardImpl implements Board, Serializable {
     return true;
   }
 
-  void reset() {
-    for (Player[] column : content) {
-      for (int rowIdx = 0; rowIdx < column.length; rowIdx++) {
-        column[rowIdx] = EMPTY;
-      }
-    }
-  }
-
   /**
    * Player entry point, drop a disc into a given column.
    */
   void dropDisc(Player player, int colIdx) {
+    if (player == EMPTY_PLAYER) {
+      throw new ConnectFourException("Empty player not allowed to play");
+    }
     checkColIdx(colIdx);
     if (isColumnFull(colIdx)) {
       throw new ConnectFourException("Column is full");
@@ -106,7 +117,7 @@ public class BoardImpl implements Board, Serializable {
 
     Player[] column = content[colIdx];
     int rowIdx = column.length;
-    while ((rowIdx > 0) && (column[rowIdx - 1] == EMPTY)) {
+    while ((rowIdx > 0) && (column[rowIdx - 1] == EMPTY_PLAYER)) {
       rowIdx--;
     }
     column[rowIdx] = player;
@@ -129,7 +140,7 @@ public class BoardImpl implements Board, Serializable {
   }
 
   private boolean isColumnFull(Player[] column) {
-    return column[column.length - 1] != EMPTY;
+    return column[column.length - 1] != EMPTY_PLAYER;
   }
 
   private Player getCellFast(int colIdx, int rowIdx) {
@@ -142,13 +153,13 @@ public class BoardImpl implements Board, Serializable {
     // Does the latest drop creates an horizontal line ?
     if (getHorizontalLength(colIdx, rowIdx) >= LENGTH_TO_WIN) {
       endGameListener.victory(player);
-    // Does the latest drop creates a vertical line ?
+      // Does the latest drop creates a vertical line ?
     } else if (getVerticalLength(colIdx, rowIdx) >= LENGTH_TO_WIN) {
       endGameListener.victory(player);
-    // Does the latest drop creates a diagonal line ?
+      // Does the latest drop creates a diagonal line ?
     } else if (getDiagonalLength1(colIdx, rowIdx) >= LENGTH_TO_WIN) {
       endGameListener.victory(player);
-    // Does the latest drop creates a diagonal line ?
+      // Does the latest drop creates a diagonal line ?
     } else if (getDiagonalLength2(colIdx, rowIdx) >= LENGTH_TO_WIN) {
       endGameListener.victory(player);
     } else if (isFull()) {
@@ -200,14 +211,14 @@ public class BoardImpl implements Board, Serializable {
 
     int columnLeft = column;
     int rowDown = row;
-    while ((columnLeft > 0) && (rowDown > 0) && (getCell(columnLeft - 1, rowDown - 1) == player)) {
+    while ((columnLeft > 0) && (rowDown > 0) && (getCellFast(columnLeft - 1, rowDown - 1) == player)) {
       columnLeft--;
       rowDown--;
     }
     int columnRight = column;
     int rowUp = row;
     while ((columnRight < (getWidth() - 1)) && (rowUp < (getHeight() - 1))
-        && (getCell(columnRight + 1, rowUp + 1) == player)) {
+        && (getCellFast(columnRight + 1, rowUp + 1) == player)) {
       columnRight++;
       rowUp++;
     }
@@ -223,13 +234,13 @@ public class BoardImpl implements Board, Serializable {
 
     int columnLeft = column;
     int rowUp = row;
-    while ((columnLeft > 0) && (rowUp < (getHeight() - 1)) && (getCell(columnLeft - 1, rowUp + 1) == player)) {
+    while ((columnLeft > 0) && (rowUp < (getHeight() - 1)) && (getCellFast(columnLeft - 1, rowUp + 1) == player)) {
       columnLeft--;
       rowUp++;
     }
     int columnRight = column;
     int rowDown = row;
-    while ((columnRight < (getWidth() - 1)) && (rowDown > 0) && (getCell(columnRight + 1, rowDown - 1) == player)) {
+    while ((columnRight < (getWidth() - 1)) && (rowDown > 0) && (getCellFast(columnRight + 1, rowDown - 1) == player)) {
       columnRight++;
       rowDown--;
     }

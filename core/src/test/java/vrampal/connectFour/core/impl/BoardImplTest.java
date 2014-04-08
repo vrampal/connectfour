@@ -35,7 +35,7 @@ public class BoardImplTest {
 
     for (int colIdx = 0; colIdx < 7; colIdx++) {
       for (int rowIdx = 0; rowIdx < 6; rowIdx++) {
-        assertSame(BoardImpl.EMPTY, board.getCell(colIdx, rowIdx));
+        assertSame(BoardImpl.EMPTY_PLAYER, board.getCell(colIdx, rowIdx));
       }
     }
   }
@@ -49,7 +49,7 @@ public class BoardImplTest {
 
     for (int colIdx = 0; colIdx < 15; colIdx++) {
       for (int rowIdx = 0; rowIdx < 10; rowIdx++) {
-        assertSame(BoardImpl.EMPTY, board.getCell(colIdx, rowIdx));
+        assertSame(BoardImpl.EMPTY_PLAYER, board.getCell(colIdx, rowIdx));
       }
     }
   }

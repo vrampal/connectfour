@@ -19,7 +19,7 @@ public class ConnectFourRobot extends AbstractConnectFour {
 
   @Override
   protected int selectPlayColumn() {
-    Board board = getGame().getBoard();
+    Board board = game.getBoard();
     int width = board.getWidth();
     int colIdx = rand.nextInt(width);
     while (board.isColumnFull(colIdx)) {
