@@ -141,13 +141,13 @@ class BoardImpl implements Board, Serializable {
 
   private void checkColIdx(int colIdx) {
     if ((colIdx < 0) || (colIdx >= getWidth())) {
-      throw new ConnectFourException("Invalid column id:" + colIdx);
+      throw new ConnectFourException("Invalid column id: " + colIdx);
     }
   }
 
   private void checkRowIdx(int rowIdx) {
     if ((rowIdx < 0) || (rowIdx >= getHeight())) {
-      throw new ConnectFourException("Invalid row id:" + rowIdx);
+      throw new ConnectFourException("Invalid row id: " + rowIdx);
     }
   }
 

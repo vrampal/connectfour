@@ -8,3 +8,5 @@ Technology used:
 * JSP
 * HTML5
 * CSS
+* JMeter
+* Selenium
