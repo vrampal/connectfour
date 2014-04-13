@@ -2,6 +2,7 @@ package vrampal.connectfour.cmdline;
 
 import java.io.PrintStream;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import vrampal.connectfour.core.Board;
@@ -11,12 +12,12 @@ import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 import vrampal.connectfour.core.impl.GameImpl;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractConnectFour implements Runnable {
 
   private final boolean enableDiplay;
 
-   // TODO use dependency injection
+  // TODO use dependency injection
   @Getter
   protected final Game game = new GameImpl();
 
