@@ -16,6 +16,8 @@ public interface GameReadOnly {
 
   GameStatus getStatus();
 
+  int getTurnNumber();
+
   Player getCurrentPlayer();
 
   Player getWinner();

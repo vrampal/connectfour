@@ -20,6 +20,7 @@ import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
+import vrampal.connectfour.core.data.PlayerData;
 
 @Slf4j
 @EqualsAndHashCode
@@ -32,23 +33,24 @@ public class GameImpl implements Game, GameEndListener, Serializable {
 
   private static final Logger LOG_STATS = LoggerFactory.getLogger(LOG_STATS_NAME);
 
-  private static final Player YELLOW = new PlayerImpl("Yellow", 'Y');
+  private static final Player YELLOW = new PlayerData("Yellow", 'Y');
 
-  private static final Player RED = new PlayerImpl("Red", 'R');
+  private static final Player RED = new PlayerData("Red", 'R');
 
   private static final Random RAND = new Random();
 
   @Getter
-  private String id;
+  private final String id;
 
-  private List<Player> players;
+  private final List<Player> players;
 
   @Getter
-  private BoardImpl board;
+  private final BoardImpl board;
 
   @Getter
   private GameStatus status = GameStatus.INIT;
 
+  @Getter
   private int turnNumber = 0;
 
   @Getter

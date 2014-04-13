@@ -1,4 +1,4 @@
-package vrampal.connectfour.core.impl;
+package vrampal.connectfour.core.data;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
@@ -10,24 +10,24 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import vrampal.connectfour.core.Game;
+import vrampal.connectfour.core.impl.GameImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
-public class GameSerializeTest {
+public class GameDataSerializeTest {
 
   private static final boolean PRINT_OUTPUT = false;
 
-  private Game game;
+  private GameData gameData;
 
   @Before
   public void setUp() throws Exception {
-    game = new GameImpl();
+    Game game = new GameImpl();
 
     game.begin();
     game.dropDisc(3);
@@ -35,6 +35,8 @@ public class GameSerializeTest {
     game.dropDisc(5);
     game.dropDisc(2);
     game.dropDisc(3);
+
+    gameData = new GameData(game);
   }
 
   @Test
@@ -42,72 +44,69 @@ public class GameSerializeTest {
     ByteArrayOutputStream baoStream = new ByteArrayOutputStream();
     ObjectOutputStream ooStream = new ObjectOutputStream(baoStream);
 
-    ooStream.writeObject(game);
+    ooStream.writeObject(gameData);
     byte[] bytes = baoStream.toByteArray();
 
-    System.out.println("Game - Java length: " + bytes.length);
+    System.out.println("GameData - Java length: " + bytes.length);
 
     ByteArrayInputStream baiStream = new ByteArrayInputStream(bytes);
     ObjectInputStream oiStream = new ObjectInputStream(baiStream);
 
-    Game game2 = (Game) oiStream.readObject();
+    GameData gameData2 = (GameData) oiStream.readObject();
 
-    assertEquals(game, game2);
-    assertNotSame(game, game2);
+    assertEquals(gameData, gameData2);
+    assertNotSame(gameData, gameData2);
   }
 
   @Test
-  @Ignore("Not yet finished")
   public void testGoogleGson() {
     Gson gsonSave = new Gson();
-    String jsonStr = gsonSave.toJson(game);
+    String jsonStr = gsonSave.toJson(gameData);
 
-    System.out.println("Game - Google GSON length: " + jsonStr.length());
+    System.out.println("GameData - Google GSON length: " + jsonStr.length());
     if (PRINT_OUTPUT) {
       System.out.println(jsonStr);
     }
 
     Gson gsonRead = new Gson();
-    Game game2 = gsonRead.fromJson(jsonStr, GameImpl.class);
+    GameData gameData2 = gsonRead.fromJson(jsonStr, GameData.class);
 
-    assertEquals(game, game2);
-    assertNotSame(game, game2);
+    assertEquals(gameData, gameData2);
+    assertNotSame(gameData, gameData2);
   }
 
   @Test
-  @Ignore("Not yet finished")
   public void testJackson() throws IOException {
     ObjectMapper mapperSave = new ObjectMapper();
-    String jsonStr = mapperSave.writeValueAsString(game);
+    String jsonStr = mapperSave.writeValueAsString(gameData);
 
-    System.out.println("Game - Jackson length: " + jsonStr.length());
+    System.out.println("GameData - Jackson length: " + jsonStr.length());
     if (PRINT_OUTPUT) {
       System.out.println(jsonStr);
     }
 
     ObjectMapper mapperRead = new ObjectMapper();
-    Game game2 = mapperRead.readValue(jsonStr, GameImpl.class);
+    GameData gameData2 = mapperRead.readValue(jsonStr, GameData.class);
 
-    assertEquals(game, game2);
-    assertNotSame(game, game2);
+    assertEquals(gameData, gameData2);
+    assertNotSame(gameData, gameData2);
   }
 
   @Test
-  @Ignore("Not yet finished")
   public void testXstream() {
     XStream xstreamSave = new XStream();
-    String xmlStr = xstreamSave.toXML(game);
+    String xmlStr = xstreamSave.toXML(gameData);
 
-    System.out.println("Game - Xstream length: " + xmlStr.length());
+    System.out.println("GameData - Xstream length: " + xmlStr.length());
     if (PRINT_OUTPUT) {
       System.out.println(xmlStr);
     }
 
     XStream xstreamRead = new XStream();
-    Game game2 = (GameImpl) xstreamRead.fromXML(xmlStr);
+    GameData gameData2 = (GameData) xstreamRead.fromXML(xmlStr);
 
-    assertEquals(game, game2);
-    assertNotSame(game, game2);
+    assertEquals(gameData, gameData2);
+    assertNotSame(gameData, gameData2);
   }
 
 }

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Player;
+import vrampal.connectfour.core.data.PlayerData;
 
 @Slf4j
 @EqualsAndHashCode(of = { "content" })
@@ -16,7 +17,7 @@ class BoardImpl implements Board, Serializable {
 
   private static final long serialVersionUID = -5581793932297360395L;
 
-  static final Player EMPTY_PLAYER = new PlayerImpl("Empty", ' ');
+  static final Player EMPTY_PLAYER = new PlayerData("Empty", ' ');
 
   private static final int DEFAULT_WIDTH = 7;
 
@@ -106,6 +107,14 @@ class BoardImpl implements Board, Serializable {
     return true;
   }
 
+  Player getCellFast(int colIdx, int rowIdx) {
+    return content[colIdx][rowIdx];
+  }
+
+  void setCellFast(int colIdx, int rowIdx, Player player) {
+    content[colIdx][rowIdx] = player;
+  }
+
   /**
    * Player entry point, drop a disc into a given column.
    */
@@ -144,10 +153,6 @@ class BoardImpl implements Board, Serializable {
 
   private boolean isColumnFull(Player[] column) {
     return column[column.length - 1] != EMPTY_PLAYER;
-  }
-
-  private Player getCellFast(int colIdx, int rowIdx) {
-    return content[colIdx][rowIdx];
   }
 
   private void checkForGameEnd(int colIdx, int rowIdx) {
