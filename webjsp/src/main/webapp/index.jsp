@@ -10,11 +10,10 @@
 <body>
 <%
   helper.pageBegin(request);
-  Game game = helper.getGame();
 %>
 <h2><%=helper.getMainMessage()%></h2>
 <h3><%=helper.getSubMessage()%></h3>
-<p>Game id: <%=game.getId()%></p>
+<p>Game id: <%=helper.getGameId()%></p>
 <table class="cfb"><tbody>
 <%=helper.printBoard()%>
 </tbody></table>

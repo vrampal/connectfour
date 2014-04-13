@@ -67,6 +67,10 @@ public class ConnectFourHelper {
     return subMessage;
   }
 
+  public String getGameId() {
+    return game.getId();
+  }
+
   public String printBoard() {
     StringBuilder buff = new StringBuilder(1300);
 
@@ -103,10 +107,6 @@ public class ConnectFourHelper {
     }
 
     return buff.toString();
-  }
-
-  public Game getGame() {
-    return game;
   }
 
 }
