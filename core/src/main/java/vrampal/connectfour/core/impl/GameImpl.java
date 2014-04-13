@@ -23,9 +23,11 @@ import vrampal.connectfour.core.Player;
 @Slf4j
 public class GameImpl implements Game, GameEndListener, Serializable {
 
-  private static final Random rand = new Random();
+  public static final String LOG_STATS_NAME = "connectfour.game.stats";
 
-  private static final Logger statsLog = LoggerFactory.getLogger("connectfour.stats");
+  private static final Logger LOG_STATS = LoggerFactory.getLogger(LOG_STATS_NAME);
+
+  private static final Random RAND = new Random();
 
   @Getter
   private final String id;
@@ -72,7 +74,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
 
   private String generateShortId() {
     byte[] randData = new byte[6];
-    rand.nextBytes(randData);
+    RAND.nextBytes(randData);
     return Base64.encodeBase64URLSafeString(randData);
   }
 
@@ -114,8 +116,8 @@ public class GameImpl implements Game, GameEndListener, Serializable {
     Player currentPlayer = getCurrentPlayer();
     board.dropDisc(currentPlayer, colIdx);
     turnNumber++;
-    if (statsLog.isInfoEnabled()) {
-      statsLog.info(id + ',' + currentPlayer.getName() + ',' + colIdx + ',' + status);
+    if (LOG_STATS.isInfoEnabled()) {
+      LOG_STATS.info(id + ',' + currentPlayer.getName() + ',' + colIdx + ',' + status);
     }
   }
 

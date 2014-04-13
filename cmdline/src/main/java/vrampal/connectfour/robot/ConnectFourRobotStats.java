@@ -1,5 +1,6 @@
 package vrampal.connectfour.robot;
 
+import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.Player;
 
 public class ConnectFourRobotStats implements Runnable {
@@ -22,19 +23,12 @@ public class ConnectFourRobotStats implements Runnable {
 
     long beginTime = System.currentTimeMillis();
     for (int i = 0; i < NB_TOTAL_GAME; i++) {
-      ConnectFourRobot robotGame = new ConnectFourRobot(false);
-      robotGame.run();
+      ConnectFourRobot robotRunner = new ConnectFourRobot(false);
+      robotRunner.run();
 
-      Player winner = robotGame.getGame().getWinner();
-      if (winner == null) {
-        nbDraw++;
-      } else if (winner.getName().equals("Yellow")) {
-        nbYellowWin++;
-      } else if (winner.getName().equals("Red")) {
-        nbRedWin++;
-      } else {
-        throw new RuntimeException("Unknown winner");
-      }
+      Game game = robotRunner.getGame();
+      Player winner = game.getWinner();
+      analyeWinner(winner);
     }
     long endTime = System.currentTimeMillis();
 
@@ -42,6 +36,21 @@ public class ConnectFourRobotStats implements Runnable {
     System.out.println("Nb red win: " + nbRedWin);
     System.out.println("Nb draw: " + nbDraw);
     System.out.println("Elapsed time: " + (endTime - beginTime) + " ms");
+  }
+
+  private void analyeWinner(Player winner) {
+    if (winner == null) {
+      nbDraw++;
+    } else {
+      String winnerName = winner.getName();
+      if ("Yellow".equals(winnerName)) {
+        nbYellowWin++;
+      } else if ("Red".equals(winnerName)) {
+        nbRedWin++;
+      } else {
+        throw new IllegalStateException("Unknown winner");
+      }
+    }
   }
 
 }

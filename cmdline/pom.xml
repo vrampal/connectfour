@@ -33,4 +33,35 @@
 
   </dependencies>
 
+  <build>
+    <plugins>
+
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.2</version>
+        <!-- Add the main class in the manifest -->
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>vrampal.connectfour.cmdline.ConnectFourConsole</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.4</version>
+        <!-- run "mvn assembly:single" to have a jar with all dependencies -->
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
 </project>
