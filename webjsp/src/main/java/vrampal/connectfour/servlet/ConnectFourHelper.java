@@ -15,13 +15,14 @@ public class ConnectFourHelper {
 
   private Game game = null;
 
-  private String subMessage = null;
+  private String subMessage = "";
 
   public void pageBegin(HttpServletRequest req) {
 
     HttpSession session = req.getSession();
     game = (Game) session.getAttribute(GAME_KEY);
-    if (game == null) {
+    String resetStr = req.getParameter("reset");
+    if ((game == null) || (resetStr != null)) {
       // TODO use dependency injection
       game = new GameImpl();
       game.begin();
@@ -60,15 +61,6 @@ public class ConnectFourHelper {
 
   public String getSubMessage() {
     return subMessage;
-  }
-
-  public void pageEnd(HttpServletRequest req) {
-
-    HttpSession session = req.getSession();
-
-    if (game.getStatus() == GameStatus.FINISHED) {
-      session.setAttribute(GAME_KEY, null);
-    }
   }
 
   public Game getGame() {

@@ -1,0 +1,30 @@
+.cfb {
+	border-collapse: collapse;
+}
+
+.cfh {
+	text-align: center;
+}
+
+.cfe {
+	width: 30px;
+	height: 30px;
+	background-image: url('cell.png');
+	border: 1px solid black;
+}
+
+.cfr {
+	width: 30px;
+	height: 30px;
+	background-image: url('cell.png');
+	background-color: red;
+	border: 1px solid black;
+}
+
+.cfy {
+	width: 30px;
+	height: 30px;
+	background-image: url('cell.png');
+	background-color: yellow;
+	border: 1px solid black;
+}
