@@ -32,7 +32,7 @@ public class GameSerializeTest {
   }
 
   @Test
-  @Ignore("Not yet stable")
+  @Ignore("Not yet implemented")
   public void testJavaSerialize() {
     fail("Not yet implemented");
   }
@@ -42,6 +42,8 @@ public class GameSerializeTest {
   public void testGoogleGson() {
     Gson gsonSave = new Gson();
     String jsonStr = gsonSave.toJson(game);
+
+    System.out.println(jsonStr);
 
     Gson gsonRead = new Gson();
     Game game2 = gsonRead.fromJson(jsonStr, GameImpl.class);
@@ -56,6 +58,8 @@ public class GameSerializeTest {
     ObjectMapper mapperSave = new ObjectMapper();
     String jsonStr = mapperSave.writeValueAsString(game);
 
+    System.out.println(jsonStr);
+
     ObjectMapper mapperRead = new ObjectMapper();
     Game game2 = mapperRead.readValue(jsonStr, GameImpl.class);
 
@@ -68,6 +72,8 @@ public class GameSerializeTest {
   public void testXstream() {
     XStream xstreamSave = new XStream();
     String xmlStr = xstreamSave.toXML(game);
+
+    System.out.println(xmlStr);
 
     XStream xstreamRead = new XStream();
     Game game2 = (GameImpl) xstreamRead.fromXML(xmlStr);

@@ -1,6 +1,5 @@
 package vrampal.connectfour.core.impl;
 
-import java.awt.Color;
 import java.io.Serializable;
 
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +10,7 @@ import vrampal.connectfour.core.Player;
 @Slf4j
 class BoardImpl implements Board, Serializable {
 
-  static final Player EMPTY_PLAYER = new DefaultPlayerImpl("", ' ', Color.WHITE);
+  static final Player EMPTY_PLAYER = new DefaultPlayerImpl("Empty", ' ');
 
   private static final int DEFAULT_WIDTH = 7;
 

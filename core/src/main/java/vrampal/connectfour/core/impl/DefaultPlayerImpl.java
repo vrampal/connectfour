@@ -1,6 +1,5 @@
 package vrampal.connectfour.core.impl;
 
-import java.awt.Color;
 import java.io.Serializable;
 
 import lombok.AccessLevel;
@@ -18,15 +17,5 @@ class DefaultPlayerImpl implements Player, Serializable {
 
   @Getter
   private final char letter;
-
-  @Getter
-  private final Color color;
-
-  /**
-   * For unit testing only.
-   */
-  DefaultPlayerImpl() {
-    this("", ' ', Color.WHITE);
-  }
 
 }

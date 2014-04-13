@@ -1,6 +1,5 @@
 package vrampal.connectfour.core.impl;
 
-import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +26,10 @@ public class GameImpl implements Game, GameEndListener, Serializable {
 
   private static final Logger LOG_STATS = LoggerFactory.getLogger(LOG_STATS_NAME);
 
+  private static final Player YELLOW = new DefaultPlayerImpl("Yellow", 'Y');
+
+  private static final Player RED = new DefaultPlayerImpl("Red", 'R');
+
   private static final Random RAND = new Random();
 
   @Getter
@@ -47,10 +50,8 @@ public class GameImpl implements Game, GameEndListener, Serializable {
 
   public GameImpl() {
     this(2);
-    Player yellow = new DefaultPlayerImpl("Yellow", 'Y', Color.YELLOW);
-    players.add(yellow);
-    Player red = new DefaultPlayerImpl("Red", 'R', Color.RED);
-    players.add(red);
+    players.add(YELLOW);
+    players.add(RED);
   }
 
   public GameImpl(List<Player> players) {

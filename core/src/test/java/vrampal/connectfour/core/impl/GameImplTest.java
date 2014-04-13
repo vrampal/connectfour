@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +39,11 @@ public class GameImplTest {
   @Test
   public void testBoardImplInt() {
     List<Player> players = new ArrayList<>();
-    players.add(new DefaultPlayerImpl());
-    players.add(new DefaultPlayerImpl());
-    players.add(new DefaultPlayerImpl());
-    players.add(new DefaultPlayerImpl());
-    players.add(new DefaultPlayerImpl());
+    players.add(createPlayer());
+    players.add(createPlayer());
+    players.add(createPlayer());
+    players.add(createPlayer());
+    players.add(createPlayer());
 
     game = new GameImpl(players);
 
@@ -96,12 +97,16 @@ public class GameImplTest {
 
   @Test
   public void testVistory() {
-    Player winner = new DefaultPlayerImpl();
+    Player winner = createPlayer();
 
     game.victory(winner);
 
     assertEquals(GameStatus.FINISHED, game.getStatus());
     assertSame(winner, game.getWinner());
+  }
+
+  private Player createPlayer() {
+    return mock(Player.class);
   }
 
 }
