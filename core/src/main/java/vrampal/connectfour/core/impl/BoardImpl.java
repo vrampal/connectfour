@@ -2,6 +2,7 @@ package vrampal.connectfour.core.impl;
 
 import java.io.Serializable;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,7 @@ class BoardImpl implements Board, Serializable {
 
   private static final int LENGTH_TO_WIN = 4;
 
-  @Setter
+  @Setter(AccessLevel.PACKAGE)
   private GameEndListener endGameListener;
 
   private final Player[][] content;
