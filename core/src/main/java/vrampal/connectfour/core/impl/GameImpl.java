@@ -25,7 +25,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
 
   private static final Random rand = new Random();
 
-  private static final Logger stats = LoggerFactory.getLogger("connectfour.stats");
+  private static final Logger statsLog = LoggerFactory.getLogger("connectfour.stats");
 
   @Getter
   private final String id;
@@ -114,8 +114,8 @@ public class GameImpl implements Game, GameEndListener, Serializable {
     Player currentPlayer = getCurrentPlayer();
     board.dropDisc(currentPlayer, colIdx);
     turnNumber++;
-    if (stats.isInfoEnabled()) {
-      stats.info(id + ',' + currentPlayer.getName() + ',' + colIdx + ',' + status);
+    if (statsLog.isInfoEnabled()) {
+      statsLog.info(id + ',' + currentPlayer.getName() + ',' + colIdx + ',' + status);
     }
   }
 

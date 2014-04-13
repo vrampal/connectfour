@@ -16,6 +16,7 @@ public abstract class AbstractConnectFour implements Runnable {
 
   private final boolean enableDiplay;
 
+   // TODO use dependency injection
   @Getter
   protected final Game game = new GameImpl();
 

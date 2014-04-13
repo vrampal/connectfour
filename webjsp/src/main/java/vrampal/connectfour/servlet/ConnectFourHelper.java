@@ -22,6 +22,7 @@ public class ConnectFourHelper {
     HttpSession session = req.getSession();
     game = (Game) session.getAttribute(GAME_KEY);
     if (game == null) {
+      // TODO use dependency injection
       game = new GameImpl();
       game.begin();
       session.setAttribute(GAME_KEY, game);

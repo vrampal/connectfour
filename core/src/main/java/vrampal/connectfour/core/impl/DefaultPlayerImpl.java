@@ -3,28 +3,30 @@ package vrampal.connectfour.core.impl;
 import java.awt.Color;
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import vrampal.connectfour.core.Player;
 
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 @ToString(of = { "name" })
-public class DefaultPlayerImpl implements Player, Serializable {
+class DefaultPlayerImpl implements Player, Serializable {
 
   @Getter
-  @Setter
-  private String name = "";
+  private final String name;
 
   @Getter
-  @Setter
-  private char letter = ' ';
+  private final char letter;
 
   @Getter
-  @Setter
-  private Color color = Color.BLACK;
+  private final Color color;
+
+  /**
+   * For unit testing only.
+   */
+  DefaultPlayerImpl() {
+    this("", ' ', Color.WHITE);
+  }
 
 }

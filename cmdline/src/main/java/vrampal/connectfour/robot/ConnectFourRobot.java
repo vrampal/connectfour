@@ -11,7 +11,7 @@ public class ConnectFourRobot extends AbstractConnectFour {
     new ConnectFourRobot(true).run();
   }
 
-  private final Random rand = new Random();
+  private static final Random rand = new Random();
 
   public ConnectFourRobot(boolean enableDiplay) {
     super(enableDiplay);

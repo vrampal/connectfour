@@ -9,7 +9,7 @@ import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Player;
 
 @Slf4j
-public class BoardImpl implements Board, Serializable {
+class BoardImpl implements Board, Serializable {
 
   static final Player EMPTY_PLAYER = new DefaultPlayerImpl("", ' ', Color.WHITE);
 
@@ -24,7 +24,7 @@ public class BoardImpl implements Board, Serializable {
   private final Player[][] content;
 
   /**
-   * Create a board with default size, no listener (for serialization).
+   * Create a board with default size, no listener (for serialization tests).
    */
   BoardImpl() {
     this(null);
