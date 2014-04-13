@@ -28,8 +28,6 @@ public class GameImplTest {
 
   @Test
   public void testBoardImpl() {
-    game = new GameImpl();
-
     assertEquals(GameStatus.INIT, game.getStatus());
     assertEquals(2, game.getAllPlayers().size());
     assertNotNull(game.getBoard());

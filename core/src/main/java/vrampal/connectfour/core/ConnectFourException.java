@@ -5,6 +5,8 @@ package vrampal.connectfour.core;
  */
 public class ConnectFourException extends RuntimeException {
 
+  private static final long serialVersionUID = -535204485244891402L;
+
   public ConnectFourException(String message) {
     super(message);
   }

@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.codec.binary.Base64;
@@ -20,25 +22,29 @@ import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 
 @Slf4j
+@EqualsAndHashCode
+@ToString(of = { "id" })
 public class GameImpl implements Game, GameEndListener, Serializable {
+
+  private static final long serialVersionUID = -266280070673809422L;
 
   public static final String LOG_STATS_NAME = "connectfour.game.stats";
 
   private static final Logger LOG_STATS = LoggerFactory.getLogger(LOG_STATS_NAME);
 
-  private static final Player YELLOW = new DefaultPlayerImpl("Yellow", 'Y');
+  private static final Player YELLOW = new PlayerImpl("Yellow", 'Y');
 
-  private static final Player RED = new DefaultPlayerImpl("Red", 'R');
+  private static final Player RED = new PlayerImpl("Red", 'R');
 
   private static final Random RAND = new Random();
 
   @Getter
-  private final String id;
+  private String id;
+
+  private List<Player> players;
 
   @Getter
-  private final BoardImpl board;
-
-  private final List<Player> players;
+  private BoardImpl board;
 
   @Getter
   private GameStatus status = GameStatus.INIT;
@@ -49,31 +55,35 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   private Player winner = null;
 
   public GameImpl() {
-    this(2);
+    this(generateShortId(), 2);
     players.add(YELLOW);
     players.add(RED);
   }
 
-  public GameImpl(List<Player> players) {
-    this(players.size());
-    this.players.addAll(players);
+  public GameImpl(List<Player> playerList) {
+    this(generateShortId(), playerList.size());
+    players.addAll(playerList);
   }
 
-  private GameImpl(int nbPlayers) {
-    id = generateShortId();
-    board = new BoardImpl(this);
+  GameImpl(String id, int nbPlayers) {
+    this.id = id;
+
     players = new ArrayList<>(nbPlayers);
+
+    board = new BoardImpl();
+    board.setEndGameListener(this);
+
     if (log.isInfoEnabled()) {
       log.info("Creating new game for " + nbPlayers + " players, id: " + id);
     }
   }
 
-  private String generateUUID() {
+  private static String generateUUID() {
     UUID uuid = UUID.randomUUID();
     return uuid.toString();
   }
 
-  private String generateShortId() {
+  private static String generateShortId() {
     byte[] randData = new byte[6];
     RAND.nextBytes(randData);
     return Base64.encodeBase64URLSafeString(randData);

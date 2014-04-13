@@ -2,15 +2,20 @@ package vrampal.connectfour.core.impl;
 
 import java.io.Serializable;
 
+import lombok.EqualsAndHashCode;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Player;
 
 @Slf4j
+@EqualsAndHashCode(of = { "content" })
 class BoardImpl implements Board, Serializable {
 
-  static final Player EMPTY_PLAYER = new DefaultPlayerImpl("Empty", ' ');
+  private static final long serialVersionUID = -5581793932297360395L;
+
+  static final Player EMPTY_PLAYER = new PlayerImpl("Empty", ' ');
 
   private static final int DEFAULT_WIDTH = 7;
 
@@ -18,36 +23,28 @@ class BoardImpl implements Board, Serializable {
 
   private static final int LENGTH_TO_WIN = 4;
 
-  private final GameEndListener endGameListener;
+  @Setter
+  private GameEndListener endGameListener;
 
   private final Player[][] content;
 
   /**
-   * Create a board with default size, no listener (for serialization tests).
-   */
-  BoardImpl() {
-    this(null);
-  }
-
-  /**
    * Create a board with default size (7x6).
    */
-  BoardImpl(GameEndListener endGameListener) {
-    this(endGameListener, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+  BoardImpl() {
+    this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
   }
 
   /**
    * Create a board with custom size.
    */
-  BoardImpl(GameEndListener endGameListener, int width, int height) {
+  BoardImpl(int width, int height) {
     if (width <= 0) {
       throw new ConnectFourException("Invalid width: " + width);
     }
     if (height <= 0) {
       throw new ConnectFourException("Invalid height: " + height);
     }
-
-    this.endGameListener = endGameListener;
 
     content = new Player[width][];
     for (int colIdx = 0; colIdx < width; colIdx++) {

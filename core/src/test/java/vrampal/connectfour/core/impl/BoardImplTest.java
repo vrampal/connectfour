@@ -15,21 +15,20 @@ import vrampal.connectfour.core.Player;
 
 public class BoardImplTest {
 
-  private GameEndListener endGameListener;
-
   private BoardImpl board;
+
+  private GameEndListener endGameListener;
 
   @Before
   public void setUp() throws Exception {
-    endGameListener = mock(GameEndListener.class);
+    board = new BoardImpl();
 
-    board = new BoardImpl(endGameListener);
+    endGameListener = mock(GameEndListener.class);
+    board.setEndGameListener(endGameListener);
   }
 
   @Test
-  public void testBoardImplGameEndListener() {
-    board = new BoardImpl(endGameListener);
-
+  public void testBoardImpl() {
     assertEquals(7, board.getWidth());
     assertEquals(6, board.getHeight());
 
@@ -41,8 +40,8 @@ public class BoardImplTest {
   }
 
   @Test
-  public void testBoardImplGameEndListenerIntInt() {
-    board = new BoardImpl(endGameListener, 15, 10);
+  public void testBoardImplIntInt() {
+    board = new BoardImpl(15, 10);
 
     assertEquals(15, board.getWidth());
     assertEquals(10, board.getHeight());
@@ -55,13 +54,13 @@ public class BoardImplTest {
   }
 
   @Test(expected = ConnectFourException.class)
-  public void testBoardImplGameEndListenerIntIntInvalid1() {
-    board = new BoardImpl(endGameListener, -2, 8);
+  public void testBoardImplIntIntInvalid1() {
+    board = new BoardImpl(-2, 8);
   }
 
   @Test(expected = ConnectFourException.class)
-  public void testBoardImplGameEndListenerIntIntInvalid2() {
-    board = new BoardImpl(endGameListener, 3, 0);
+  public void testBoardImplIntIntInvalid2() {
+    board = new BoardImpl(3, 0);
   }
 
   @Test(expected = ConnectFourException.class)
