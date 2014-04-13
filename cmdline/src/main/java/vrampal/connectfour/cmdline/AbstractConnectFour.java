@@ -12,6 +12,7 @@ import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 import vrampal.connectfour.core.impl.GameImpl;
 
+// TODO use composition instead of inheritance
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractConnectFour implements Runnable {
 
