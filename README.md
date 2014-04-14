@@ -1,7 +1,6 @@
 
-![CodeShip Status](https://www.codeship.io/projects/a0796380-a64a-0131-abe2-7aaaf5720568/status)
-
 Technology used:
+
 * Java 7
 * Maven
 * Lombok
