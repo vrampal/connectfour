@@ -1,4 +1,6 @@
 
+![CodeShip status](https://www.codeship.io/projects/aa8d45a0-a64e-0131-556a-2286e1db6a86/status)
+
 Technology used:
 
 * Java 7
