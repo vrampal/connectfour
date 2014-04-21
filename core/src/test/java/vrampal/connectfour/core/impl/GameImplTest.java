@@ -17,8 +17,12 @@ import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 
+/**
+ * Simple JUnit with Mockito.
+ */
 public class GameImplTest {
 
+  // Object under test
   private GameImpl game;
 
   @Before

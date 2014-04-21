@@ -19,10 +19,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Simple demonstrator for Google GSON (JSON), Jackson (JSON) and Xtream (XML)
+ * automatic serialization.
+ */
 public class GameSerializeTest {
 
   private static final boolean PRINT_OUTPUT = false;
 
+  // Object under test
   private Game game;
 
   @Before
@@ -57,7 +62,7 @@ public class GameSerializeTest {
   }
 
   @Test
-  @Ignore("Not yet finished")
+  @Ignore("This is an object model with circular references, auto serialize does not work")
   public void testGoogleGson() {
     Gson gsonSave = new Gson();
     String jsonStr = gsonSave.toJson(game);
@@ -75,7 +80,7 @@ public class GameSerializeTest {
   }
 
   @Test
-  @Ignore("Not yet finished")
+  @Ignore("This is an object model with circular references, auto serialize does not work")
   public void testJackson() throws IOException {
     ObjectMapper mapperSave = new ObjectMapper();
     String jsonStr = mapperSave.writeValueAsString(game);
@@ -93,7 +98,7 @@ public class GameSerializeTest {
   }
 
   @Test
-  @Ignore("Not yet finished")
+  @Ignore("This is an object model with circular references, auto serialize does not work")
   public void testXstream() {
     XStream xstreamSave = new XStream();
     String xmlStr = xstreamSave.toXML(game);

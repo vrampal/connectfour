@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import vrampal.connectfour.core.Player;
 
+/**
+ * Pure data class for serialization.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

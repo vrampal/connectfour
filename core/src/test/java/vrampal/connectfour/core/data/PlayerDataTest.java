@@ -1,0 +1,44 @@
+package vrampal.connectfour.core.data;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class PlayerDataTest {
+
+  // Object under test
+  private PlayerData playerData;
+
+  @Before
+  public void setUp() throws Exception {
+    playerData = new PlayerData("Test player", 'T');
+  }
+
+  @Test
+  public void testJavaSerialize() throws IOException, ClassNotFoundException {
+    ByteArrayOutputStream baoStream = new ByteArrayOutputStream();
+    ObjectOutputStream ooStream = new ObjectOutputStream(baoStream);
+
+    ooStream.writeObject(playerData);
+    byte[] bytes = baoStream.toByteArray();
+
+    System.out.println("PlayerData - Java length: " + bytes.length);
+
+    ByteArrayInputStream baiStream = new ByteArrayInputStream(bytes);
+    ObjectInputStream oiStream = new ObjectInputStream(baiStream);
+
+    PlayerData playerData2 = (PlayerData) oiStream.readObject();
+
+    assertEquals(playerData, playerData2);
+    assertNotSame(playerData, playerData2);
+  }
+
+}

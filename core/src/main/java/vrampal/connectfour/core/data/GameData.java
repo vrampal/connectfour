@@ -11,6 +11,9 @@ import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 
+/**
+ * Pure data class for serialization.
+ */
 @Data
 @NoArgsConstructor
 @ToString(of = { "id" })

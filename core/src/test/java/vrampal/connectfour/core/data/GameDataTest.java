@@ -19,10 +19,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
-public class GameDataSerializeTest {
+/**
+ * Simple demonstrator for Google GSON (JSON), Jackson (JSON) and Xtream (XML)
+ * automatic serialization.
+ */
+public class GameDataTest {
 
   private static final boolean PRINT_OUTPUT = false;
 
+  // Object under test
   private GameData gameData;
 
   @Before

@@ -1,16 +1,38 @@
+ConnectFour Demo
+===============
 
-![CodeShip status](https://www.codeship.io/projects/aa8d45a0-a64e-0131-556a-2286e1db6a86/status)
+Organization
+------------
+* connectfour is the root POM, agregate all the module and provide dependency management
+* core contains all the business layer with tests and serialization example
+* cmdline is a very basic command line executable based on core, it also contains basic robots
+* webjsp is a very basic web application based on core, it contains load test and Selenium tests
 
-Technology used:
-
-* Java 7
-* Maven
-* Lombok
-* SLF4J
-* JUnit 4
-* Mockito
+Technology used
+---------------
+* [Git](http://git-scm.com/)
+* [Apache Maven](http://maven.apache.org/)
+* [Java 7](http://docs.oracle.com/javase/7/docs/) (also check [the specs page](http://docs.oracle.com/javase/specs/))
+* [Lombok](http://projectlombok.org/)
+* [SLF4J](http://www.slf4j.org/)
+* [Apache Commons](http://commons.apache.org/) (only for Base64)
+* [Google GSON](https://sites.google.com/site/gson/gson-user-guide)
+* [Fastxml Jackson](http://wiki.fasterxml.com/JacksonHome)
+* [Xstream](http://xstream.codehaus.org/)
+* [JUnit 4](https://github.com/junit-team/junit/wiki)
+* [Mockito](https://code.google.com/p/mockito/)
+* [JBehave](http://jbehave.org/)
+* [Apache Tomcat](http://tomcat.apache.org/)
 * JSP
-* HTML5
-* CSS
-* JMeter
-* Selenium
+* [HTML5](http://www.w3.org/TR/html5/)
+* [CSS](http://www.w3.org/TR/CSS2/)
+* [Apache JMeter](https://jmeter.apache.org/)
+* [Selenium](http://docs.seleniumhq.org/)
+
+How to build
+------------
+* mvn install
+
+How to run
+----------
+* TODO

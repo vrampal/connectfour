@@ -13,17 +13,19 @@ import org.junit.Test;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Player;
 
+/**
+ * Simple JUnit with Mockito.
+ */
 public class BoardImplTest {
 
+  // Object under test
   private BoardImpl board;
 
-  private GameEndListener endGameListener;
+  private GameEndListener endGameListener = mock(GameEndListener.class);
 
   @Before
   public void setUp() throws Exception {
     board = new BoardImpl();
-
-    endGameListener = mock(GameEndListener.class);
     board.setEndGameListener(endGameListener);
   }
 
