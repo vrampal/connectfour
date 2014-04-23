@@ -11,9 +11,9 @@ Organization
 Technology used
 ---------------
 * [Git](http://git-scm.com/)
-* [Apache Maven](http://maven.apache.org/)
+* [Apache Maven](http://maven.apache.org/pom.html) (also check [this book](http://books.sonatype.com/mvnref-book/reference/))
 * [Java 7](http://docs.oracle.com/javase/7/docs/) (also check [the specs page](http://docs.oracle.com/javase/specs/))
-* [Lombok](http://projectlombok.org/)
+* [Lombok](http://projectlombok.org/features/)
 * [SLF4J](http://www.slf4j.org/)
 * [Apache Commons](http://commons.apache.org/) (only for Base64)
 * [Google GSON](https://sites.google.com/site/gson/gson-user-guide)

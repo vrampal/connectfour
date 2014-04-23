@@ -1,41 +1,89 @@
 package vrampal.connectfour.cmdline;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import vrampal.connectfour.core.Board;
+import lombok.Getter;
+import vrampal.connectfour.core.ConnectFourException;
+import vrampal.connectfour.core.Game;
+import vrampal.connectfour.core.GameStatus;
+import vrampal.connectfour.core.Player;
+import vrampal.connectfour.core.impl.GameImpl;
 
-public class ConnectFourConsole extends AbstractConnectFour implements Runnable {
+public class ConnectFourConsole implements Runnable {
 
-  public static void main(String[] args) {
-    new ConnectFourConsole(true).run();
+  private static final GameMonitor CONSOLE_DISPLAY = new ConsoleDiplay();
+
+  private static final PrintStream OUT = System.out;
+
+  // TODO use dependency injection
+  @Getter
+  private final Game game = new GameImpl();
+
+  private final PlayerInterface yellowItf;
+
+  private final PlayerInterface redItf;
+
+  private final Collection<GameMonitor> monitors = new ArrayList<>();
+
+  public ConnectFourConsole(PlayerInterface yellowItf, PlayerInterface redItf, boolean enableDiplay) {
+    this.yellowItf = yellowItf;
+    this.redItf = redItf;
+
+    if (enableDiplay) {
+      addMonitor(CONSOLE_DISPLAY);
+    }
   }
 
-  private final BufferedReader buffRead = new BufferedReader(new InputStreamReader(System.in));
-
-  public ConnectFourConsole(boolean enableDiplay) {
-    super(enableDiplay);
+  public void addMonitor(GameMonitor monitor) {
+    monitors.add(monitor);
   }
 
   @Override
-  protected int selectPlayColumn() {
-    Board board = game.getBoard();
-    int width = board.getWidth();
-    int colIdx = 0;
-    while ((colIdx < 1) || (colIdx > width)) {
+  public void run() {
+    game.begin();
+    for (GameMonitor monitor : monitors) {
+      monitor.begin(game);
+    }
+
+    while (game.getStatus() != GameStatus.FINISHED) {
       try {
-        out.println("Now playing: " + game.getCurrentPlayer().getName());
-        out.print("Type a column number [1.." + width + "]: ");
-        String line = buffRead.readLine();
-        if (line != null) {
-          colIdx = Integer.parseInt(line);
-        }
-      } catch (IOException | NumberFormatException e) {
-        out.println("Error while reading your input.");
+        play();
+      } catch (ConnectFourException e) {
+        OUT.println(e.getMessage());
       }
     }
-    return colIdx - 1;
+
+    Player winner = game.getWinner();
+    if (winner != null) {
+      for (GameMonitor monitor : monitors) {
+        monitor.victory(game, winner);
+      }
+    } else {
+      for (GameMonitor monitor : monitors) {
+        monitor.drawGame(game);
+      }
+    }
+  }
+
+  private void play() {
+    Player currentPlayer = game.getCurrentPlayer();
+
+    int colIdx;
+    if ("Yellow".equals(currentPlayer.getName())) {
+      colIdx = yellowItf.selectPlayColumn(game);
+    } else if ("Red".equals(currentPlayer.getName())) {
+      colIdx = redItf.selectPlayColumn(game);
+    } else {
+      throw new IllegalStateException("Unknown player");
+    }
+
+    game.dropDisc(colIdx);
+
+    for (GameMonitor monitor : monitors) {
+      monitor.played(game, currentPlayer, colIdx);
+    }
   }
 
 }

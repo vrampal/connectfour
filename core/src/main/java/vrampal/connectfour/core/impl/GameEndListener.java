@@ -6,6 +6,6 @@ interface GameEndListener {
 
   void drawGame();
 
-  void victory(Player player);
+  void victory(Player winner);
 
 }

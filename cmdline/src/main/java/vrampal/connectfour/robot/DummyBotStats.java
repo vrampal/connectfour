@@ -1,15 +1,17 @@
 package vrampal.connectfour.robot;
 
+import vrampal.connectfour.cmdline.ConnectFourConsole;
+import vrampal.connectfour.cmdline.PlayerInterface;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.Player;
 
-public class ConnectFourRobotStats implements Runnable {
-
-  public static void main(String[] args) {
-    new ConnectFourRobotStats().run();
-  }
+public class DummyBotStats implements Runnable {
 
   private static final int NB_TOTAL_GAME = 100000;
+
+  public static void main(String[] args) {
+    new DummyBotStats().run();
+  }
 
   private int nbYellowWin = 0;
 
@@ -21,12 +23,14 @@ public class ConnectFourRobotStats implements Runnable {
   public void run() {
     System.out.println("Running for " + NB_TOTAL_GAME + " games");
 
+    PlayerInterface playerItf = new DummyBotPlayerInterface();
+
     long beginTime = System.currentTimeMillis();
     for (int i = 0; i < NB_TOTAL_GAME; i++) {
-      ConnectFourRobot robotRunner = new ConnectFourRobot(false);
-      robotRunner.run();
+      ConnectFourConsole consoleGame = new ConnectFourConsole(playerItf, playerItf, false);
+      consoleGame.run();
 
-      Game game = robotRunner.getGame();
+      Game game = consoleGame.getGame();
       Player winner = game.getWinner();
       analyeWinner(winner);
     }

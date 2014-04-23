@@ -8,6 +8,10 @@
   <version>0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <name>ConnectFour demo</name>
+  <description>This project demonstrate the use of several Java technologies.</description>
+  <url>https://bitbucket.org/vrampal/connectfour</url>
+
   <modules>
     <module>core</module>
     <module>cmdline</module>

@@ -144,9 +144,9 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   }
 
   @Override
-  public void victory(Player player) {
+  public void victory(Player winPlayer) {
     status = GameStatus.FINISHED;
-    winner = player;
+    winner = winPlayer;
     if (log.isInfoEnabled()) {
       log.info("End of game id: " + id + ", winner: " + winner.getName());
     }
