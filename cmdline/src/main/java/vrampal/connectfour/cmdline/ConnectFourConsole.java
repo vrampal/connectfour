@@ -1,6 +1,5 @@
 package vrampal.connectfour.cmdline;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,13 +12,8 @@ import vrampal.connectfour.core.impl.GameImpl;
 
 public class ConnectFourConsole implements Runnable {
 
-  private static final GameMonitor CONSOLE_DISPLAY = new ConsoleDiplay();
-
-  private static final PrintStream OUT = System.out;
-
-  // TODO use dependency injection
   @Getter
-  private final Game game = new GameImpl();
+  private final Game game;
 
   private final PlayerInterface yellowItf;
 
@@ -27,13 +21,15 @@ public class ConnectFourConsole implements Runnable {
 
   private final Collection<GameMonitor> monitors = new ArrayList<>();
 
-  public ConnectFourConsole(PlayerInterface yellowItf, PlayerInterface redItf, boolean enableDiplay) {
+  public ConnectFourConsole(Game game, PlayerInterface yellowItf, PlayerInterface redItf) {
+    this.game = game;
     this.yellowItf = yellowItf;
     this.redItf = redItf;
+  }
 
-    if (enableDiplay) {
-      addMonitor(CONSOLE_DISPLAY);
-    }
+  public ConnectFourConsole(PlayerInterface yellowItf, PlayerInterface redItf) {
+    // TODO use dependency injection
+    this(new GameImpl(), yellowItf, redItf);
   }
 
   public void addMonitor(GameMonitor monitor) {
@@ -44,36 +40,39 @@ public class ConnectFourConsole implements Runnable {
   public void run() {
     game.begin();
     for (GameMonitor monitor : monitors) {
-      monitor.begin(game);
+      monitor.onBegin(game);
     }
 
     while (game.getStatus() != GameStatus.FINISHED) {
       try {
-        play();
+        playOneTurn();
       } catch (ConnectFourException e) {
-        OUT.println(e.getMessage());
+        for (GameMonitor monitor : monitors) {
+          monitor.onError(game, e);
+        }
       }
     }
 
     Player winner = game.getWinner();
     if (winner != null) {
       for (GameMonitor monitor : monitors) {
-        monitor.victory(game, winner);
+        monitor.onVictory(game, winner);
       }
     } else {
       for (GameMonitor monitor : monitors) {
-        monitor.drawGame(game);
+        monitor.onDraw(game);
       }
     }
   }
 
-  private void play() {
+  private void playOneTurn() {
     Player currentPlayer = game.getCurrentPlayer();
+    String curPlayerName = currentPlayer.getName();
 
     int colIdx;
-    if ("Yellow".equals(currentPlayer.getName())) {
+    if ("Yellow".equals(curPlayerName)) {
       colIdx = yellowItf.selectPlayColumn(game);
-    } else if ("Red".equals(currentPlayer.getName())) {
+    } else if ("Red".equals(curPlayerName)) {
       colIdx = redItf.selectPlayColumn(game);
     } else {
       throw new IllegalStateException("Unknown player");
@@ -82,7 +81,7 @@ public class ConnectFourConsole implements Runnable {
     game.dropDisc(colIdx);
 
     for (GameMonitor monitor : monitors) {
-      monitor.played(game, currentPlayer, colIdx);
+      monitor.onPlay(game, currentPlayer, colIdx);
     }
   }
 

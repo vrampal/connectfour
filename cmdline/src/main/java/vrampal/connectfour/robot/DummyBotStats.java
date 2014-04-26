@@ -27,7 +27,7 @@ public class DummyBotStats implements Runnable {
 
     long beginTime = System.currentTimeMillis();
     for (int i = 0; i < NB_TOTAL_GAME; i++) {
-      ConnectFourConsole consoleGame = new ConnectFourConsole(playerItf, playerItf, false);
+      ConnectFourConsole consoleGame = new ConnectFourConsole(playerItf, playerItf);
       consoleGame.run();
 
       Game game = consoleGame.getGame();
