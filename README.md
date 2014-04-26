@@ -1,6 +1,8 @@
 ConnectFour Demo
 ===============
 
+![CodeShip status](https://www.codeship.io/projects/1d88ad50-af84-0131-1f7f-52f111de9aa7/status)
+
 Organization
 ------------
 * connectfour is the root POM, agregate all the module and provide dependency management
