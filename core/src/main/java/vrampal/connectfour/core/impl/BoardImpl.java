@@ -11,6 +11,9 @@ import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Player;
 import vrampal.connectfour.core.data.PlayerData;
 
+/**
+ * Empty cell use null internally but it use EMPTY_PLAYER externally.
+ */
 @Slf4j
 @EqualsAndHashCode(of = { "content" })
 class BoardImpl implements Board, Serializable {
@@ -60,14 +63,6 @@ class BoardImpl implements Board, Serializable {
     }
   }
 
-  void reset() {
-    for (Player[] column : content) {
-      for (int rowIdx = 0; rowIdx < column.length; rowIdx++) {
-        column[rowIdx] = EMPTY_PLAYER;
-      }
-    }
-  }
-
   @Override
   public int getWidth() {
     return content.length;
@@ -78,23 +73,56 @@ class BoardImpl implements Board, Serializable {
     return content[0].length;
   }
 
+  Player getCellFast(int colIdx, int rowIdx) {
+    return content[colIdx][rowIdx];
+  }
+
+  void setCellFast(int colIdx, int rowIdx, Player player) {
+    content[colIdx][rowIdx] = player;
+  }
+
+  // ----- The following methods rely on getWidth(), getHeight(), getCellFast() and setCellFast() -----
+
+  void reset() {
+    for (int colIdx = 0; colIdx < getWidth(); colIdx++) {
+      for (int rowIdx = 0; rowIdx < getHeight(); rowIdx++) {
+        setCellFast(colIdx, rowIdx, null);
+      }
+    }
+  }
+
+  private void checkColIdx(int colIdx) {
+    if ((colIdx < 0) || (colIdx >= getWidth())) {
+      String message = "Invalid column id: " + colIdx;
+      log.error(message);
+      throw new ConnectFourException(message);
+    }
+  }
+
+  private void checkRowIdx(int rowIdx) {
+    if ((rowIdx < 0) || (rowIdx >= getHeight())) {
+      String message = "Invalid row id: " + rowIdx;
+      log.error(message);
+      throw new ConnectFourException(message);
+    }
+  }
+
+  // ----- The following methods rely on checkColIdx() and checkRowIdx() -----
+
   @Override
   public Player getCell(int colIdx, int rowIdx) {
     checkColIdx(colIdx);
     checkRowIdx(rowIdx);
-    return getCellFast(colIdx, rowIdx);
+    Player player = getCellFast(colIdx, rowIdx);
+    if (player == null) {
+      player = EMPTY_PLAYER;
+    }
+    return player;
   }
 
   @Override
   public Player getEmptyPlayer() {
     return EMPTY_PLAYER;
-  }
-
-  @Override
-  public boolean isColumnFull(int colIdx) {
-    checkColIdx(colIdx);
-    Player[] column = content[colIdx];
-    return isColumnFull(column);
   }
 
   @Override
@@ -107,29 +135,43 @@ class BoardImpl implements Board, Serializable {
     return true;
   }
 
-  Player getCellFast(int colIdx, int rowIdx) {
-    return content[colIdx][rowIdx];
+  @Override
+  public boolean isColumnFull(int colIdx) {
+    checkColIdx(colIdx);
+    Player[] column = content[colIdx];
+    return isColumnFull(column);
   }
 
-  void setCellFast(int colIdx, int rowIdx, Player player) {
-    content[colIdx][rowIdx] = player;
+  private boolean isColumnFull(Player[] column) {
+    return column[column.length - 1] != null;
   }
+
+  // ----- Dropping and victory mechanics -----
 
   /**
    * Player entry point, drop a disc into a given column.
    */
   void dropDisc(Player player, int colIdx) {
+    if (player == null) {
+      String message = "Null is not a valid player";
+      log.error(message);
+      throw new ConnectFourException(message);
+    }
     if (player == EMPTY_PLAYER) {
-      throw new ConnectFourException("Empty player not allowed to play");
+      String message = "Empty player not allowed to play";
+      log.error(message);
+      throw new ConnectFourException(message);
     }
     checkColIdx(colIdx);
     if (isColumnFull(colIdx)) {
-      throw new ConnectFourException("Column is full");
+      String message = "Cannot play: column is full";
+      log.error(message);
+      throw new ConnectFourException(message);
     }
 
     Player[] column = content[colIdx];
     int rowIdx = column.length;
-    while ((rowIdx > 0) && (column[rowIdx - 1] == EMPTY_PLAYER)) {
+    while ((rowIdx > 0) && (column[rowIdx - 1] == null)) {
       rowIdx--;
     }
     column[rowIdx] = player;
@@ -137,22 +179,6 @@ class BoardImpl implements Board, Serializable {
     if (endGameListener != null) {
       checkForGameEnd(colIdx, rowIdx);
     }
-  }
-
-  private void checkColIdx(int colIdx) {
-    if ((colIdx < 0) || (colIdx >= getWidth())) {
-      throw new ConnectFourException("Invalid column id: " + colIdx);
-    }
-  }
-
-  private void checkRowIdx(int rowIdx) {
-    if ((rowIdx < 0) || (rowIdx >= getHeight())) {
-      throw new ConnectFourException("Invalid row id: " + rowIdx);
-    }
-  }
-
-  private boolean isColumnFull(Player[] column) {
-    return column[column.length - 1] != EMPTY_PLAYER;
   }
 
   private void checkForGameEnd(int colIdx, int rowIdx) {

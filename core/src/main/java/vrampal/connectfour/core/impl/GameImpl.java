@@ -103,7 +103,9 @@ public class GameImpl implements Game, GameEndListener, Serializable {
       log.error(message);
       throw new ConnectFourException(message);
     }
+
     status = GameStatus.ONGOING;
+
     if (log.isInfoEnabled()) {
       log.info("Begin of game id: " + id);
     }
@@ -126,18 +128,23 @@ public class GameImpl implements Game, GameEndListener, Serializable {
       log.error(message);
       throw new ConnectFourException(message);
     }
+
     Player currentPlayer = getCurrentPlayer();
     board.dropDisc(currentPlayer, colIdx);
     turnNumber++;
+
     if (LOG_STATS.isInfoEnabled()) {
       LOG_STATS.info(id + ',' + currentPlayer.getName() + ',' + colIdx + ',' + status);
     }
   }
 
+  // ----- GameEndListener methods -----
+
   @Override
   public void drawGame() {
     status = GameStatus.FINISHED;
     winner = null;
+
     if (log.isInfoEnabled()) {
       log.info("End of game id: " + id + ", draw game");
     }
@@ -147,6 +154,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   public void victory(Player winPlayer) {
     status = GameStatus.FINISHED;
     winner = winPlayer;
+
     if (log.isInfoEnabled()) {
       log.info("End of game id: " + id + ", winner: " + winner.getName());
     }

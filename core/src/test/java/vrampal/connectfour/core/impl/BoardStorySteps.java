@@ -1,6 +1,8 @@
 package vrampal.connectfour.core.impl;
 
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
@@ -15,44 +17,80 @@ import vrampal.connectfour.core.Player;
  */
 public class BoardStorySteps {
 
+  private final Player playerA = mock(Player.class);
+
+  private final Player playerB = mock(Player.class);
+
   // Object under test
   private BoardImpl board;
 
-  private Player playerA = mock(Player.class);
+  private GameEndListener endGame;
 
-  private Player playerB = mock(Player.class);
-
-  private GameEndListener endGame = mock(GameEndListener.class);
+  // ----- Given -----
 
   @Given("a board $width by $height")
-  public void createGame(int width, int height) {
+  public void GivenABoard(int width, int height) {
     board = new BoardImpl(width, height);
+    endGame = mock(GameEndListener.class);
     board.setEndGameListener(endGame);
   }
 
+  // ----- When -----
+
   @When("playerA drop in column $colIdx")
-  public void dropA(int colIdx) {
+  public void whenPlayerADrop(int colIdx) {
     board.dropDisc(playerA, colIdx);
   }
 
   @When("playerB drop in column $colIdx")
-  public void dropB(int colIdx) {
+  public void whenPlayerBDrop(int colIdx) {
     board.dropDisc(playerB, colIdx);
   }
 
-  @Then("playerA is a winner")
-  public void checkWinnerA() {
-    verify(endGame).victory(playerA);
+  // ----- Then -----
+
+  @Then("cell $colIdx,$rowIdx is empty")
+  public void thenCellEmpty(int colIdx, int rowIdx) {
+    Player player = board.getCell(colIdx, rowIdx);
+    assertSame(board.getEmptyPlayer(), player);
   }
 
-  @Then("playerB is a winner")
-  public void checkWinnerB() {
-    verify(endGame).victory(playerB);
+  @Then("cell $colIdx,$rowIdx is playerA")
+  public void thenCellPlayerA(int colIdx, int rowIdx) {
+    Player player = board.getCell(colIdx, rowIdx);
+    assertSame(playerA, player);
+  }
+
+  @Then("cell $colIdx,$rowIdx is playerB")
+  public void thenCellPlayerB(int colIdx, int rowIdx) {
+    Player player = board.getCell(colIdx, rowIdx);
+    assertSame(playerB, player);
   }
 
   @Then("there is no winner")
-  public void checkNoWinner() {
+  public void thenNoWinner() {
     verifyZeroInteractions(endGame);
+  }
+
+  @Then("playerA is a winner")
+  public void thenWinnerA() {
+    verify(endGame).victory(playerA);
+    verify(endGame, never()).victory(playerB);
+    verify(endGame, never()).drawGame();
+  }
+
+  @Then("playerB is a winner")
+  public void thenWinnerB() {
+    verify(endGame, never()).victory(playerA);
+    verify(endGame).victory(playerB);
+    verify(endGame, never()).drawGame();
+  }
+
+  @Then("it's a draw game")
+  public void thenDrawGame() {
+    verify(endGame, never()).victory(playerA);
+    verify(endGame, never()).victory(playerB);
+    verify(endGame).drawGame();
   }
 
 }

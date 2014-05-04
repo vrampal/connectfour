@@ -21,13 +21,12 @@ public class BoardImplTest {
   // Object under test
   private BoardImpl board;
 
-  private GameEndListener endGameListener = mock(GameEndListener.class);
-
   @Before
   public void setUp() throws Exception {
     board = new BoardImpl();
-    board.setEndGameListener(endGameListener);
   }
+
+  // ----- No player tests -----
 
   @Test
   public void testBoardImpl() {
@@ -85,9 +84,15 @@ public class BoardImplTest {
     board.getCell(3, 1234);
   }
 
+  
+
+  // ----- One player tests -----
+
   @Test
   public void testDropDisc() {
     Player player1 = mock(Player.class);
+    GameEndListener endGameListener = mock(GameEndListener.class);
+    board.setEndGameListener(endGameListener);
 
     board.dropDisc(player1, 3);
     assertSame(player1, board.getCell(3, 0));
@@ -110,6 +115,8 @@ public class BoardImplTest {
     verifyZeroInteractions(endGameListener);
   }
 
+  // ----- Two players tests -----
+
   @Test(expected = ConnectFourException.class)
   public void testDropDiscFull() {
     Player player1 = mock(Player.class);
@@ -127,6 +134,8 @@ public class BoardImplTest {
   @Test
   public void testUpToVictory1() {
     Player player1 = mock(Player.class);
+    GameEndListener endGameListener = mock(GameEndListener.class);
+    board.setEndGameListener(endGameListener);
 
     board.dropDisc(player1, 4);
     board.dropDisc(player1, 5);
@@ -140,6 +149,8 @@ public class BoardImplTest {
   @Test
   public void testUpToVictory2() {
     Player player1 = mock(Player.class);
+    GameEndListener endGameListener = mock(GameEndListener.class);
+    board.setEndGameListener(endGameListener);
 
     board.dropDisc(player1, 3);
     board.dropDisc(player1, 3);
@@ -154,6 +165,8 @@ public class BoardImplTest {
   public void testUpToVictory3() {
     Player player1 = mock(Player.class);
     Player player2 = mock(Player.class);
+    GameEndListener endGameListener = mock(GameEndListener.class);
+    board.setEndGameListener(endGameListener);
 
     board.dropDisc(player1, 4);
     board.dropDisc(player2, 3);
@@ -176,6 +189,8 @@ public class BoardImplTest {
   public void testUpToDraw() {
     Player player1 = mock(Player.class);
     Player player2 = mock(Player.class);
+    GameEndListener endGameListener = mock(GameEndListener.class);
+    board.setEndGameListener(endGameListener);
 
     board.dropDisc(player1, 0);
     board.dropDisc(player2, 1);

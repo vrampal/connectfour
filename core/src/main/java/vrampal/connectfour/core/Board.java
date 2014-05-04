@@ -15,8 +15,8 @@ public interface Board {
 
   Player getEmptyPlayer();
 
-  boolean isColumnFull(int colIdx);
-
   boolean isFull();
+
+  boolean isColumnFull(int colIdx);
 
 }

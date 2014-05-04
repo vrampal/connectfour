@@ -13,8 +13,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import vrampal.connectfour.core.Game;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
@@ -28,7 +26,7 @@ public class GameSerializeTest {
   private static final boolean PRINT_OUTPUT = false;
 
   // Object under test
-  private Game game;
+  private GameImpl game;
 
   @Before
   public void setUp() throws Exception {
@@ -50,12 +48,12 @@ public class GameSerializeTest {
     ooStream.writeObject(game);
     byte[] bytes = baoStream.toByteArray();
 
-    System.out.println("Game - Java length: " + bytes.length);
+    System.out.println("GameImpl - Java length: " + bytes.length);
 
     ByteArrayInputStream baiStream = new ByteArrayInputStream(bytes);
     ObjectInputStream oiStream = new ObjectInputStream(baiStream);
 
-    Game game2 = (Game) oiStream.readObject();
+    GameImpl game2 = (GameImpl) oiStream.readObject();
 
     assertEquals(game, game2);
     assertNotSame(game, game2);
@@ -67,13 +65,13 @@ public class GameSerializeTest {
     Gson gsonSave = new Gson();
     String jsonStr = gsonSave.toJson(game);
 
-    System.out.println("Game - Google GSON length: " + jsonStr.length());
+    System.out.println("GameImpl - Google GSON length: " + jsonStr.length());
     if (PRINT_OUTPUT) {
       System.out.println(jsonStr);
     }
 
     Gson gsonRead = new Gson();
-    Game game2 = gsonRead.fromJson(jsonStr, GameImpl.class);
+    GameImpl game2 = gsonRead.fromJson(jsonStr, GameImpl.class);
 
     assertEquals(game, game2);
     assertNotSame(game, game2);
@@ -85,13 +83,13 @@ public class GameSerializeTest {
     ObjectMapper mapperSave = new ObjectMapper();
     String jsonStr = mapperSave.writeValueAsString(game);
 
-    System.out.println("Game - Jackson length: " + jsonStr.length());
+    System.out.println("GameImpl - Jackson length: " + jsonStr.length());
     if (PRINT_OUTPUT) {
       System.out.println(jsonStr);
     }
 
     ObjectMapper mapperRead = new ObjectMapper();
-    Game game2 = mapperRead.readValue(jsonStr, GameImpl.class);
+    GameImpl game2 = mapperRead.readValue(jsonStr, GameImpl.class);
 
     assertEquals(game, game2);
     assertNotSame(game, game2);
@@ -103,13 +101,13 @@ public class GameSerializeTest {
     XStream xstreamSave = new XStream();
     String xmlStr = xstreamSave.toXML(game);
 
-    System.out.println("Game - Xstream length: " + xmlStr.length());
+    System.out.println("GameImpl - Xstream length: " + xmlStr.length());
     if (PRINT_OUTPUT) {
       System.out.println(xmlStr);
     }
 
     XStream xstreamRead = new XStream();
-    Game game2 = (GameImpl) xstreamRead.fromXML(xmlStr);
+    GameImpl game2 = (GameImpl) xstreamRead.fromXML(xmlStr);
 
     assertEquals(game, game2);
     assertNotSame(game, game2);

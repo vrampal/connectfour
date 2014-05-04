@@ -16,9 +16,16 @@ public class BoardStory extends JUnitStory {
 
   @Override
   public Configuration configuration() {
-    return new MostUsefulConfiguration().useStoryLoader(new LoadFromClasspath(this.getClass()))
-        .useStoryReporterBuilder(
-            new StoryReporterBuilder().withDefaultFormats().withFormats(Format.CONSOLE, Format.TXT));
+    // TODO better config declaration
+    StoryReporterBuilder reporterBuilder = new StoryReporterBuilder().withDefaultFormats().withFormats(Format.CONSOLE,
+        Format.TXT);
+
+    LoadFromClasspath storyLoader = new LoadFromClasspath(this.getClass());
+
+    Configuration config = new MostUsefulConfiguration().useStoryLoader(storyLoader).useStoryReporterBuilder(
+        reporterBuilder);
+
+    return config;
   }
 
   @Override
