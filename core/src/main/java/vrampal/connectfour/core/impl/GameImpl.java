@@ -80,15 +80,23 @@ public class GameImpl implements Game, GameEndListener, Serializable {
     }
   }
 
-  private static String generateUUID() {
-    UUID uuid = UUID.randomUUID();
-    return uuid.toString();
-  }
-
+  /**
+   * Main id generator, requires commons-codec until java 8.
+   */
   private static String generateShortId() {
     byte[] randData = new byte[6];
     RAND.nextBytes(randData);
-    return Base64.encodeBase64URLSafeString(randData);
+    Base64 encoder = new Base64(true); // thread safe, could be static
+    byte[] encodedByte = encoder.encode(randData);
+    return new String(encodedByte);
+  }
+
+  /**
+   * Alternative id generator.
+   */
+  private static String generateUUID() {
+    UUID uuid = UUID.randomUUID();
+    return uuid.toString();
   }
 
   @Override
