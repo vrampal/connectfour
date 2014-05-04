@@ -23,7 +23,7 @@ Global
 * [Java 7](http://docs.oracle.com/javase/7/docs/) (also check [the specs page](http://docs.oracle.com/javase/specs/))
 * [Apache Maven](http://maven.apache.org/pom.html) (also check [this book](http://books.sonatype.com/mvnref-book/reference/))
 * [Lombok](http://projectlombok.org/features/)
-* [SLF4J](http://www.slf4j.org/)
+* [SLF4J](http://www.slf4j.org/manual.html)
 * [JUnit 4](https://github.com/junit-team/junit/wiki)
 * [Harmcrest](https://code.google.com/p/hamcrest/wiki/Tutorial)
 * [Mockito](http://docs.mockito.googlecode.com/hg/latest/org/mockito/Mockito.html)
@@ -67,5 +67,6 @@ Console
 
 Webjsp
 
+* cd webjsp
 * mvn tomcat7:run
 * http://localhost:8080/connect-four-jsp/
