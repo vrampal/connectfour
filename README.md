@@ -2,7 +2,8 @@ ConnectFour Demo
 ===============
 This project is a implementation of the [Connect Four game](http://en.wikipedia.org/wiki/Connect_Four) to show some java related technology.
 
-![CodeShip status](https://www.codeship.io/projects/1d88ad50-af84-0131-1f7f-52f111de9aa7/status)
+![CodeShip status](https://www.codeship.io/projects/1d88ad50-af84-0131-1f7f-52f111de9aa7/status) 
+[![Travis Status](https://travis-ci.org/vrampal/connectfour.svg?branch=master)](https://travis-ci.org/vrampal/connectfour)
 
 Warning: master repository is in [BitBucket](https://bitbucket.org/vrampal/connectfour), not in [GitHub](https://github.com/vrampal/connectfour).
 
@@ -69,4 +70,4 @@ Webjsp
 
 * cd webjsp
 * mvn tomcat7:run
-* http://localhost:8080/connect-four-jsp/
+* [http://localhost:8080/connect-four-jsp/](http://localhost:8080/connect-four-jsp/)
