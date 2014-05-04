@@ -14,13 +14,16 @@ import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.Player;
 
+/**
+ * Warning the learning-bot is totally broken by design.
+ */
 class LearningBotPlayerInterface implements PlayerInterface, GameMonitor {
 
   private static final Random RAND = new Random();
 
   public static void main(String[] args) throws Exception {
     ConsoleDiplay consoleDisplay = new ConsoleDiplay();
-    GamesData rootData = GamesData.loadFromDisk("LearningBot.dat");
+    GamesData rootData = GamesData.loadFromDisk("LearningBotData.tmp");
     HumanPlayerInterface player1Itf = new HumanPlayerInterface();
     LearningBotPlayerInterface player2Itf = new LearningBotPlayerInterface("Red", rootData);
     ConnectFourConsole consoleGame = new ConnectFourConsole(player1Itf, player2Itf);

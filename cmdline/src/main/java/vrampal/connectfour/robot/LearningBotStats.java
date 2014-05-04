@@ -35,7 +35,7 @@ public class LearningBotStats implements Runnable {
     rootData.computeFullStats();
 
     try {
-      rootData.saveToDisk("LearningBot.dat");
+      rootData.saveToDisk("LearningBotData.tmp");
     } catch (IOException e) {
       OUT.println(e.getMessage());
     }

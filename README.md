@@ -34,7 +34,7 @@ Core
 * [Google GSON](https://sites.google.com/site/gson/gson-user-guide)
 * [Fastxml Jackson](http://wiki.fasterxml.com/JacksonHome)
 * [Xstream](http://xstream.codehaus.org/)
-* [JBehave](http://jbehave.org/reference/stable/getting-started.html)
+* [JBehave](http://jbehave.org/reference/stable/getting-started.html) (in a separate folder)
 
 Console
 
@@ -47,7 +47,7 @@ Webjsp
 * [HTML5](http://www.w3.org/TR/html5/)
 * [CSS](http://www.w3.org/TR/CSS2/)
 * [Apache JMeter](https://jmeter.apache.org/)
-* [Selenium](http://docs.seleniumhq.org/)
+* [Selenium](http://docs.seleniumhq.org/) (in a separate folder)
 
 How to build
 ------------

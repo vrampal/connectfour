@@ -46,7 +46,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>vrampal.connectfour.cmdline.ConnectFourConsole</mainClass>
+              <mainClass>vrampal.connectfour.cmdline.HumanPlayerInterface</mainClass>
             </manifest>
           </archive>
         </configuration>

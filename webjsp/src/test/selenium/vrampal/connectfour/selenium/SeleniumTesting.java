@@ -79,7 +79,7 @@ public class SeleniumTesting {
     play(4);
     play(4);
     play(4);
-    assertEquals("Column is full", getSubMessage());
+    assertEquals("Cannot play: column is full", getSubMessage());
   }
 
   @Test

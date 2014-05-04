@@ -1,6 +1,22 @@
+# Maven build directory
 target
+
+# Binary files
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse generated files
 .settings
 .project
 .classpath
+
+# Logs and temporary files
 *.log
 *.log.*
+*.tmp
+
+# VM crash log and heap dump
+hs_err_pid*
+*.hprof

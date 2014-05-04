@@ -34,7 +34,7 @@ public class ConsoleDiplay implements GameMonitor {
     for (int rowIdx = height; rowIdx > 0; rowIdx--) {
       buff = new StringBuilder();
       buff.append(rowIdx);
-      buff.append(" ");
+      buff.append(' ');
       for (int colIdx = 1; colIdx <= width; colIdx++) {
         char c = board.getCell(colIdx - 1, rowIdx - 1).getLetter();
         buff.append(c);
