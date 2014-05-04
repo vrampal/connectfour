@@ -3,8 +3,10 @@ package vrampal.connectfour.core.data;
 import java.io.Serializable;
 import java.util.List;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.Game;
@@ -14,29 +16,47 @@ import vrampal.connectfour.core.Player;
 /**
  * Pure data class for serialization.
  */
-@Data
 @NoArgsConstructor
+@EqualsAndHashCode
 @ToString(of = { "id" })
 public class GameData implements Serializable {
 
   private static final long serialVersionUID = 2649138486471544477L;
 
+  @Getter
+  @Setter
   private String id;
 
+  @Getter
+  @Setter
   private int nbPlayers;
 
+  @Getter
+  @Setter
   private PlayerData[] players;
 
+  @Getter
+  @Setter
   private int width;
 
+  @Getter
+  @Setter
   private int height;
 
+  @Getter
+  @Setter
   private char[][] board;
 
+  @Getter
+  @Setter
   private GameStatus status;
 
+  @Getter
+  @Setter
   private int turnNumber;
 
+  @Getter
+  @Setter
   private String winner;
 
   public GameData(Game in) {

@@ -30,6 +30,10 @@ public class GameImplTest {
     game = new GameImpl();
   }
 
+  private Player createPlayer() {
+    return mock(Player.class);
+  }
+
   @Test
   public void testBoardImpl() {
     assertEquals(GameStatus.INIT, game.getStatus());
@@ -67,6 +71,11 @@ public class GameImplTest {
 
     Player player1 = game.getCurrentPlayer();
     assertNotNull(player1);
+
+    game.drawGame();
+
+    Player player2 = game.getCurrentPlayer();
+    assertNull(player2);
   }
 
   @Test(expected = ConnectFourException.class)
@@ -75,8 +84,20 @@ public class GameImplTest {
     game.begin();
   }
 
+  @Test(expected = ConnectFourException.class)
+  public void testDropBeforeBegin() {
+    game.dropDisc(3);
+  }
+
+  @Test(expected = ConnectFourException.class)
+  public void testDropAfterEnd() {
+    game.begin();
+    game.drawGame();
+    game.dropDisc(3);
+  }
+
   @Test
-  public void testDropGetCurrentPlayer() {
+  public void testDropAndPlayerAlternance() {
     game.begin();
 
     Player player1 = game.getCurrentPlayer();
@@ -91,6 +112,7 @@ public class GameImplTest {
 
   @Test
   public void testDrawGame() {
+    game.begin();
     game.drawGame();
 
     assertEquals(GameStatus.FINISHED, game.getStatus());
@@ -101,14 +123,23 @@ public class GameImplTest {
   public void testVistory() {
     Player winner = createPlayer();
 
+    game.begin();
     game.victory(winner);
 
     assertEquals(GameStatus.FINISHED, game.getStatus());
     assertSame(winner, game.getWinner());
   }
 
-  private Player createPlayer() {
-    return mock(Player.class);
+  @Test(expected = ConnectFourException.class)
+  public void testDrawBeforeBegin() {
+    game.drawGame();
+  }
+
+  @Test(expected = ConnectFourException.class)
+  public void testVistoryBeforeBegin() {
+    Player winner = createPlayer();
+
+    game.victory(winner);
   }
 
 }

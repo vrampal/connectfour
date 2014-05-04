@@ -142,6 +142,12 @@ public class GameImpl implements Game, GameEndListener, Serializable {
 
   @Override
   public void drawGame() {
+    if (status != GameStatus.ONGOING) {
+      String message = "drawGame operation is allowed in status: " + status;
+      log.error(message);
+      throw new ConnectFourException(message);
+    }
+
     status = GameStatus.FINISHED;
     winner = null;
 
@@ -152,6 +158,12 @@ public class GameImpl implements Game, GameEndListener, Serializable {
 
   @Override
   public void victory(Player winPlayer) {
+    if (status != GameStatus.ONGOING) {
+      String message = "victory operation is allowed in status: " + status;
+      log.error(message);
+      throw new ConnectFourException(message);
+    }
+
     status = GameStatus.FINISHED;
     winner = winPlayer;
 

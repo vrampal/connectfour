@@ -1,6 +1,7 @@
 package vrampal.connectfour.core.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -64,6 +65,13 @@ public class BoardImplTest {
     board = new BoardImpl(3, 0);
   }
 
+  @Test
+  public void testGetEmptyPlayer() {
+    Player emptyPlayer = board.getEmptyPlayer();
+    assertEquals(BoardImpl.EMPTY_PLAYER, emptyPlayer);
+    assertNotNull(emptyPlayer);
+  }
+
   @Test(expected = ConnectFourException.class)
   public void testGetCellInvalid1() {
     board.getCell(-8, 2);
@@ -84,7 +92,15 @@ public class BoardImplTest {
     board.getCell(3, 1234);
   }
 
-  
+  @Test(expected = ConnectFourException.class)
+  public void testDropDiscNull() {
+    board.dropDisc(null, 3);
+  }
+
+  @Test(expected = ConnectFourException.class)
+  public void testDropDiscEmptyPlayer() {
+    board.dropDisc(BoardImpl.EMPTY_PLAYER, 3);
+  }
 
   // ----- One player tests -----
 
