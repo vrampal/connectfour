@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.core.Board;
@@ -28,7 +29,13 @@ class BoardImpl implements Board, Serializable {
 
   private static final int LENGTH_TO_WIN = 4;
 
-  private final Player[][] content;
+  @Getter
+  private final int width;
+
+  @Getter
+  private final int height;
+
+  private final Player[] content;
 
   @Setter(AccessLevel.PACKAGE)
   private GameEndListener endGameListener;
@@ -51,10 +58,9 @@ class BoardImpl implements Board, Serializable {
       throw new ConnectFourException("Invalid height: " + height);
     }
 
-    content = new Player[width][];
-    for (int colIdx = 0; colIdx < width; colIdx++) {
-      content[colIdx] = new Player[height];
-    }
+    this.width = width;
+    this.height = height;
+    content = new Player[width * height];
 
     if (log.isInfoEnabled()) {
       log.info("Creating new board " + width + 'x' + height);
@@ -63,26 +69,16 @@ class BoardImpl implements Board, Serializable {
 
   // ----- Base methods for content manipulation -----
 
-  @Override
-  public int getWidth() {
-    return content.length;
-  }
-
-  @Override
-  public int getHeight() {
-    return content[0].length;
-  }
-
   private Player getCellFast(int colIdx, int rowIdx) {
-    return content[colIdx][rowIdx];
+    return content[(colIdx * height) + rowIdx];
   }
 
   private void setCellFast(int colIdx, int rowIdx, Player player) {
-    content[colIdx][rowIdx] = player;
+    content[(colIdx * height) + rowIdx] = player;
   }
 
-  private boolean isColumnFullFast(Player[] column) {
-    return column[column.length - 1] != null;
+  private boolean isColumnFullFast(int colIdx) {
+    return content[((colIdx + 1) * height) - 1] != null;
   }
 
   // ----- All the following methods rely on getWidth(), getHeight(), getCellFast() and setCellFast() -----
@@ -121,14 +117,13 @@ class BoardImpl implements Board, Serializable {
   @Override
   public boolean isColumnFull(int colIdx) {
     checkColIdx(colIdx);
-    Player[] column = content[colIdx];
-    return isColumnFullFast(column);
+    return isColumnFullFast(colIdx);
   }
 
   @Override
   public boolean isFull() {
-    for (Player[] column : content) {
-      if (!isColumnFullFast(column)) {
+    for (int colIdx = 0; colIdx < width; colIdx++) {
+      if (!isColumnFullFast(colIdx)) {
         return false;
       }
     }
