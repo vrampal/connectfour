@@ -31,22 +31,14 @@ Global
 Core
 
 * [Apache Commons](http://commons.apache.org/) (only for Base64), alternative are [Guava](https://code.google.com/p/guava-libraries/) or Java 8
-* [Google GSON](https://sites.google.com/site/gson/gson-user-guide)
-* [Fastxml Jackson](http://wiki.fasterxml.com/JacksonHome)
-* [Xstream](http://xstream.codehaus.org/)
-* [JBehave](http://jbehave.org/reference/stable/getting-started.html) (in src/test/jbehave, not run by maven)
 
 Console
-
-* [Proguard](http://proguard.sourceforge.net/) (not yet integrated)
 
 Webjsp
 
 * [Apache Tomcat](http://tomcat.apache.org/)
 * Servlet 2.5 / JSP 2.1
 * [HTML5](http://www.w3.org/TR/html5/) / [CSS2](http://www.w3.org/TR/CSS2/)
-* [Apache JMeter](https://jmeter.apache.org/) (in src/test/jmeter, not run by maven)
-* [Selenium](http://docs.seleniumhq.org/) (in src/test/selenium, not run by maven)
 
 How to build
 ------------
