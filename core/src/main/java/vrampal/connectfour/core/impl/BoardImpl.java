@@ -162,7 +162,7 @@ class BoardImpl implements Board, Serializable {
       log.error(message);
       throw new ConnectFourException(message);
     }
-    checkColIdx(colIdx);
+    // isColumnFull() also perform checkColIdx() no need to to it twice.
     if (isColumnFull(colIdx)) {
       String message = "Cannot play: column is full";
       log.error(message);

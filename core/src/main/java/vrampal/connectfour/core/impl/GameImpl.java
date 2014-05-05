@@ -81,7 +81,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   }
 
   /**
-   * Main id generator, requires commons-codec until java 8.
+   * Main id generator, requires commons-codec, or Guava until java 8.
    */
   private static String generateShortId() {
     byte[] randData = new byte[6];
