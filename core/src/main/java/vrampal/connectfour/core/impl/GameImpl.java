@@ -107,7 +107,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   @Override
   public void begin() {
     if (status != GameStatus.INIT) {
-      String message = "begin operation is allowed in status: " + status;
+      String message = "begin operation is not allowed in status: " + status;
       log.error(message);
       throw new ConnectFourException(message);
     }
@@ -132,7 +132,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   @Override
   public void dropDisc(int colIdx) {
     if (status != GameStatus.ONGOING) {
-      String message = "dropDisc operation is allowed in status: " + status;
+      String message = "dropDisc operation is not allowed in status: " + status;
       log.error(message);
       throw new ConnectFourException(message);
     }
@@ -151,7 +151,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   @Override
   public void drawGame() {
     if (status != GameStatus.ONGOING) {
-      String message = "drawGame operation is allowed in status: " + status;
+      String message = "drawGame operation is not allowed in status: " + status;
       log.error(message);
       throw new ConnectFourException(message);
     }
@@ -167,7 +167,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   @Override
   public void victory(Player winPlayer) {
     if (status != GameStatus.ONGOING) {
-      String message = "victory operation is allowed in status: " + status;
+      String message = "victory operation is not allowed in status: " + status;
       log.error(message);
       throw new ConnectFourException(message);
     }

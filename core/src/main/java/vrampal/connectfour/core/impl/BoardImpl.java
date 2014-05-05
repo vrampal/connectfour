@@ -28,10 +28,10 @@ class BoardImpl implements Board, Serializable {
 
   private static final int LENGTH_TO_WIN = 4;
 
+  private final Player[][] content;
+
   @Setter(AccessLevel.PACKAGE)
   private GameEndListener endGameListener;
-
-  private final Player[][] content;
 
   /**
    * Create a board with default size (7x6).
@@ -55,8 +55,6 @@ class BoardImpl implements Board, Serializable {
     for (int colIdx = 0; colIdx < width; colIdx++) {
       content[colIdx] = new Player[height];
     }
-
-    reset();
 
     if (log.isInfoEnabled()) {
       log.info("Creating new board " + width + 'x' + height);
@@ -88,24 +86,6 @@ class BoardImpl implements Board, Serializable {
   }
 
   // ----- All the following methods rely on getWidth(), getHeight(), getCellFast() and setCellFast() -----
-
-  void reset() {
-    for (int colIdx = 0; colIdx < getWidth(); colIdx++) {
-      for (int rowIdx = 0; rowIdx < getHeight(); rowIdx++) {
-        setCellFast(colIdx, rowIdx, null);
-      }
-    }
-  }
-
-  @Override
-  public boolean isFull() {
-    for (Player[] column : content) {
-      if (!isColumnFullFast(column)) {
-        return false;
-      }
-    }
-    return true;
-  }
 
   // ----- Input validation methods -----
 
@@ -145,6 +125,16 @@ class BoardImpl implements Board, Serializable {
     return isColumnFullFast(column);
   }
 
+  @Override
+  public boolean isFull() {
+    for (Player[] column : content) {
+      if (!isColumnFullFast(column)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   // ----- Dropping and victory mechanics -----
 
   @Override
@@ -168,7 +158,7 @@ class BoardImpl implements Board, Serializable {
     }
     // isColumnFull() also perform checkColIdx() no need to to it twice.
     if (isColumnFull(colIdx)) {
-      String message = "Cannot play: column is full";
+      String message = "Column is full";
       log.error(message);
       throw new ConnectFourException(message);
     }
