@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.core.Board;
@@ -28,10 +29,16 @@ class BoardImpl implements Board, Serializable {
 
   private static final int LENGTH_TO_WIN = 4;
 
+  @Getter
+  private final int width;
+
+  @Getter
+  private final int height;
+
+  private final Player[] content;
+
   @Setter(AccessLevel.PACKAGE)
   private GameEndListener endGameListener;
-
-  private final Player[][] content;
 
   /**
    * Create a board with default size (7x6).
@@ -51,45 +58,32 @@ class BoardImpl implements Board, Serializable {
       throw new ConnectFourException("Invalid height: " + height);
     }
 
-    content = new Player[width][];
-    for (int colIdx = 0; colIdx < width; colIdx++) {
-      content[colIdx] = new Player[height];
-    }
-
-    reset();
+    this.width = width;
+    this.height = height;
+    content = new Player[width * height];
 
     if (log.isInfoEnabled()) {
       log.info("Creating new board " + width + 'x' + height);
     }
   }
 
-  @Override
-  public int getWidth() {
-    return content.length;
+  // ----- Base methods for content manipulation -----
+
+  private Player getCellFast(int colIdx, int rowIdx) {
+    return content[(colIdx * height) + rowIdx];
   }
 
-  @Override
-  public int getHeight() {
-    return content[0].length;
+  private void setCellFast(int colIdx, int rowIdx, Player player) {
+    content[(colIdx * height) + rowIdx] = player;
   }
 
-  Player getCellFast(int colIdx, int rowIdx) {
-    return content[colIdx][rowIdx];
+  private boolean isColumnFullFast(int colIdx) {
+    return content[((colIdx + 1) * height) - 1] != null;
   }
 
-  void setCellFast(int colIdx, int rowIdx, Player player) {
-    content[colIdx][rowIdx] = player;
-  }
+  // ----- All the following methods rely on getWidth(), getHeight(), getCellFast() and setCellFast() -----
 
-  // ----- The following methods rely on getWidth(), getHeight(), getCellFast() and setCellFast() -----
-
-  void reset() {
-    for (int colIdx = 0; colIdx < getWidth(); colIdx++) {
-      for (int rowIdx = 0; rowIdx < getHeight(); rowIdx++) {
-        setCellFast(colIdx, rowIdx, null);
-      }
-    }
-  }
+  // ----- Input validation methods -----
 
   private void checkColIdx(int colIdx) {
     if ((colIdx < 0) || (colIdx >= getWidth())) {
@@ -121,32 +115,27 @@ class BoardImpl implements Board, Serializable {
   }
 
   @Override
-  public Player getEmptyPlayer() {
-    return EMPTY_PLAYER;
+  public boolean isColumnFull(int colIdx) {
+    checkColIdx(colIdx);
+    return isColumnFullFast(colIdx);
   }
 
   @Override
   public boolean isFull() {
-    for (Player[] column : content) {
-      if (!isColumnFull(column)) {
+    for (int colIdx = 0; colIdx < width; colIdx++) {
+      if (!isColumnFullFast(colIdx)) {
         return false;
       }
     }
     return true;
   }
 
-  @Override
-  public boolean isColumnFull(int colIdx) {
-    checkColIdx(colIdx);
-    Player[] column = content[colIdx];
-    return isColumnFull(column);
-  }
-
-  private boolean isColumnFull(Player[] column) {
-    return column[column.length - 1] != null;
-  }
-
   // ----- Dropping and victory mechanics -----
+
+  @Override
+  public Player getEmptyPlayer() {
+    return EMPTY_PLAYER;
+  }
 
   /**
    * Player entry point, drop a disc into a given column.
@@ -162,19 +151,18 @@ class BoardImpl implements Board, Serializable {
       log.error(message);
       throw new ConnectFourException(message);
     }
-    checkColIdx(colIdx);
+    // isColumnFull() also perform checkColIdx() no need to to it twice.
     if (isColumnFull(colIdx)) {
-      String message = "Cannot play: column is full";
+      String message = "Column is full";
       log.error(message);
       throw new ConnectFourException(message);
     }
 
-    Player[] column = content[colIdx];
-    int rowIdx = column.length;
-    while ((rowIdx > 0) && (column[rowIdx - 1] == null)) {
+    int rowIdx = getHeight() - 1;
+    while ((rowIdx > 0) && (getCellFast(colIdx, rowIdx - 1) == null)) {
       rowIdx--;
     }
-    column[rowIdx] = player;
+    setCellFast(colIdx, rowIdx, player);
 
     if (endGameListener != null) {
       checkForGameEnd(colIdx, rowIdx);
@@ -182,7 +170,7 @@ class BoardImpl implements Board, Serializable {
   }
 
   private void checkForGameEnd(int colIdx, int rowIdx) {
-    Player player = content[colIdx][rowIdx];
+    Player player = getCellFast(colIdx, rowIdx);
 
     // Does the latest drop creates an horizontal line ?
     if (getHorizontalLength(colIdx, rowIdx) >= LENGTH_TO_WIN) {
@@ -205,7 +193,7 @@ class BoardImpl implements Board, Serializable {
    * Returns the length of the horizontal line from a given point.
    */
   private int getHorizontalLength(int colIdx, int rowIdx) {
-    Player player = content[colIdx][rowIdx];
+    Player player = getCellFast(colIdx, rowIdx);
 
     int columnLeft = colIdx;
     while ((columnLeft > 0) && (getCellFast(columnLeft - 1, rowIdx) == player)) {
@@ -222,15 +210,15 @@ class BoardImpl implements Board, Serializable {
   /**
    * Returns the length of the vertical line from a given point.
    */
-  private int getVerticalLength(int column, int row) {
-    Player player = content[column][row];
+  private int getVerticalLength(int colIdx, int rowIdx) {
+    Player player = getCellFast(colIdx, rowIdx);
 
-    int rowDown = row;
-    while ((rowDown > 0) && (getCellFast(column, rowDown - 1) == player)) {
+    int rowDown = rowIdx;
+    while ((rowDown > 0) && (getCellFast(colIdx, rowDown - 1) == player)) {
       rowDown--;
     }
-    int rowUp = row;
-    while ((rowUp < (getHeight() - 1)) && (getCellFast(column, rowUp + 1) == player)) {
+    int rowUp = rowIdx;
+    while ((rowUp < (getHeight() - 1)) && (getCellFast(colIdx, rowUp + 1) == player)) {
       rowUp++;
     }
 
@@ -240,17 +228,17 @@ class BoardImpl implements Board, Serializable {
   /**
    * Returns the length of a diagonal line from a given point.
    */
-  private int getDiagonalLength1(int column, int row) {
-    Player player = content[column][row];
+  private int getDiagonalLength1(int colIdx, int rowIdx) {
+    Player player = getCellFast(colIdx, rowIdx);
 
-    int columnLeft = column;
-    int rowDown = row;
+    int columnLeft = colIdx;
+    int rowDown = rowIdx;
     while ((columnLeft > 0) && (rowDown > 0) && (getCellFast(columnLeft - 1, rowDown - 1) == player)) {
       columnLeft--;
       rowDown--;
     }
-    int columnRight = column;
-    int rowUp = row;
+    int columnRight = colIdx;
+    int rowUp = rowIdx;
     while ((columnRight < (getWidth() - 1)) && (rowUp < (getHeight() - 1))
         && (getCellFast(columnRight + 1, rowUp + 1) == player)) {
       columnRight++;
@@ -263,17 +251,17 @@ class BoardImpl implements Board, Serializable {
   /**
    * Returns the length of another diagonal line from a given point.
    */
-  private int getDiagonalLength2(int column, int row) {
-    Player player = content[column][row];
+  private int getDiagonalLength2(int colIdx, int rowIdx) {
+    Player player = getCellFast(colIdx, rowIdx);
 
-    int columnLeft = column;
-    int rowUp = row;
+    int columnLeft = colIdx;
+    int rowUp = rowIdx;
     while ((columnLeft > 0) && (rowUp < (getHeight() - 1)) && (getCellFast(columnLeft - 1, rowUp + 1) == player)) {
       columnLeft--;
       rowUp++;
     }
-    int columnRight = column;
-    int rowDown = row;
+    int columnRight = colIdx;
+    int rowDown = rowIdx;
     while ((columnRight < (getWidth() - 1)) && (rowDown > 0) && (getCellFast(columnRight + 1, rowDown - 1) == player)) {
       columnRight++;
       rowDown--;
