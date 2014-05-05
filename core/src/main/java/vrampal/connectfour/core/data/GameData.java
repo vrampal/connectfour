@@ -45,7 +45,7 @@ public class GameData implements Serializable {
 
   @Getter
   @Setter
-  private char[][] board;
+  private char[] board;
 
   @Getter
   @Setter
@@ -70,12 +70,11 @@ public class GameData implements Serializable {
     Board inBoard = in.getBoard();
     width = inBoard.getWidth();
     height = inBoard.getHeight();
-    board = new char[width][];
+    board = new char[width * height];
     for (int colIdx = 0; colIdx < width; colIdx++) {
-      board[colIdx] = new char[height];
       for (int rowIdx = 0; rowIdx < height; rowIdx++) {
         Player curCell = inBoard.getCell(colIdx, rowIdx);
-        board[colIdx][rowIdx] = curCell.getLetter();
+        board[(colIdx * height) + rowIdx] = curCell.getLetter();
       }
     }
 
