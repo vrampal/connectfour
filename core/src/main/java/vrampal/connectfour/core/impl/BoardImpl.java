@@ -63,6 +63,8 @@ class BoardImpl implements Board, Serializable {
     }
   }
 
+  // ----- Base methods for content manipulation -----
+
   @Override
   public int getWidth() {
     return content.length;
@@ -73,15 +75,19 @@ class BoardImpl implements Board, Serializable {
     return content[0].length;
   }
 
-  Player getCellFast(int colIdx, int rowIdx) {
+  private Player getCellFast(int colIdx, int rowIdx) {
     return content[colIdx][rowIdx];
   }
 
-  void setCellFast(int colIdx, int rowIdx, Player player) {
+  private void setCellFast(int colIdx, int rowIdx, Player player) {
     content[colIdx][rowIdx] = player;
   }
 
-  // ----- The following methods rely on getWidth(), getHeight(), getCellFast() and setCellFast() -----
+  private boolean isColumnFullFast(Player[] column) {
+    return column[column.length - 1] != null;
+  }
+
+  // ----- All the following methods rely on getWidth(), getHeight(), getCellFast() and setCellFast() -----
 
   void reset() {
     for (int colIdx = 0; colIdx < getWidth(); colIdx++) {
@@ -90,6 +96,18 @@ class BoardImpl implements Board, Serializable {
       }
     }
   }
+
+  @Override
+  public boolean isFull() {
+    for (Player[] column : content) {
+      if (!isColumnFullFast(column)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // ----- Input validation methods -----
 
   private void checkColIdx(int colIdx) {
     if ((colIdx < 0) || (colIdx >= getWidth())) {
@@ -121,32 +139,18 @@ class BoardImpl implements Board, Serializable {
   }
 
   @Override
-  public Player getEmptyPlayer() {
-    return EMPTY_PLAYER;
-  }
-
-  private boolean isColumnFullFast(Player[] column) {
-    return column[column.length - 1] != null;
-  }
-
-  @Override
   public boolean isColumnFull(int colIdx) {
     checkColIdx(colIdx);
     Player[] column = content[colIdx];
     return isColumnFullFast(column);
   }
 
-  @Override
-  public boolean isFull() {
-    for (Player[] column : content) {
-      if (!isColumnFullFast(column)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   // ----- Dropping and victory mechanics -----
+
+  @Override
+  public Player getEmptyPlayer() {
+    return EMPTY_PLAYER;
+  }
 
   /**
    * Player entry point, drop a disc into a given column.
