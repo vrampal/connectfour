@@ -5,17 +5,12 @@ import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 
+/**
+ * Used by main-display.jsp to print the board.
+ */
 public class BoardPrinter {
 
-  public String printBoard(Object input) {
-    if (!(input instanceof Game)) {
-      return "";
-    }
-    Game game = (Game) input;
-    return printBoard(game);
-  }
-
-  String printBoard(Game game) {
+  public String printBoard(Game game) {
     Board board = game.getBoard();
     int height = board.getHeight();
     int width = board.getWidth();

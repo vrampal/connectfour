@@ -19,8 +19,6 @@ import vrampal.connectfour.core.data.PlayerData;
 @EqualsAndHashCode(of = { "content" })
 class BoardImpl implements Board, Serializable {
 
-  private static final long serialVersionUID = -5581793932297360395L;
-
   static final Player EMPTY_PLAYER = new PlayerData("Empty", ' ');
 
   private static final int DEFAULT_WIDTH = 7;
@@ -223,13 +221,9 @@ class BoardImpl implements Board, Serializable {
     while ((rowDown > 0) && (getCellFast(colIdx, rowDown - 1) == player)) {
       rowDown--;
     }
-    int rowUp = rowIdx;
-    while ((rowUp < (getHeight() - 1)) && (getCellFast(colIdx, rowUp + 1) == player)) {
-      // TODO is this part unreachable ?
-      rowUp++;
-    }
+    // Note: row up checking is impossible as the disc is always the top.
 
-    return rowUp - rowDown + 1;
+    return rowIdx - rowDown + 1;
   }
 
   /**

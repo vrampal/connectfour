@@ -21,8 +21,6 @@ import vrampal.connectfour.core.Player;
 @ToString(of = { "id" })
 public class GameData implements Serializable {
 
-  private static final long serialVersionUID = 2649138486471544477L;
-
   @Getter
   @Setter
   private String id;
