@@ -2,6 +2,7 @@ package vrampal.connectfour.core.data;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -42,6 +43,16 @@ public class GameDataTest {
     game.dropDisc(3);
 
     gameData = new GameData(game);
+  }
+
+  /**
+   * Not very useful but required to check we do not broke API.
+   */
+  @Test
+  public void testToString() {
+    String string = gameData.toString();
+
+    assertTrue(string.contains(gameData.getId()));
   }
 
   @Test

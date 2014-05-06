@@ -2,6 +2,7 @@ package vrampal.connectfour.core.data;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,6 +27,16 @@ public class PlayerDataTest {
   @Before
   public void setUp() throws Exception {
     playerData = new PlayerData("Test player", 'T');
+  }
+
+  /**
+   * Not very useful but required to check we do not broke API.
+   */
+  @Test
+  public void testToString() {
+    String string = playerData.toString();
+
+    assertTrue(string.contains("Test player"));
   }
 
   @Test

@@ -225,6 +225,7 @@ class BoardImpl implements Board, Serializable {
     }
     int rowUp = rowIdx;
     while ((rowUp < (getHeight() - 1)) && (getCellFast(colIdx, rowUp + 1) == player)) {
+      // TODO is this part unreachable ?
       rowUp++;
     }
 
