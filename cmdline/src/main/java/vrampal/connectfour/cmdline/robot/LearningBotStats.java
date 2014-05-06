@@ -1,9 +1,9 @@
-package vrampal.connectfour.robot;
+package vrampal.connectfour.cmdline.robot;
 
 import java.io.IOException;
 import java.io.PrintStream;
 
-import vrampal.connectfour.cmdline.ConnectFourConsole;
+import vrampal.connectfour.cmdline.GameRunner;
 import vrampal.connectfour.cmdline.PlayerInterface;
 
 public class LearningBotStats implements Runnable {
@@ -25,7 +25,7 @@ public class LearningBotStats implements Runnable {
 
     long beginTime = System.currentTimeMillis();
     for (int i = 0; i < NB_TOTAL_GAME; i++) {
-      ConnectFourConsole consoleGame = new ConnectFourConsole(playerItf, playerItf);
+      GameRunner consoleGame = new GameRunner(playerItf, playerItf);
       GameDataFeeder dataFeed = new GameDataFeeder(rootData);
       consoleGame.addMonitor(dataFeed);
       consoleGame.run();

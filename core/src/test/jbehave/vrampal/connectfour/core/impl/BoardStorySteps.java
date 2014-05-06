@@ -1,5 +1,6 @@
 package vrampal.connectfour.core.impl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -24,6 +25,8 @@ public class BoardStorySteps {
   // Object under test
   private BoardImpl board;
 
+  private int lastRawIdx = -1;
+
   private GameEndListener endGame;
 
   // ----- Given -----
@@ -39,15 +42,20 @@ public class BoardStorySteps {
 
   @When("playerA drop in column $colIdx")
   public void whenPlayerADrop(int colIdx) {
-    board.dropDisc(playerA, colIdx);
+    lastRawIdx = board.dropDisc(playerA, colIdx);
   }
 
   @When("playerB drop in column $colIdx")
   public void whenPlayerBDrop(int colIdx) {
-    board.dropDisc(playerB, colIdx);
+    lastRawIdx = board.dropDisc(playerB, colIdx);
   }
 
   // ----- Then -----
+
+  @Then("disc stopped in row $rowIdx")
+  public void discStoppedinRow(int rowIdx) {
+    assertEquals(rowIdx, lastRawIdx);
+  }
 
   @Then("cell $colIdx,$rowIdx is empty")
   public void thenCellEmpty(int colIdx, int rowIdx) {

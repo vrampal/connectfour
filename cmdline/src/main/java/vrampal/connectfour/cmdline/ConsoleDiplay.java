@@ -4,7 +4,7 @@ import java.io.PrintStream;
 
 import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.ConnectFourException;
-import vrampal.connectfour.core.Game;
+import vrampal.connectfour.core.GameReadOnly;
 import vrampal.connectfour.core.Player;
 
 // TODO move to logger ?
@@ -13,13 +13,13 @@ public class ConsoleDiplay implements GameMonitor {
   private static final PrintStream OUT = System.out;
 
   @Override
-  public void onBegin(Game game) {
+  public void onBegin(GameReadOnly game) {
     println("Game id: " + game.getId());
   }
 
   @Override
-  public void onPlay(Game game, Player player, int colIdx) {
-    println(player.getName() + " played in column " + (colIdx + 1));
+  public void onPlay(GameReadOnly game, Player player, int colIdx, int rowIdx) {
+    println(player.getName() + " played in column " + (colIdx + 1) + ", row " + (rowIdx + 1));
     printBoard(game.getBoard());
   }
 
@@ -56,17 +56,17 @@ public class ConsoleDiplay implements GameMonitor {
   }
 
   @Override
-  public void onDraw(Game game) {
+  public void onDraw(GameReadOnly game) {
     println("It's a draw game.");
   }
 
   @Override
-  public void onVictory(Game game, Player winner) {
+  public void onVictory(GameReadOnly game, Player winner) {
     println(winner.getName() + " won the game!");
   }
 
   @Override
-  public void onError(Game game, ConnectFourException expection) {
+  public void onError(GameReadOnly game, ConnectFourException expection) {
     println("Error: " + expection.getMessage());
   }
 

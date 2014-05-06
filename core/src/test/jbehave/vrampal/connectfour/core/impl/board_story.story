@@ -11,18 +11,25 @@ Then cell 3,1 is playerB
 Scenario: Horizontal line
 Given a board 7 by 5
 When playerA drop in column 4
+Then disc stopped in row 0
 When playerA drop in column 5
 When playerB drop in column 0
+Then disc stopped in row 0
 When playerA drop in column 2
 When playerA drop in column 3
+Then disc stopped in row 0
 Then playerA is a winner
 
 Scenario: Vertical line
 Given a board 7 by 5
 When playerB drop in column 2
+Then disc stopped in row 0
 When playerA drop in column 4
 When playerB drop in column 2
+Then disc stopped in row 1
 When playerB drop in column 2
+Then disc stopped in row 2
 When playerB drop in column 3
 When playerB drop in column 2
+Then disc stopped in row 3
 Then playerB is a winner

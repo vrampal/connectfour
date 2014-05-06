@@ -138,9 +138,13 @@ class BoardImpl implements Board, Serializable {
   }
 
   /**
-   * Player entry point, drop a disc into a given column.
+   * Play entry point, drop a disc into a given column, checks for victory or draw.
+   *
+   * @param player Player doing the drop.
+   * @param colIdx Column of the drop.
+   * @return Row of the drop.
    */
-  void dropDisc(Player player, int colIdx) {
+  int dropDisc(Player player, int colIdx) {
     if (player == null) {
       String message = "Null is not a valid player";
       log.error(message);
@@ -167,6 +171,8 @@ class BoardImpl implements Board, Serializable {
     if (endGameListener != null) {
       checkForGameEnd(colIdx, rowIdx);
     }
+
+    return rowIdx;
   }
 
   private void checkForGameEnd(int colIdx, int rowIdx) {

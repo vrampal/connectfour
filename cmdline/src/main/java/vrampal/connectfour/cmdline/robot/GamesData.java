@@ -1,4 +1,4 @@
-package vrampal.connectfour.robot;
+package vrampal.connectfour.cmdline.robot;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
