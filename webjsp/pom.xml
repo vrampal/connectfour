@@ -14,6 +14,7 @@
   <packaging>war</packaging>
 
   <dependencies>
+
     <dependency>
       <groupId>vrampal.connectfour</groupId>
       <artifactId>core</artifactId>
@@ -27,25 +28,25 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- Enable logs for webapp -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-jdk14</artifactId>
       <!-- version in parent POM -->
-      <scope>runtime</scope>
     </dependency>
 
+    <!-- Only for Selenium tests -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <!-- version in parent POM -->
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>2.41.0</version>
-      <scope>test</scope>
+      <!-- version in parent POM -->
     </dependency>
+
   </dependencies>
 
   <build>
@@ -53,12 +54,13 @@
 
     <plugins>
       <plugin>
+        <!-- Enable Tomcat for this module -->
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
-        <version>2.2</version>
-          <configuration>
-            <path>/connect-four-jsp</path>
-          </configuration>
+        <!-- version in parent POM -->
+        <configuration>
+          <path>/connect-four-jsp</path>
+        </configuration>
       </plugin>
 
     </plugins>

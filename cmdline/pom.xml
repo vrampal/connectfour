@@ -13,6 +13,7 @@
   <artifactId>cmdline</artifactId>
 
   <dependencies>
+
     <dependency>
       <groupId>vrampal.connectfour</groupId>
       <artifactId>core</artifactId>
@@ -23,14 +24,12 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <!-- version in parent POM -->
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <!-- version in parent POM -->
-      <scope>runtime</scope>
     </dependency>
 
   </dependencies>
@@ -39,9 +38,9 @@
     <plugins>
 
       <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.3.2</version>
         <!-- Add the main class in the manifest -->
+        <artifactId>maven-jar-plugin</artifactId>
+        <!-- version in parent POM -->
         <configuration>
           <archive>
             <manifest>
@@ -53,9 +52,9 @@
       </plugin>
 
       <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.4</version>
         <!-- run "mvn assembly:single" to have a jar with all dependencies -->
+        <artifactId>maven-assembly-plugin</artifactId>
+        <!-- version in parent POM -->
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
