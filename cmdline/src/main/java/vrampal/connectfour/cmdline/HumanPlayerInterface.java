@@ -15,14 +15,6 @@ public class HumanPlayerInterface implements PlayerInterface {
 
   private static final BufferedReader IN = new BufferedReader(new InputStreamReader(System.in));
 
-  public static void main(String[] args) {
-    ConsoleDiplay consoleDisplay = new ConsoleDiplay();
-    PlayerInterface playerItf = new HumanPlayerInterface();
-    ConnectFourConsole consoleGame = new ConnectFourConsole(playerItf, playerItf);
-    consoleGame.addMonitor(consoleDisplay);
-    consoleGame.run();
-  }
-
   @Override
   public int selectPlayColumn(Game game) {
     Board board = game.getBoard();

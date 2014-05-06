@@ -4,4 +4,58 @@
 
 <web-app>
   <display-name>Connect-four JSP webapp</display-name>
+
+  <!-- This servlet does almost everything... -->
+  <servlet>
+    <servlet-name>main-handler</servlet-name>
+    <servlet-class>vrampal.connectfour.servlet.ConnectFourServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!-- Main handler as entry point for the welcome pages -->
+  <servlet-mapping>
+    <servlet-name>main-handler</servlet-name>
+    <url-pattern>/index.jsp</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>main-handler</servlet-name>
+    <url-pattern>/index.html</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>main-handler</servlet-name>
+    <url-pattern>/index.htm</url-pattern>
+  </servlet-mapping>
+
+  <!-- Default servlet to serve static content (js, css, images) -->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.html</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/50x.html</location>
+  </error-page>
+  <error-page>
+    <error-code>502</error-code>
+    <location>/50x.html</location>
+  </error-page>
+  <error-page>
+    <error-code>503</error-code>
+    <location>/50x.html</location>
+  </error-page>
+  <error-page>
+    <error-code>504</error-code>
+    <location>/50x.html</location>
+  </error-page>
+
 </web-app>

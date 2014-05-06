@@ -16,6 +16,8 @@ import vrampal.connectfour.core.Player;
 
 /**
  * Simple JUnit with Mockito.
+ *
+ * TODO a test showing victory on last drop of a full board should be nice.
  */
 public class BoardImplTest {
 
@@ -148,7 +150,7 @@ public class BoardImplTest {
   }
 
   @Test
-  public void testUpToVictory1() {
+  public void testUpToVictoryHorizontal() {
     Player player1 = mock(Player.class);
     GameEndListener endGameListener = mock(GameEndListener.class);
     board.setEndGameListener(endGameListener);
@@ -163,11 +165,13 @@ public class BoardImplTest {
   }
 
   @Test
-  public void testUpToVictory2() {
+  public void testUpToVictoryVertical() {
     Player player1 = mock(Player.class);
+    Player player2 = mock(Player.class);
     GameEndListener endGameListener = mock(GameEndListener.class);
     board.setEndGameListener(endGameListener);
 
+    board.dropDisc(player2, 3);
     board.dropDisc(player1, 3);
     board.dropDisc(player1, 3);
     board.dropDisc(player1, 3);
@@ -178,7 +182,7 @@ public class BoardImplTest {
   }
 
   @Test
-  public void testUpToVictory3() {
+  public void testUpToVictoryDiaginal1() {
     Player player1 = mock(Player.class);
     Player player2 = mock(Player.class);
     GameEndListener endGameListener = mock(GameEndListener.class);
@@ -195,6 +199,30 @@ public class BoardImplTest {
     board.dropDisc(player1, 2);
     board.dropDisc(player2, 5);
     board.dropDisc(player1, 4);
+
+    verify(endGameListener).victory(player1);
+    verify(endGameListener, never()).victory(player2);
+    verify(endGameListener, never()).drawGame();
+  }
+
+  @Test
+  public void testUpToVictoryDiaginal2() {
+    Player player1 = mock(Player.class);
+    Player player2 = mock(Player.class);
+    GameEndListener endGameListener = mock(GameEndListener.class);
+    board.setEndGameListener(endGameListener);
+
+    board.dropDisc(player1, 2);
+    board.dropDisc(player2, 3);
+    board.dropDisc(player1, 1);
+    board.dropDisc(player2, 3);
+    board.dropDisc(player1, 3);
+    board.dropDisc(player2, 4);
+    board.dropDisc(player1, 4);
+    board.dropDisc(player2, 4);
+    board.dropDisc(player1, 4);
+    board.dropDisc(player2, 1);
+    board.dropDisc(player1, 2);
 
     verify(endGameListener).victory(player1);
     verify(endGameListener, never()).victory(player2);

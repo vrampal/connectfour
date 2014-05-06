@@ -86,13 +86,11 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   private static String generateShortId() {
     byte[] randData = new byte[6];
     RAND.nextBytes(randData);
-    Base64 encoder = new Base64(true); // thread safe, could be static
-    byte[] encodedByte = encoder.encode(randData);
-    return new String(encodedByte);
+    return Base64.encodeBase64URLSafeString(randData);
   }
 
   /**
-   * Alternative id generator.
+   * Alternative id generator, currently not used.
    */
   private static String generateUUID() {
     UUID uuid = UUID.randomUUID();
@@ -130,7 +128,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   }
 
   @Override
-  public void dropDisc(int colIdx) {
+  public int dropDisc(int colIdx) {
     if (status != GameStatus.ONGOING) {
       String message = "dropDisc operation is not allowed in status: " + status;
       log.error(message);
@@ -138,12 +136,14 @@ public class GameImpl implements Game, GameEndListener, Serializable {
     }
 
     Player currentPlayer = getCurrentPlayer();
-    board.dropDisc(currentPlayer, colIdx);
+    int rowIdx = board.dropDisc(currentPlayer, colIdx);
     turnNumber++;
 
     if (LOG_STATS.isInfoEnabled()) {
-      LOG_STATS.info(id + ',' + currentPlayer.getName() + ',' + colIdx + ',' + status);
+      LOG_STATS.info(id + ',' + currentPlayer.getName() + ',' + colIdx +',' + rowIdx + ',' + status);
     }
+
+    return rowIdx;
   }
 
   // ----- GameEndListener methods -----

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
@@ -58,6 +59,16 @@ public class GameImplTest {
     assertNotSame(players, game.getAllPlayers());
     assertNotNull(game.getBoard());
     assertNull(game.getWinner());
+  }
+
+  /**
+   * Not very useful but required to check we do not broke API.
+   */
+  @Test
+  public void testToString() {
+    String string = game.toString();
+
+    assertTrue(string.contains(game.getId()));
   }
 
   @Test

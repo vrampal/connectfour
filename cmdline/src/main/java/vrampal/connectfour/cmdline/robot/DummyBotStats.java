@@ -1,6 +1,6 @@
-package vrampal.connectfour.robot;
+package vrampal.connectfour.cmdline.robot;
 
-import vrampal.connectfour.cmdline.ConnectFourConsole;
+import vrampal.connectfour.cmdline.GameRunner;
 import vrampal.connectfour.cmdline.PlayerInterface;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.Player;
@@ -27,10 +27,10 @@ public class DummyBotStats implements Runnable {
 
     long beginTime = System.currentTimeMillis();
     for (int i = 0; i < NB_TOTAL_GAME; i++) {
-      ConnectFourConsole consoleGame = new ConnectFourConsole(playerItf, playerItf);
-      consoleGame.run();
+      GameRunner gameRunner = new GameRunner(playerItf, playerItf);
+      gameRunner.run();
 
-      Game game = consoleGame.getGame();
+      Game game = gameRunner.getGame();
       Player winner = game.getWinner();
       analyeWinner(winner);
     }

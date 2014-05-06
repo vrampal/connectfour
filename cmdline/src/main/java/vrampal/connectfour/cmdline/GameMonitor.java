@@ -1,19 +1,19 @@
 package vrampal.connectfour.cmdline;
 
 import vrampal.connectfour.core.ConnectFourException;
-import vrampal.connectfour.core.Game;
+import vrampal.connectfour.core.GameReadOnly;
 import vrampal.connectfour.core.Player;
 
 public interface GameMonitor {
 
-  void onBegin(Game game);
+  void onBegin(GameReadOnly game);
 
-  void onPlay(Game game, Player player, int colIdx);
+  void onPlay(GameReadOnly game, Player player, int colIdx, int rowIdx);
 
-  void onDraw(Game game);
+  void onDraw(GameReadOnly game);
 
-  void onVictory(Game game, Player winner);
+  void onVictory(GameReadOnly game, Player winner);
 
-  void onError(Game game, ConnectFourException expection);
+  void onError(GameReadOnly game, ConnectFourException expection);
 
 }
