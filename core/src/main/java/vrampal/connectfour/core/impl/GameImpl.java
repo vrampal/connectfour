@@ -27,8 +27,6 @@ import vrampal.connectfour.core.data.PlayerData;
 @ToString(of = { "id" })
 public class GameImpl implements Game, GameEndListener, Serializable {
 
-  private static final long serialVersionUID = -266280070673809422L;
-
   public static final String LOG_STATS_NAME = "connectfour.game.stats";
 
   private static final Logger LOG_STATS = LoggerFactory.getLogger(LOG_STATS_NAME);

@@ -14,9 +14,10 @@ import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 import vrampal.connectfour.core.impl.GameImpl;
 
+/**
+ * Does all the main logic, creating game, handling play request.
+ */
 public class ConnectFourServlet extends HttpServlet implements SessionKeys, RequestAttributeKeys  {
-
-  private static final long serialVersionUID = 1541913207020588705L;
 
   static final String PARAM_RESET_KEY = "reset";
   static final String PARAM_PLAY_KEY = "col";
