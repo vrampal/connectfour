@@ -86,10 +86,7 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   private static String generateShortId() {
     byte[] randData = new byte[6];
     RAND.nextBytes(randData);
-    // Base64 is thread safe, could be a static instance
-    Base64 encoder = new Base64(true);
-    byte[] encodedByte = encoder.encode(randData);
-    return new String(encodedByte);
+    return Base64.encodeBase64URLSafeString(randData);
   }
 
   /**
