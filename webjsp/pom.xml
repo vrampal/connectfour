@@ -13,6 +13,10 @@
   <artifactId>webjsp</artifactId>
   <packaging>war</packaging>
 
+  <properties>
+    <webapp.name>connect-four-jsp</webapp.name>
+  </properties>
+
   <dependencies>
 
     <dependency>
@@ -56,7 +60,7 @@
   </dependencies>
 
   <build>
-    <finalName>connect-four-jsp</finalName>
+    <finalName>${webapp.name}</finalName>
 
     <plugins>
       <plugin>
@@ -65,7 +69,19 @@
         <artifactId>tomcat7-maven-plugin</artifactId>
         <!-- version in parent POM -->
         <configuration>
-          <path>/connect-four-jsp</path>
+          <path>/${webapp.name}</path>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <!-- Enable Jetty for this module -->
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <!-- version in parent POM -->
+        <configuration>
+          <webApp>
+            <contextPath>/${webapp.name}</contextPath>
+          </webApp>
         </configuration>
       </plugin>
 

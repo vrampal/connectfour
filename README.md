@@ -45,7 +45,8 @@ Console
 
 Webjsp
 
-* [Apache Tomcat](http://tomcat.apache.org/)
+* [Apache Tomcat 7](http://tomcat.apache.org/)
+* [Jetty](http://www.eclipse.org/jetty/)
 * Servlet 2.5 / JSP 2.1
 * [HTML5](http://www.w3.org/TR/html5/) / [CSS2](http://www.w3.org/TR/CSS2/)
 * [Apache JMeter](https://jmeter.apache.org/) (in src/test/jmeter, not run by maven)
@@ -67,8 +68,14 @@ Console
 
 * TODO
 
-Webjsp
+Webjsp (with Tomcat)
 
 * cd webjsp
 * mvn tomcat7:run
 * [http://localhost:8080/connect-four-jsp/](http://localhost:8080/connect-four-jsp/)
+
+Webjsp (with Jetty)
+
+* cd webjsp
+* mvn jetty:run
+* [http://localhost:8080/connect-four-jsp/index.html](http://localhost:8080/connect-four-jsp/index.html)
