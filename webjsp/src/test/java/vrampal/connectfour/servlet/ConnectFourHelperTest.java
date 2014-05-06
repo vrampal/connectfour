@@ -25,8 +25,6 @@ public class ConnectFourHelperTest {
   // Object under test
   private ConnectFourHelper helper;
 
-  private Player player;
-
   private Game game;
 
   private HttpSession session;
@@ -37,20 +35,8 @@ public class ConnectFourHelperTest {
   public void setUp() throws Exception {
     helper = new ConnectFourHelper();
 
-    player = mock(Player.class);
-    when(player.getName()).thenReturn("Test player");
-    when(player.getLetter()).thenReturn('T');
-
-    Board board = mock(Board.class);
-    when(board.getWidth()).thenReturn(3);
-    when(board.getHeight()).thenReturn(2);
-    when(board.getCell(anyInt(), anyInt())).thenReturn(player);
-
     game = mock(Game.class);
     when(game.getId()).thenReturn("Test game");
-    when(game.getStatus()).thenReturn(GameStatus.ONGOING);
-    when(game.getBoard()).thenReturn(board);
-    when(game.getCurrentPlayer()).thenReturn(player);
 
     session = mock(HttpSession.class);
     when(session.getAttribute(ConnectFourHelper.SESSION_GAME_KEY)).thenReturn(game);
@@ -79,22 +65,32 @@ public class ConnectFourHelperTest {
 
   @Test
   public void testPageBeginPlayingGame() {
+    Player currentPlayer = mock(Player.class);
+    when(currentPlayer.getName()).thenReturn("Test current player");
+    when(game.getCurrentPlayer()).thenReturn(currentPlayer);
+    when(game.getStatus()).thenReturn(GameStatus.ONGOING);
     when(req.getParameter(ConnectFourHelper.PARAM_PLAY_KEY)).thenReturn("1342");
 
     helper.pageBegin(req);
 
     verify(game).dropDisc(eq(1341));
+    assertEquals("Test game", helper.getGameId());
+    assertEquals("Now playing: Test current player", helper.getMainMessage());
+    assertEquals("", helper.getSubMessage());
   }
 
   @Test
   public void testPageBeginVictory() {
-    when(game.getStatus()).thenReturn(GameStatus.FINISHED);
+    Player player = mock(Player.class);
+    when(player.getName()).thenReturn("Test winner");
     when(game.getWinner()).thenReturn(player);
+    when(game.getStatus()).thenReturn(GameStatus.FINISHED);
 
     helper.pageBegin(req);
 
     assertEquals("Test game", helper.getGameId());
-    assertEquals("Test player won the game.", helper.getMainMessage());
+    assertEquals("Test winner won the game.", helper.getMainMessage());
+    assertEquals("", helper.getSubMessage());
   }
 
   @Test
@@ -105,12 +101,25 @@ public class ConnectFourHelperTest {
 
     assertEquals("Test game", helper.getGameId());
     assertEquals("It's a draw game.", helper.getMainMessage());
+    assertEquals("", helper.getSubMessage());
   }
 
   @Test
   public void testPrintBoard() {
-    helper.pageBegin(req);
+    Player player = mock(Player.class);
+    when(player.getName()).thenReturn("Test player");
+    when(player.getLetter()).thenReturn(' ');
 
+    Board board = mock(Board.class);
+    when(board.getWidth()).thenReturn(3);
+    when(board.getHeight()).thenReturn(2);
+    when(board.getCell(anyInt(), anyInt())).thenReturn(player);
+
+    when(game.getCurrentPlayer()).thenReturn(player);
+    when(game.getStatus()).thenReturn(GameStatus.ONGOING);
+    when(game.getBoard()).thenReturn(board);
+
+    helper.pageBegin(req);
     String result = helper.printBoard();
 
     // TODO find a better assert.
