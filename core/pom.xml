@@ -42,6 +42,8 @@
       <artifactId>mockito-core</artifactId>
       <!-- version in parent POM -->
     </dependency>
+
+    <!-- Only for optional JBehave tests -->
     <dependency>
       <groupId>org.jbehave</groupId>
       <artifactId>jbehave-core</artifactId>

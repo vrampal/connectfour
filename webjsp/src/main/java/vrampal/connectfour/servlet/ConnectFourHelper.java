@@ -12,7 +12,11 @@ import vrampal.connectfour.core.impl.GameImpl;
 
 public class ConnectFourHelper {
 
-  private static final String GAME_KEY = "GAME";
+  static final String SESSION_GAME_KEY = "GAME";
+
+  static final String PARAM_RESET_KEY = "reset";
+
+  static final String PARAM_PLAY_KEY = "col";
 
   private Game game = null;
 
@@ -24,17 +28,17 @@ public class ConnectFourHelper {
 
     HttpSession session = req.getSession();
 
-    game = (Game) session.getAttribute(GAME_KEY);
+    game = (Game) session.getAttribute(SESSION_GAME_KEY);
 
-    String resetStr = req.getParameter("reset");
+    String resetStr = req.getParameter(PARAM_RESET_KEY);
     if ((game == null) || (resetStr != null)) {
       // TODO use dependency injection
       game = new GameImpl();
       game.begin();
-      session.setAttribute(GAME_KEY, game);
+      session.setAttribute(SESSION_GAME_KEY, game);
     }
 
-    String colStr = req.getParameter("col");
+    String colStr = req.getParameter(PARAM_PLAY_KEY);
     if (colStr != null) {
       try {
         int colIdx = Integer.parseInt(colStr);
