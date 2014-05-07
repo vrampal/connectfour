@@ -14,6 +14,8 @@ import org.junit.Test;
 
 public class GameSerializeTest {
 
+  private static final String CLASS_UNDER_TEST = "GameImpl";
+
   // Object under test
   private GameImpl game;
 
@@ -37,7 +39,7 @@ public class GameSerializeTest {
     ooStream.writeObject(game);
     byte[] bytes = baoStream.toByteArray();
 
-    System.out.println("GameImpl - Java length: " + bytes.length + " bytes");
+    System.out.println(CLASS_UNDER_TEST + " - Java length: " + bytes.length + " bytes");
 
     ByteArrayInputStream baiStream = new ByteArrayInputStream(bytes);
     ObjectInputStream oiStream = new ObjectInputStream(baiStream);

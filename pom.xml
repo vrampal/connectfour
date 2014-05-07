@@ -5,18 +5,47 @@
 
   <groupId>vrampal</groupId>
   <artifactId>connectfour</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>ConnectFour demo</name>
-  <description>This project demonstrate the use of several Java technologies.</description>
-  <url>https://bitbucket.org/vrampal/connectfour</url>
+  <description>This project is a implementation of the ConnectFour game to show some java related technology.</description>
+
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>http://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>vrampal</id>
+      <name>Vincent RAMPAL</name>
+      <email>vincent.rampal@gmail.com</email>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
 
   <modules>
     <module>core</module>
     <module>cmdline</module>
     <module>webjsp</module>
   </modules>
+
+  <scm>
+    <url>https://bitbucket.org/vrampal/connectfour</url>
+    <connection>scm:git:git@bitbucket.org:vrampal/connectfour.git</connection>
+  </scm>
+
+  <issueManagement>
+    <url>https://bitbucket.org/vrampal/connectfour/issues</url>
+  </issueManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,12 +78,6 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-jdk14</artifactId>
-        <version>${slf4j.version}</version>
-        <scope>runtime</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-jcl</artifactId>
         <version>${slf4j.version}</version>
         <scope>runtime</scope>
       </dependency>
@@ -97,18 +120,6 @@
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
           <version>2.4</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.7.0.201403182114</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.eluder.coveralls</groupId>
-          <artifactId>coveralls-maven-plugin</artifactId>
-          <version>2.2.0</version>
         </plugin>
 
         <plugin>

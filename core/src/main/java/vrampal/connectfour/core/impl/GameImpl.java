@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,6 +25,8 @@ import vrampal.connectfour.core.data.PlayerData;
 @EqualsAndHashCode
 @ToString(of = { "id" })
 public class GameImpl implements Game, GameEndListener, Serializable {
+
+  private static final long serialVersionUID = 9070592540629187066L;
 
   public static final String LOG_STATS_NAME = "connectfour.game.stats";
 
@@ -80,19 +81,12 @@ public class GameImpl implements Game, GameEndListener, Serializable {
 
   /**
    * Main id generator, requires commons-codec, or Guava until java 8.
+   * An alternative could be UUID.randomUUID().toString()
    */
   private static String generateShortId() {
     byte[] randData = new byte[6];
     RAND.nextBytes(randData);
     return Base64.encodeBase64URLSafeString(randData);
-  }
-
-  /**
-   * Alternative id generator, currently not used.
-   */
-  private static String generateUUID() {
-    UUID uuid = UUID.randomUUID();
-    return uuid.toString();
   }
 
   @Override

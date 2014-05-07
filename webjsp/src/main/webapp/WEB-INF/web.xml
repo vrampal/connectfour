@@ -3,13 +3,12 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Connect-four JSP webapp</display-name>
+  <display-name>ConnectFour JSP webapp</display-name>
 
   <!-- This servlet does almost everything... -->
   <servlet>
     <servlet-name>main-handler</servlet-name>
     <servlet-class>vrampal.connectfour.servlet.ConnectFourServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
   </servlet>
 
   <!-- Main handler as entry point for the welcome pages -->
@@ -21,16 +20,10 @@
     <servlet-name>main-handler</servlet-name>
     <url-pattern>/index.html</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>main-handler</servlet-name>
-    <url-pattern>/index.htm</url-pattern>
-  </servlet-mapping>
 
-  <!-- Default servlet to serve static content (js, css, images) -->
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
 
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

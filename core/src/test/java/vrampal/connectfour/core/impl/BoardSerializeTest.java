@@ -15,6 +15,8 @@ import org.junit.Test;
 
 public class BoardSerializeTest {
 
+  private static final String CLASS_UNDER_TEST = "BoardImpl";
+
   // Object under test
   private BoardImpl board;
 
@@ -31,7 +33,7 @@ public class BoardSerializeTest {
     ooStream.writeObject(board);
     byte[] bytes = baoStream.toByteArray();
 
-    System.out.println("BoardImpl - Java length: " + bytes.length + " bytes");
+    System.out.println(CLASS_UNDER_TEST + " - Java length: " + bytes.length + " bytes");
 
     ByteArrayInputStream baiStream = new ByteArrayInputStream(bytes);
     ObjectInputStream oiStream = new ObjectInputStream(baiStream);

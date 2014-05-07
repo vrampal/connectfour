@@ -6,11 +6,14 @@
   <parent>
     <groupId>vrampal</groupId>
     <artifactId>connectfour</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
   </parent>
 
   <groupId>vrampal.connectfour</groupId>
   <artifactId>cmdline</artifactId>
+
+  <name>ConnectFour command line</name>
+  <description>This module produce a runnable jar to play with no GUI.</description>
 
   <dependencies>
 

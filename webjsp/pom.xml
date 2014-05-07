@@ -6,12 +6,19 @@
   <parent>
     <groupId>vrampal</groupId>
     <artifactId>connectfour</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
   </parent>
 
   <groupId>vrampal.connectfour</groupId>
   <artifactId>webjsp</artifactId>
   <packaging>war</packaging>
+
+  <name>ConnectFour web/jsp</name>
+  <description>This module is a simple web application to play connectfour.</description>
+
+  <properties>
+    <webapp.name>connectfour</webapp.name>
+  </properties>
 
   <dependencies>
 
@@ -49,7 +56,7 @@
   </dependencies>
 
   <build>
-    <finalName>connect-four-jsp</finalName>
+    <finalName>${webapp.name}</finalName>
 
     <plugins>
       <plugin>
@@ -58,7 +65,7 @@
         <artifactId>tomcat7-maven-plugin</artifactId>
         <!-- version in parent POM -->
         <configuration>
-          <path>/connect-four-jsp</path>
+          <path>/${webapp.name}</path>
         </configuration>
       </plugin>
 

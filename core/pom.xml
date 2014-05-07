@@ -6,11 +6,14 @@
   <parent>
     <groupId>vrampal</groupId>
     <artifactId>connectfour</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
   </parent>
 
   <groupId>vrampal.connectfour</groupId>
   <artifactId>core</artifactId>
+
+  <name>ConnectFour core</name>
+  <description>This module is a library with all the game logic.</description>
 
   <dependencies>
 
@@ -52,33 +55,5 @@
     </dependency>
 
   </dependencies>
-
-  <build>
-    <plugins>
-
-      <plugin>
-        <!-- Run tests with JaCoCo and produce target/jacoco.exec -->
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <!-- version in parent POM -->
-        <executions>
-          <execution>
-            <id>prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <!-- Activate Coveralls for this module -->
-        <groupId>org.eluder.coveralls</groupId>
-        <artifactId>coveralls-maven-plugin</artifactId>
-        <!-- version in parent POM -->
-      </plugin>
-
-    </plugins>
-  </build>
 
 </project>

@@ -37,9 +37,11 @@ Core
 
 Console
 
+* None
+
 Webjsp
 
-* [Apache Tomcat](http://tomcat.apache.org/)
+* [Apache Tomcat 7](http://tomcat.apache.org/)
 * Servlet 2.5 / JSP 2.1
 * [HTML5](http://www.w3.org/TR/html5/) / [CSS2](http://www.w3.org/TR/CSS2/)
 
@@ -59,8 +61,16 @@ Console
 
 * TODO
 
-Webjsp
+Webjsp (with Tomcat)
 
 * cd webjsp
 * mvn tomcat7:run
-* [http://localhost:8080/connect-four-jsp/](http://localhost:8080/connect-four-jsp/)
+* [http://localhost:8080/connectfour/](http://localhost:8080/connectfour/)
+
+License
+-------
+
+[MIT license](http://opensource.org/licenses/MIT)
+Copyright (c) 2014 Vincent RAMPAL
+
+

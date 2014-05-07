@@ -15,6 +15,8 @@ import org.junit.Test;
 
 public class PlayerDataTest {
 
+  private static final String CLASS_UNDER_TEST = "PlayerData";
+
   // Object under test
   private PlayerData playerData;
 
@@ -41,7 +43,7 @@ public class PlayerDataTest {
     ooStream.writeObject(playerData);
     byte[] bytes = baoStream.toByteArray();
 
-    System.out.println("PlayerData - Java length: " + bytes.length + " bytes");
+    System.out.println(CLASS_UNDER_TEST + " - Java length: " + bytes.length + " bytes");
 
     ByteArrayInputStream baiStream = new ByteArrayInputStream(bytes);
     ObjectInputStream oiStream = new ObjectInputStream(baiStream);
