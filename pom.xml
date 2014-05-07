@@ -43,6 +43,10 @@
     <connection>scm:git:git@bitbucket.org:vrampal/connectfour.git</connection>
   </scm>
 
+  <issueManagement>
+    <url>https://bitbucket.org/vrampal/connectfour/issues</url>
+  </issueManagement>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>1.7</jdk.version>
