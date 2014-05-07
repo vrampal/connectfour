@@ -36,8 +36,8 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
    */
   void handleRequest(HttpServletRequest req) {
     HttpSession session = req.getSession();
-
     Game game = (Game) session.getAttribute(SESSION_GAME_KEY);
+
     String mainMessage = "";
     String subMessage = "";
 
@@ -47,7 +47,6 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
       // TODO use dependency injection to avoid dependency on implementation
       game = new GameImpl();
       game.begin();
-      session.setAttribute(SESSION_GAME_KEY, game);
     }
 
     // Handle play parameter
@@ -80,6 +79,8 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
     req.setAttribute(ATTR_GAME_ID_KEY, game.getId());
     req.setAttribute(ATTR_MAIN_MESSAGE_KEY, mainMessage);
     req.setAttribute(ATTR_SUB_MESSAGE_KEY, subMessage);
+
+    session.setAttribute(SESSION_GAME_KEY, game);
   }
 
 }
