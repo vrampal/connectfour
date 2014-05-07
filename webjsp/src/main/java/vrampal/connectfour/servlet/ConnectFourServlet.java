@@ -19,7 +19,10 @@ import vrampal.connectfour.core.impl.GameImpl;
  */
 public class ConnectFourServlet extends HttpServlet implements SessionKeys, RequestAttributeKeys  {
 
+  private static final long serialVersionUID = -30750880358249276L;
+
   static final String PARAM_RESET_KEY = "reset";
+
   static final String PARAM_PLAY_KEY = "col";
 
   @Override

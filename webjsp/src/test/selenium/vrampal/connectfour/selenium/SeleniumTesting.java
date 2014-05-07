@@ -25,7 +25,7 @@ public class SeleniumTesting {
     driver = new FirefoxDriver();
     // driver = new ChromeDriver();
 
-    baseUrl = "http://localhost:8080/connect-four-jsp/";
+    baseUrl = "http://localhost:8080/connectfour/";
 
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
   }

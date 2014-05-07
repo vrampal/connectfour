@@ -5,18 +5,43 @@
 
   <groupId>vrampal</groupId>
   <artifactId>connectfour</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>ConnectFour demo</name>
-  <description>This project demonstrate the use of several Java technologies.</description>
-  <url>https://bitbucket.org/vrampal/connectfour</url>
+  <description>This project is a implementation of the ConnectFour game to show some java related technology.</description>
+
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>http://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>vrampal</id>
+      <name>Vincent RAMPAL</name>
+      <email>vincent.rampal@gmail.com</email>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
 
   <modules>
     <module>core</module>
     <module>cmdline</module>
     <module>webjsp</module>
   </modules>
+
+  <scm>
+    <url>https://bitbucket.org/vrampal/connectfour</url>
+    <connection>scm:git:git@bitbucket.org:vrampal/connectfour.git</connection>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

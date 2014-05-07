@@ -12,6 +12,8 @@ import lombok.Getter;
 
 class GamesData implements Serializable {
 
+  private static final long serialVersionUID = 5963230425676909192L;
+
   @Getter(AccessLevel.PACKAGE)
   private int yellowVictCount = 0;
 

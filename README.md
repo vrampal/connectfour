@@ -72,10 +72,18 @@ Webjsp (with Tomcat)
 
 * cd webjsp
 * mvn tomcat7:run
-* [http://localhost:8080/connect-four-jsp/](http://localhost:8080/connect-four-jsp/)
+* [http://localhost:8080/connectfour/](http://localhost:8080/connectfour/)
 
 Webjsp (with Jetty)
 
 * cd webjsp
 * mvn jetty:run
-* [http://localhost:8080/connect-four-jsp/index.html](http://localhost:8080/connect-four-jsp/index.html)
+* [http://localhost:8080/connectfour/index.html](http://localhost:8080/connectfour/index.html)
+
+License
+-------
+
+[MIT license](http://opensource.org/licenses/MIT)
+Copyright (c) 2014 Vincent RAMPAL
+
+

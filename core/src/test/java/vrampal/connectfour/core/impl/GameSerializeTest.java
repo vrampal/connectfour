@@ -25,6 +25,8 @@ public class GameSerializeTest {
 
   private static final boolean PRINT_OUTPUT = false;
 
+  private static final String CLASS_UNDER_TEST = "GameImpl";
+
   // Object under test
   private GameImpl game;
 
@@ -48,7 +50,7 @@ public class GameSerializeTest {
     ooStream.writeObject(game);
     byte[] bytes = baoStream.toByteArray();
 
-    System.out.println("GameImpl - Java length: " + bytes.length + " bytes");
+    System.out.println(CLASS_UNDER_TEST + " - Java length: " + bytes.length + " bytes");
 
     ByteArrayInputStream baiStream = new ByteArrayInputStream(bytes);
     ObjectInputStream oiStream = new ObjectInputStream(baiStream);
@@ -65,7 +67,7 @@ public class GameSerializeTest {
     Gson gsonSave = new Gson();
     String jsonStr = gsonSave.toJson(game);
 
-    System.out.println("GameImpl - Google GSON length: " + jsonStr.length() + " chars");
+    System.out.println(CLASS_UNDER_TEST + " - Google GSON length: " + jsonStr.length() + " chars");
     if (PRINT_OUTPUT) {
       System.out.println(jsonStr);
     }
@@ -83,7 +85,7 @@ public class GameSerializeTest {
     ObjectMapper mapperSave = new ObjectMapper();
     String jsonStr = mapperSave.writeValueAsString(game);
 
-    System.out.println("GameImpl - Jackson length: " + jsonStr.length() + " chars");
+    System.out.println(CLASS_UNDER_TEST + " - Jackson length: " + jsonStr.length() + " chars");
     if (PRINT_OUTPUT) {
       System.out.println(jsonStr);
     }
@@ -101,7 +103,7 @@ public class GameSerializeTest {
     XStream xstreamSave = new XStream();
     String xmlStr = xstreamSave.toXML(game);
 
-    System.out.println("GameImpl - Xstream length: " + xmlStr.length() + " chars");
+    System.out.println(CLASS_UNDER_TEST + " - Xstream length: " + xmlStr.length() + " chars");
     if (PRINT_OUTPUT) {
       System.out.println(xmlStr);
     }

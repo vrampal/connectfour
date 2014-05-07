@@ -21,6 +21,8 @@ public class PlayerDataTest {
 
   private static final boolean PRINT_OUTPUT = false;
 
+  private static final String CLASS_UNDER_TEST = "PlayerData";
+
   // Object under test
   private PlayerData playerData;
 
@@ -47,7 +49,7 @@ public class PlayerDataTest {
     ooStream.writeObject(playerData);
     byte[] bytes = baoStream.toByteArray();
 
-    System.out.println("PlayerData - Java length: " + bytes.length + " bytes");
+    System.out.println(CLASS_UNDER_TEST + " - Java length: " + bytes.length + " bytes");
 
     ByteArrayInputStream baiStream = new ByteArrayInputStream(bytes);
     ObjectInputStream oiStream = new ObjectInputStream(baiStream);
@@ -63,7 +65,7 @@ public class PlayerDataTest {
     Gson gsonSave = new Gson();
     String jsonStr = gsonSave.toJson(playerData);
 
-    System.out.println("PlayerData - Google GSON length: " + jsonStr.length() + " chars");
+    System.out.println(CLASS_UNDER_TEST + " - Google GSON length: " + jsonStr.length() + " chars");
     if (PRINT_OUTPUT) {
       System.out.println(jsonStr);
     }
@@ -80,7 +82,7 @@ public class PlayerDataTest {
     ObjectMapper mapperSave = new ObjectMapper();
     String jsonStr = mapperSave.writeValueAsString(playerData);
 
-    System.out.println("PlayerData - Jackson length: " + jsonStr.length() + " chars");
+    System.out.println(CLASS_UNDER_TEST + " - Jackson length: " + jsonStr.length() + " chars");
     if (PRINT_OUTPUT) {
       System.out.println(jsonStr);
     }
@@ -97,7 +99,7 @@ public class PlayerDataTest {
     XStream xstreamSave = new XStream();
     String xmlStr = xstreamSave.toXML(playerData);
 
-    System.out.println("PlayerData - Xstream length: " + xmlStr.length() + " chars");
+    System.out.println(CLASS_UNDER_TEST + " - Xstream length: " + xmlStr.length() + " chars");
     if (PRINT_OUTPUT) {
       System.out.println(xmlStr);
     }

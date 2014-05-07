@@ -19,6 +19,8 @@ import vrampal.connectfour.core.data.PlayerData;
 @EqualsAndHashCode(of = { "content" })
 class BoardImpl implements Board, Serializable {
 
+  private static final long serialVersionUID = 9146512987657901915L;
+
   static final Player EMPTY_PLAYER = new PlayerData("Empty", ' ');
 
   private static final int DEFAULT_WIDTH = 7;
