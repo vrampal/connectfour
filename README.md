@@ -26,7 +26,7 @@ Global
 * [Git](http://git-scm.com/)
 * [Java 7](http://docs.oracle.com/javase/7/docs/) (also check [the specs page](http://docs.oracle.com/javase/specs/))
 * [Apache Maven](http://maven.apache.org/pom.html) (also check [this book](http://books.sonatype.com/mvnref-book/reference/))
-* [Lombok](http://projectlombok.org/features/)
+* [Lombok](http://projectlombok.org/features/) (requires to be installed in your IDE)
 * [SLF4J](http://www.slf4j.org/manual.html)
 * [JUnit 4](https://github.com/junit-team/junit/wiki) with [Harmcrest](https://code.google.com/p/hamcrest/wiki/Tutorial)
 * [Mockito](http://docs.mockito.googlecode.com/hg/latest/org/mockito/Mockito.html)

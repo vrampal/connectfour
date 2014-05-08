@@ -1,4 +1,4 @@
-package vrampal.connectfour.servlet;
+package vrampal.connectfour.webjsp.servlet;
 
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
@@ -15,6 +15,8 @@ import org.junit.Test;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
+import vrampal.connectfour.webjsp.RequestAttributeKeys;
+import vrampal.connectfour.webjsp.SessionKeys;
 
 public class ConnectFourServletTest implements SessionKeys, RequestAttributeKeys {
 

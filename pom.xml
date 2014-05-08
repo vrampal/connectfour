@@ -160,6 +160,22 @@
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>0.7.0.201403182114</version>
+          <executions>
+            <execution>
+              <id>add-jacoco-agent</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+              <configuration>
+                <includes>
+                  <include>vrampal.connectfour.**</include>
+                </includes>
+                <excludes>
+                  <exclude>**ByMockito**</exclude>
+                </excludes>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
 
         <plugin>

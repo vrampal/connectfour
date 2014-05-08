@@ -3,22 +3,6 @@
 
   <display-name>ConnectFour JSP webapp</display-name>
 
-  <!-- This servlet does almost everything... -->
-  <servlet>
-    <servlet-name>main-handler</servlet-name>
-    <servlet-class>vrampal.connectfour.servlet.ConnectFourServlet</servlet-class>
-  </servlet>
-
-  <!-- Main handler as entry point for the welcome pages -->
-  <servlet-mapping>
-    <servlet-name>main-handler</servlet-name>
-    <url-pattern>/index.jsp</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>main-handler</servlet-name>
-    <url-pattern>/index.html</url-pattern>
-  </servlet-mapping>
-
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>

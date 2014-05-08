@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class SeleniumTesting {
+public class MainPageTest {
 
   private WebDriver driver;
 
@@ -26,8 +24,11 @@ public class SeleniumTesting {
     // driver = new ChromeDriver();
 
     baseUrl = "http://localhost:8080/connectfour/";
+  }
 
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+  @After
+  public void tearDown() throws Exception {
+    driver.quit();
   }
 
   @Test
@@ -72,6 +73,7 @@ public class SeleniumTesting {
     assertEquals("Invalid column id: 94", getSubMessage());
 
     driver.get(baseUrl + "?reset=1");
+
     play(4);
     play(4);
     play(4);
@@ -79,12 +81,14 @@ public class SeleniumTesting {
     play(4);
     play(4);
     play(4);
+
     assertEquals("Column is full", getSubMessage());
   }
 
   @Test
   public void testYellowVictory() throws Exception {
     driver.get(baseUrl + "?reset=1");
+
     play(4);
     play(3);
     play(5);
@@ -96,21 +100,17 @@ public class SeleniumTesting {
     play(2);
     play(5);
     play(4);
+
     assertEquals("Yellow won the game.", getMainMessage());
     assertEquals("", getSubMessage());
   }
 
-  @After
-  public void tearDown() throws Exception {
-    driver.quit();
-  }
-
   private String getMainMessage() {
-    return driver.findElement(By.cssSelector("h2")).getText();
+    return driver.findElement(By.cssSelector("h1")).getText();
   }
 
   private String getSubMessage() {
-    return driver.findElement(By.cssSelector("h3")).getText();
+    return driver.findElement(By.cssSelector("h2")).getText();
   }
 
   private String getGameId() {

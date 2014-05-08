@@ -1,8 +1,9 @@
-package vrampal.connectfour.servlet;
+package vrampal.connectfour.webjsp.servlet;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,11 +14,14 @@ import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 import vrampal.connectfour.core.impl.GameImpl;
+import vrampal.connectfour.webjsp.RequestAttributeKeys;
+import vrampal.connectfour.webjsp.SessionKeys;
 
 /**
  * Does all the main logic, creating game, handling play request.
  */
-public class ConnectFourServlet extends HttpServlet implements SessionKeys, RequestAttributeKeys  {
+@WebServlet(name = "main-servlet", urlPatterns = { "/index.jsp", "/index.html" })
+public class ConnectFourServlet extends HttpServlet implements SessionKeys, RequestAttributeKeys {
 
   private static final long serialVersionUID = -30750880358249276L;
 
@@ -32,14 +36,13 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
   }
 
   /**
-   * This method simplify testing, no need to mock response, request dispatcher or to handle exceptions.
+   * This method simplify testing, no need to mock response, request dispatcher
+   * or to handle exceptions.
    */
   void handleRequest(HttpServletRequest req) {
+    // Get elements from the session
     HttpSession session = req.getSession();
     Game game = (Game) session.getAttribute(SESSION_GAME_KEY);
-
-    String mainMessage = "";
-    String subMessage = "";
 
     // Create game or reset it if necessary
     String resetStr = req.getParameter(PARAM_RESET_KEY);
@@ -50,6 +53,7 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
     }
 
     // Handle play parameter
+    String subMessage = "";
     String colStr = req.getParameter(PARAM_PLAY_KEY);
     if (colStr != null) {
       try {
@@ -63,6 +67,7 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
     }
 
     // Build main message
+    String mainMessage = "";
     if (game.getStatus() == GameStatus.ONGOING) {
       Player player = game.getCurrentPlayer();
       mainMessage = "Now playing: " + player.getName();
@@ -75,11 +80,12 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
       }
     }
 
-    req.setAttribute(ATTR_GAME_KEY, game);
-    req.setAttribute(ATTR_GAME_ID_KEY, game.getId());
+    // Save request attributes for the view
     req.setAttribute(ATTR_MAIN_MESSAGE_KEY, mainMessage);
     req.setAttribute(ATTR_SUB_MESSAGE_KEY, subMessage);
+    req.setAttribute(ATTR_GAME_ID_KEY, game.getId());
 
+    // Save elements in the session
     session.setAttribute(SESSION_GAME_KEY, game);
   }
 

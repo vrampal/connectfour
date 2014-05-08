@@ -66,6 +66,14 @@
     <finalName>${webapp.name}</finalName>
 
     <plugins>
+
+      <plugin>
+        <!-- Enable JaCoCo for this module -->
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <!-- version in parent POM -->
+      </plugin>
+
       <plugin>
         <!-- Enable Tomcat for this module -->
         <groupId>org.apache.tomcat.maven</groupId>

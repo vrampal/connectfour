@@ -1,4 +1,4 @@
-package vrampal.connectfour.servlet;
+package vrampal.connectfour.webjsp.view;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyInt;

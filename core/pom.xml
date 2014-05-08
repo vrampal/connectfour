@@ -87,18 +87,10 @@
     <plugins>
 
       <plugin>
-        <!-- Run tests with JaCoCo and produce target/jacoco.exec -->
+        <!-- Enable JaCoCo for this module -->
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <!-- version in parent POM -->
-        <executions>
-          <execution>
-            <id>prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
 
       <plugin>
