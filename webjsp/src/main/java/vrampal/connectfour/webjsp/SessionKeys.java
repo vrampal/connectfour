@@ -1,9 +1,9 @@
-package vrampal.connectfour.servlet;
+package vrampal.connectfour.webjsp;
 
 /**
  * Keys of all elements saved in the session.
  */
-interface SessionKeys {
+public interface SessionKeys {
 
   /**
    * Type: Game

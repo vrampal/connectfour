@@ -30,8 +30,8 @@
 
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
       <scope>provided</scope>
     </dependency>
 
@@ -59,6 +59,7 @@
     <finalName>${webapp.name}</finalName>
 
     <plugins>
+
       <plugin>
         <!-- Enable Tomcat for this module -->
         <groupId>org.apache.tomcat.maven</groupId>
