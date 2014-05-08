@@ -1,7 +1,7 @@
 <jsp:directive.page contentType="text/html" pageEncoding="utf-8" trimDirectiveWhitespaces="true"
 		import="static vrampal.connectfour.webjsp.SessionKeys.*"
 		import="static vrampal.connectfour.webjsp.RequestAttributeKeys.*" />
-<jsp:useBean id="boardPrinter" class="vrampal.connectfour.webjsp.view.BoardPrinter" scope="application" />
+<jsp:useBean id="boardPrinter" class="vrampal.connectfour.webjsp.view.BoardPrinter" />
 <!DOCTYPE html>
 <html>
 <head>
