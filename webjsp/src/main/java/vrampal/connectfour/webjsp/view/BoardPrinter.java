@@ -1,16 +1,29 @@
-package vrampal.connectfour.servlet;
+package vrampal.connectfour.webjsp.view;
+
+import javax.servlet.http.HttpSession;
 
 import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
+import vrampal.connectfour.webjsp.SessionKeys;
 
 /**
  * Used by main-display.jsp to print the board.
  */
-public class BoardPrinter {
+public class BoardPrinter implements SessionKeys {
 
-  public String printBoard(Game game) {
+  public String printBoard(HttpSession session) {
+    String retVal = "";
+    Object candidate = session.getAttribute(SESSION_GAME_KEY);
+    // Protects against null and ClassCastException
+    if (candidate instanceof Game) {
+      retVal = printBoard((Game) candidate);
+    }
+    return retVal;
+  }
+
+  String printBoard(Game game) {
     Board board = game.getBoard();
     int height = board.getHeight();
     int width = board.getWidth();
