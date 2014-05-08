@@ -1,13 +1,13 @@
-<jsp:directive.page contentType="text/html; charset=UTF-8" />
-<jsp:directive.page import="static vrampal.connectfour.webjsp.SessionKeys.*" />
-<jsp:directive.page import="static vrampal.connectfour.webjsp.RequestAttributeKeys.*" />
+<jsp:directive.page contentType="text/html" pageEncoding="utf-8" trimDirectiveWhitespaces="true"
+		import="static vrampal.connectfour.webjsp.SessionKeys.*"
+		import="static vrampal.connectfour.webjsp.RequestAttributeKeys.*" />
 <jsp:useBean id="boardPrinter" class="vrampal.connectfour.webjsp.view.BoardPrinter" scope="application" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <title>ConnectFour</title>
-<link rel="stylesheet" href="connectfour.css" type="text/css" media="screen">
+<link rel="stylesheet" href="connectfour.css">
 </head>
 <body>
 	<h1><%=request.getAttribute(ATTR_MAIN_MESSAGE_KEY)%></h1>
