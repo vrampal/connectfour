@@ -3,7 +3,6 @@ package vrampal.connectfour.webjsp.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +18,8 @@ import vrampal.connectfour.webjsp.SessionKeys;
 
 /**
  * Does all the main logic, creating game, handling play request.
+ * Note: Google AppEngine does not support mapping by tags.
  */
-@WebServlet(name = "main-servlet", urlPatterns = { "/index.jsp", "/index.html" })
 public class ConnectFourServlet extends HttpServlet implements SessionKeys, RequestAttributeKeys {
 
   private static final long serialVersionUID = -30750880358249276L;
