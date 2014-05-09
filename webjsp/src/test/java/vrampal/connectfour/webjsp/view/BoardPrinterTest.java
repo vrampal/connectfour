@@ -49,7 +49,7 @@ public class BoardPrinterTest {
     printer.printBoard(game, out);
 
     // TODO find a better assert.
-    assertNotNull("", out.toString());
+    assertNotNull(out.toString());
     assertNotEquals("", out.toString());
   }
 
