@@ -6,8 +6,6 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,12 +20,12 @@ public class BoardPrinterTest {
   private BoardPrinter printer;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     printer = new BoardPrinter();
   }
 
   @Test
-  public void testPrintBoard() throws IOException {
+  public void testPrintBoard() {
     Player player = mock(Player.class);
     when(player.getName()).thenReturn("Test player");
     when(player.getLetter()).thenReturn(' ');
