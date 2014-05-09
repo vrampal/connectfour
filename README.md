@@ -47,7 +47,7 @@ Webjsp
 
 * [Apache Tomcat 7](http://tomcat.apache.org/)
 * [Jetty](http://www.eclipse.org/jetty/)
-* Servlet 3.0 / JSP 2.2
+* Servlet 3.0 / JSP 2.2 (check JavaEE [API](http://docs.oracle.com/javaee/6/api/) and [tutorial](http://docs.oracle.com/javaee/6/tutorial/doc/))
 * [HTML5](http://www.w3.org/TR/html5/) / [CSS2](http://www.w3.org/TR/CSS2/)
 * [Apache JMeter](https://jmeter.apache.org/) (in src/test/jmeter, not run by maven)
 * [Selenium](http://docs.seleniumhq.org/) (in src/test/selenium, not run by maven)

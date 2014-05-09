@@ -1,5 +1,8 @@
 package vrampal.connectfour.webjsp.view;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import javax.servlet.http.HttpSession;
 
 import vrampal.connectfour.core.Board;
@@ -13,36 +16,32 @@ import vrampal.connectfour.webjsp.SessionKeys;
  */
 public class BoardPrinter implements SessionKeys {
 
-  public String printBoard(HttpSession session) {
-    String retVal = "";
+  public void printBoard(HttpSession session, Writer out) throws IOException {
     Object candidate = session.getAttribute(SESSION_GAME_KEY);
     // Protects against null and ClassCastException
     if (candidate instanceof Game) {
-      retVal = printBoard((Game) candidate);
+      printBoard((Game) candidate, out);
     }
-    return retVal;
   }
 
-  String printBoard(Game game) {
+  void printBoard(Game game, Writer out) throws IOException {
     Board board = game.getBoard();
     int height = board.getHeight();
     int width = board.getWidth();
     GameStatus status = game.getStatus();
 
-    StringBuilder buff = new StringBuilder(1300);
-
     if (status == GameStatus.ONGOING) {
-      buff.append("<tr>");
+      out.write("<tr>");
       for (int colIdx = 1; colIdx <= width; colIdx++) {
-        buff.append("<td class=\"cfh\"><a href=\"?col=");
-        buff.append(colIdx);
-        buff.append("\">V</a></td>");
+        out.write("<td class=\"cfh\"><a href=\"?col=");
+        out.write(colIdx);
+        out.write("\">V</a></td>");
       }
-      buff.append("</tr>");
+      out.write("</tr>");
     }
 
     for (int rowIdx = height; rowIdx > 0; rowIdx--) {
-      buff.append("<tr>");
+      out.write("<tr>");
       for (int colIdx = 1; colIdx <= width; colIdx++) {
         Player content = board.getCell(colIdx - 1, rowIdx - 1);
         char c = content.getLetter();
@@ -52,14 +51,12 @@ public class BoardPrinter implements SessionKeys {
         } else if (c == 'Y') {
           clazz = "cfy";
         }
-        buff.append("<td class=\"");
-        buff.append(clazz);
-        buff.append("\"></td>");
+        out.write("<td class=\"");
+        out.write(clazz);
+        out.write("\"></td>");
       }
-      buff.append("</tr>");
+      out.write("</tr>");
     }
-
-    return buff.toString();
   }
 
 }

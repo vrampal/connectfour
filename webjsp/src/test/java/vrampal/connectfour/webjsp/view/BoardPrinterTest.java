@@ -1,9 +1,13 @@
 package vrampal.connectfour.webjsp.view;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.io.StringWriter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,13 +22,17 @@ public class BoardPrinterTest {
   // Object under test
   private BoardPrinter printer;
 
+  private StringWriter out;
+
   @Before
   public void setUp() throws Exception {
     printer = new BoardPrinter();
+
+    out = new StringWriter();
   }
 
   @Test
-  public void testPrintBoard() {
+  public void testPrintBoard() throws IOException {
     Player player = mock(Player.class);
     when(player.getName()).thenReturn("Test player");
     when(player.getLetter()).thenReturn(' ');
@@ -38,10 +46,11 @@ public class BoardPrinterTest {
     when(game.getStatus()).thenReturn(GameStatus.ONGOING);
     when(game.getBoard()).thenReturn(board);
 
-    String result = printer.printBoard(game);
+    printer.printBoard(game, out);
 
     // TODO find a better assert.
-    assertNotNull(result);
+    assertNotNull("", out.toString());
+    assertNotEquals("", out.toString());
   }
 
 }

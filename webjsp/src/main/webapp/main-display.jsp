@@ -15,7 +15,7 @@
 	<p>Game id: <%=request.getAttribute(ATTR_GAME_ID_KEY)%></p>
 	<table class="cfb">
 		<tbody>
-			<%=boardPrinter.printBoard(session)%>
+			<% boardPrinter.printBoard(session, out); %>
 		</tbody>
 	</table>
 	<p><a href="?reset=1">Play another game</a></p>

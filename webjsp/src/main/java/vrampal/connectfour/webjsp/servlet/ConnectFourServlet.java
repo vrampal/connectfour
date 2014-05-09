@@ -20,10 +20,12 @@ import vrampal.connectfour.webjsp.SessionKeys;
 /**
  * Does all the main logic, creating game, handling play request.
  */
-@WebServlet(name = "main-servlet", urlPatterns = { "/index.jsp", "/index.html" })
+@WebServlet(urlPatterns = { ConnectFourServlet.MAIN_URL, "/index.jsp" })
 public class ConnectFourServlet extends HttpServlet implements SessionKeys, RequestAttributeKeys {
 
   private static final long serialVersionUID = -30750880358249276L;
+
+  public static final String MAIN_URL = "/index.html";
 
   static final String PARAM_RESET_KEY = "reset";
 
