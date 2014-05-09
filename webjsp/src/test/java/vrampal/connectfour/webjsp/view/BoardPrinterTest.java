@@ -1,5 +1,6 @@
 package vrampal.connectfour.webjsp.view;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -19,7 +20,7 @@ public class BoardPrinterTest {
   private BoardPrinter printer;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     printer = new BoardPrinter();
   }
 
@@ -38,10 +39,11 @@ public class BoardPrinterTest {
     when(game.getStatus()).thenReturn(GameStatus.ONGOING);
     when(game.getBoard()).thenReturn(board);
 
-    String result = printer.printBoard(game);
+    String retVal = printer.printBoard(game);
 
     // TODO find a better assert.
-    assertNotNull(result);
+    assertNotNull(retVal);
+    assertNotEquals("", retVal);
   }
 
 }
