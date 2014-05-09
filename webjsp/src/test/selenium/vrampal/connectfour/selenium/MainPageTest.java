@@ -18,7 +18,7 @@ public class MainPageTest {
   private String baseUrl;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     // driver = new InternetExplorerDriver();
     driver = new FirefoxDriver();
     // driver = new ChromeDriver();
@@ -27,12 +27,12 @@ public class MainPageTest {
   }
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
     driver.quit();
   }
 
   @Test
-  public void testBase() throws Exception {
+  public void testBase() {
     driver.get(baseUrl);
     assertEquals("ConnectFour", driver.getTitle());
 
@@ -65,7 +65,7 @@ public class MainPageTest {
   }
 
   @Test
-  public void testErrorCases() throws Exception {
+  public void testErrorCases() {
     driver.get(baseUrl + "?col=abcxyz");
     assertEquals("Invalid parameter col: abcxyz", getSubMessage());
 
@@ -86,7 +86,7 @@ public class MainPageTest {
   }
 
   @Test
-  public void testYellowVictory() throws Exception {
+  public void testYellowVictory() {
     driver.get(baseUrl + "?reset=1");
 
     play(4);

@@ -100,6 +100,31 @@
         <!-- version in parent POM -->
       </plugin>
 
+      <plugin>
+        <groupId>com.github.wvengen</groupId>
+        <artifactId>proguard-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>proguard</goal>
+            </goals>
+            <configuration>
+              <options>
+                <option>-optimizationpasses 9</option>
+                <option>-allowaccessmodification</option>
+                <option>-keep public class vrampal.connectfour.core.* { public *; }</option>
+                <option>-keep public class vrampal.connectfour.core.data.* { public *; }</option>
+                <option>-keep public class vrampal.connectfour.core.impl.GameImpl { }</option>
+              </options>
+              <libs>
+                <lib>${java.home}/lib/rt.jar</lib>
+              </libs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 

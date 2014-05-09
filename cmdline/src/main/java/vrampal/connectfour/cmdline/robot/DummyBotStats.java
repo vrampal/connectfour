@@ -5,7 +5,7 @@ import vrampal.connectfour.cmdline.PlayerInterface;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.Player;
 
-public class DummyBotStats implements Runnable {
+public class DummyBotStats {
 
   private static final int NB_TOTAL_GAME = 100000;
 
@@ -19,7 +19,6 @@ public class DummyBotStats implements Runnable {
 
   private int nbDraw = 0;
 
-  @Override
   public void run() {
     System.out.println("Running for " + NB_TOTAL_GAME + " games");
 

@@ -30,7 +30,7 @@ public class ConnectFourServletTest implements SessionKeys, RequestAttributeKeys
   private HttpServletRequest req;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     servlet = new ConnectFourServlet();
 
     game = mock(Game.class);

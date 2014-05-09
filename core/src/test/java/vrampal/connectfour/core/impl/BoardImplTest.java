@@ -25,7 +25,7 @@ public class BoardImplTest {
   private BoardImpl board;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     board = new BoardImpl();
   }
 

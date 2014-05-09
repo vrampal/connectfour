@@ -32,7 +32,7 @@ public class BoardSerializeTest {
   private BoardImpl board;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     board = new BoardImpl();
   }
 

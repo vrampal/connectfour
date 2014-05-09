@@ -6,7 +6,7 @@ import java.io.PrintStream;
 import vrampal.connectfour.cmdline.GameRunner;
 import vrampal.connectfour.cmdline.PlayerInterface;
 
-public class LearningBotStats implements Runnable {
+public class LearningBotStats {
 
   private static final PrintStream OUT = System.out;
 
@@ -16,7 +16,6 @@ public class LearningBotStats implements Runnable {
     new LearningBotStats().run();
   }
 
-  @Override
   public void run() {
     OUT.println("Running for " + NB_TOTAL_GAME + " games");
 

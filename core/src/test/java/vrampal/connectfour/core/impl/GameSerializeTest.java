@@ -31,7 +31,7 @@ public class GameSerializeTest {
   private GameImpl game;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     game = new GameImpl();
 
     game.begin();

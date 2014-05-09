@@ -1,5 +1,6 @@
 package vrampal.connectfour.cmdline.robot;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,7 +23,7 @@ class LearningBotPlayerInterface implements PlayerInterface, GameMonitor {
 
   private static final Random RAND = new Random();
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws ClassNotFoundException, IOException {
     ConsoleDiplay consoleDisplay = new ConsoleDiplay();
     HumanPlayerInterface player1Itf = new HumanPlayerInterface();
 

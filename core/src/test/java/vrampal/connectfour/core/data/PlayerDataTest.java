@@ -27,7 +27,7 @@ public class PlayerDataTest {
   private PlayerData playerData;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     playerData = new PlayerData("Test player", 'T');
   }
 

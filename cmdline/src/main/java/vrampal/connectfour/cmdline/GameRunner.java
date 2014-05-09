@@ -10,7 +10,7 @@ import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 import vrampal.connectfour.core.impl.GameImpl;
 
-public class GameRunner implements Runnable {
+public class GameRunner {
 
   @Getter
   private final Game game;
@@ -36,7 +36,6 @@ public class GameRunner implements Runnable {
     monitors.add(monitor);
   }
 
-  @Override
   public void run() {
     game.begin();
     for (GameMonitor monitor : monitors) {

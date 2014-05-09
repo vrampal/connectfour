@@ -34,7 +34,7 @@ public class GameDataTest {
   private GameData gameData;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     Game game = new GameImpl();
 
     game.begin();
