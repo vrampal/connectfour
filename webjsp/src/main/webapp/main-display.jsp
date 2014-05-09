@@ -8,6 +8,7 @@
 <meta charset="utf-8" />
 <title>ConnectFour</title>
 <link rel="stylesheet" href="connectfour.css" />
+</head>
 <body>
 	<h1><%=request.getAttribute(ATTR_MAIN_MESSAGE_KEY)%></h1>
 	<h2><%=request.getAttribute(ATTR_SUB_MESSAGE_KEY)%></h2>
