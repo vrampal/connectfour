@@ -7,7 +7,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,13 +21,9 @@ public class BoardPrinterTest {
   // Object under test
   private BoardPrinter printer;
 
-  private StringWriter out;
-
   @Before
   public void setUp() throws Exception {
     printer = new BoardPrinter();
-
-    out = new StringWriter();
   }
 
   @Test
@@ -46,11 +41,11 @@ public class BoardPrinterTest {
     when(game.getStatus()).thenReturn(GameStatus.ONGOING);
     when(game.getBoard()).thenReturn(board);
 
-    printer.printBoard(game, out);
+    String retVal = printer.printBoard(game);
 
     // TODO find a better assert.
-    assertNotNull(out.toString());
-    assertNotEquals("", out.toString());
+    assertNotNull(retVal);
+    assertNotEquals("", retVal);
   }
 
 }
