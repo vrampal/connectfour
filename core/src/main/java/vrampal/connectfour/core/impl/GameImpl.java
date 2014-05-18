@@ -24,7 +24,7 @@ import vrampal.connectfour.core.data.PlayerData;
 @Slf4j
 @EqualsAndHashCode
 @ToString(of = { "id" })
-public class GameImpl implements Game, GameEndListener, Serializable {
+class GameImpl implements Game, GameEndListener, Serializable {
 
   private static final long serialVersionUID = 9070592540629187066L;
 
@@ -55,13 +55,13 @@ public class GameImpl implements Game, GameEndListener, Serializable {
   @Getter
   private Player winner = null;
 
-  public GameImpl() {
+  GameImpl() {
     this(generateShortId(), 2);
     players.add(YELLOW);
     players.add(RED);
   }
 
-  public GameImpl(List<Player> playerList) {
+  GameImpl(List<Player> playerList) {
     this(generateShortId(), playerList.size());
     players.addAll(playerList);
   }

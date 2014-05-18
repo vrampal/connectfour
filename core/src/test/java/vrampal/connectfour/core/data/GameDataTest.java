@@ -14,7 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import vrampal.connectfour.core.Game;
-import vrampal.connectfour.core.impl.GameImpl;
+import vrampal.connectfour.core.GameFactory;
+import vrampal.connectfour.core.impl.GameFactoryImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -35,7 +36,8 @@ public class GameDataTest {
 
   @Before
   public void setUp() {
-    Game game = new GameImpl();
+    GameFactory gameFactory = GameFactoryImpl.getInstance();
+    Game game = gameFactory.createGame();
 
     game.begin();
     game.dropDisc(3);
