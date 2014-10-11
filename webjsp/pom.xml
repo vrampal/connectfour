@@ -56,7 +56,12 @@
     <!-- Only for optional Selenium tests -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
+      <artifactId>selenium-api</artifactId>
+      <!-- version in parent POM -->
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-firefox-driver</artifactId>
       <!-- version in parent POM -->
     </dependency>
 
