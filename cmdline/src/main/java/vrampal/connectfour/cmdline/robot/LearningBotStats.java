@@ -1,14 +1,13 @@
 package vrampal.connectfour.cmdline.robot;
 
 import java.io.IOException;
-import java.io.PrintStream;
 
+import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.cmdline.GameRunner;
 import vrampal.connectfour.cmdline.PlayerInterface;
 
+@Slf4j
 public class LearningBotStats {
-
-  private static final PrintStream OUT = System.out;
 
   private static final int NB_TOTAL_GAME = 100000;
 
@@ -17,7 +16,9 @@ public class LearningBotStats {
   }
 
   public void run() {
-    OUT.println("Running for " + NB_TOTAL_GAME + " games");
+    if (log.isInfoEnabled()) {
+      log.info("Running for " + NB_TOTAL_GAME + " games");
+    }
 
     GamesData rootData = new GamesData();
     PlayerInterface playerItf = new DummyBotPlayerInterface();
@@ -36,13 +37,15 @@ public class LearningBotStats {
     try {
       rootData.saveToDisk("LearningBotData.tmp");
     } catch (IOException e) {
-      OUT.println(e.getMessage());
+      log.error(e.getMessage());
     }
 
-    OUT.println("Nb yellow win: " + rootData.getYellowVictCount());
-    OUT.println("Nb red win: " + rootData.getRedVictCount());
-    OUT.println("Nb draw: " + rootData.getDrawCount());
-    OUT.println("Elapsed time: " + (endTime - beginTime) + " ms");
+    if (log.isInfoEnabled()) {
+      log.info("Nb yellow win: " + rootData.getYellowVictCount());
+      log.info("Nb red win: " + rootData.getRedVictCount());
+      log.info("Nb draw: " + rootData.getDrawCount());
+      log.info("Elapsed time: " + (endTime - beginTime) + " ms");
+    }
   }
 
 }

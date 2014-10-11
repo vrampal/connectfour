@@ -1,10 +1,12 @@
 package vrampal.connectfour.cmdline.robot;
 
+import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.cmdline.GameRunner;
 import vrampal.connectfour.cmdline.PlayerInterface;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.Player;
 
+@Slf4j
 public class DummyBotStats {
 
   private static final int NB_TOTAL_GAME = 100000;
@@ -20,7 +22,9 @@ public class DummyBotStats {
   private int nbDraw = 0;
 
   public void run() {
-    System.out.println("Running for " + NB_TOTAL_GAME + " games");
+    if (log.isInfoEnabled()) {
+      log.info("Running for " + NB_TOTAL_GAME + " games");
+    }
 
     PlayerInterface playerItf = new DummyBotPlayerInterface();
 
@@ -35,10 +39,12 @@ public class DummyBotStats {
     }
     long endTime = System.currentTimeMillis();
 
-    System.out.println("Nb yellow win: " + nbYellowWin);
-    System.out.println("Nb red win: " + nbRedWin);
-    System.out.println("Nb draw: " + nbDraw);
-    System.out.println("Elapsed time: " + (endTime - beginTime) + " ms");
+    if (log.isInfoEnabled()) {
+      log.info("Nb yellow win: " + nbYellowWin);
+      log.info("Nb red win: " + nbRedWin);
+      log.info("Nb draw: " + nbDraw);
+      log.info("Elapsed time: " + (endTime - beginTime) + " ms");
+    }
   }
 
   private void analyeWinner(Player winner) {

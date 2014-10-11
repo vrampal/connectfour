@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameFactory;
@@ -21,6 +22,7 @@ import vrampal.connectfour.webjsp.SessionKeys;
 /**
  * Does all the main logic, creating game, handling play request.
  */
+@Slf4j
 @WebServlet(urlPatterns = { ConnectFourServlet.MAIN_URL, "/index.jsp" })
 public class ConnectFourServlet extends HttpServlet implements SessionKeys, RequestAttributeKeys {
 
@@ -67,8 +69,10 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
         game.dropDisc(colIdx - 1);
       } catch (NumberFormatException e) {
         subMessage = "Invalid parameter col: " + colStr;
+        log.error("Invalid column", e);
       } catch (ConnectFourException e) {
         subMessage = e.getMessage();
+        log.error("Unable to play", e);
       }
     }
 
