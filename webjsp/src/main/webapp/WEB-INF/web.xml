@@ -1,17 +1,13 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>ConnectFour JSP webapp</display-name>
-
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
-
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
-
   <error-page>
     <error-code>404</error-code>
     <location>/404.html</location>
@@ -32,5 +28,4 @@
     <error-code>504</error-code>
     <location>/50x.html</location>
   </error-page>
-
 </web-app>
