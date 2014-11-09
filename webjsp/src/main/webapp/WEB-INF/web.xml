@@ -4,6 +4,10 @@
 
   <display-name>ConnectFour JSP webapp</display-name>
 
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
   <error-page>
     <error-code>404</error-code>
     <location>/404.html</location>

@@ -19,8 +19,6 @@ import vrampal.connectfour.core.Player;
 @ToString(of = { "name" })
 public class PlayerData implements Player, Serializable {
 
-  private static final long serialVersionUID = -6674494555843465952L;
-
   @Getter
   @Setter
   private String name;

@@ -1,6 +1,5 @@
 <jsp:directive.page contentType="text/html" pageEncoding="utf-8" trimDirectiveWhitespaces="true"
-	import="static vrampal.connectfour.webjsp.SessionKeys.*"
-	import="static vrampal.connectfour.webjsp.RequestAttributeKeys.*" />
+	import="vrampal.connectfour.webjsp.RequestAttributes" />
 <jsp:useBean id="boardPrinter" class="vrampal.connectfour.webjsp.view.BoardPrinter" />
 <!DOCTYPE html>
 <html>
@@ -10,9 +9,9 @@
 <link rel="stylesheet" href="connectfour.css" />
 </head>
 <body>
-	<h1><%=request.getAttribute(ATTR_MAIN_MESSAGE_KEY)%></h1>
-	<h2><%=request.getAttribute(ATTR_SUB_MESSAGE_KEY)%></h2>
-	<p>Game id: <%=request.getAttribute(ATTR_GAME_ID_KEY)%></p>
+	<h1><%=request.getAttribute(RequestAttributes.MAIN_MESSAGE)%></h1>
+	<h2><%=request.getAttribute(RequestAttributes.SUB_MESSAGE)%></h2>
+	<p>Game id: <%=request.getAttribute(RequestAttributes.GAME_ID)%></p>
 	<table class="cfb">
 		<tbody>
 			<%=boardPrinter.printBoard(session) %>

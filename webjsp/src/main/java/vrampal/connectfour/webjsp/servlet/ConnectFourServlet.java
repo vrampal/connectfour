@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.core.ConnectFourException;
@@ -16,19 +15,19 @@ import vrampal.connectfour.core.GameFactory;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 import vrampal.connectfour.core.impl.GameFactoryImpl;
-import vrampal.connectfour.webjsp.RequestAttributeKeys;
-import vrampal.connectfour.webjsp.SessionKeys;
+import vrampal.connectfour.webjsp.ConnectFourSession;
+import vrampal.connectfour.webjsp.RequestAttributes;
 
 /**
  * Does all the main logic, creating game, handling play request.
  */
 @Slf4j
-@WebServlet(urlPatterns = { ConnectFourServlet.MAIN_URL, "/index.jsp" })
-public class ConnectFourServlet extends HttpServlet implements SessionKeys, RequestAttributeKeys {
-
-  private static final long serialVersionUID = -30750880358249276L;
+@WebServlet(urlPatterns = { ConnectFourServlet.MAIN_URL })
+public class ConnectFourServlet extends HttpServlet {
 
   public static final String MAIN_URL = "/index.html";
+
+  public static final String MAIN_DISPLAY_JSP = "/main-display.jsp";
 
   public static final String PARAM_RESET_KEY = "reset";
 
@@ -39,18 +38,18 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    handleRequest(req);
-    req.getRequestDispatcher("/main-display.jsp").forward(req, resp);
+    String targetPage = handleRequest(req);
+    req.getRequestDispatcher(targetPage).forward(req, resp);
   }
 
   /**
    * This method simplify testing, no need to mock response, request dispatcher
    * or to handle exceptions.
    */
-  void handleRequest(HttpServletRequest req) {
+  String handleRequest(HttpServletRequest req) {
     // Get elements from the session
-    HttpSession session = req.getSession();
-    Game game = (Game) session.getAttribute(SESSION_GAME_KEY);
+    ConnectFourSession session = new ConnectFourSession(req.getSession());
+    Game game = session.getGame();
 
     // Create game or reset it if necessary
     String resetStr = req.getParameter(PARAM_RESET_KEY);
@@ -91,12 +90,14 @@ public class ConnectFourServlet extends HttpServlet implements SessionKeys, Requ
     }
 
     // Save request attributes for the view
-    req.setAttribute(ATTR_MAIN_MESSAGE_KEY, mainMessage);
-    req.setAttribute(ATTR_SUB_MESSAGE_KEY, subMessage);
-    req.setAttribute(ATTR_GAME_ID_KEY, game.getId());
+    req.setAttribute(RequestAttributes.MAIN_MESSAGE, mainMessage);
+    req.setAttribute(RequestAttributes.SUB_MESSAGE, subMessage);
+    req.setAttribute(RequestAttributes.GAME_ID, game.getId());
 
     // Save elements in the session
-    session.setAttribute(SESSION_GAME_KEY, game);
+    session.setGame(game);
+
+    return MAIN_DISPLAY_JSP;
   }
 
 }

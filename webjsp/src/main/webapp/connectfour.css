@@ -6,6 +6,21 @@
 	text-align: center;
 }
 
+.cfh a:link {
+	color: #808080;
+	text-decoration: none;
+}
+
+.cfh a:visited {
+	color: #808080;
+	text-decoration: none;
+}
+
+.cfh a:hover {
+	color: #0000FF;
+	text-decoration: none;
+}
+
 .cfe {
 	width: 30px;
 	height: 30px;

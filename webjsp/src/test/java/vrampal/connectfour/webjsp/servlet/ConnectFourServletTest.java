@@ -15,10 +15,10 @@ import org.junit.Test;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
-import vrampal.connectfour.webjsp.RequestAttributeKeys;
-import vrampal.connectfour.webjsp.SessionKeys;
+import vrampal.connectfour.webjsp.ConnectFourSession;
+import vrampal.connectfour.webjsp.RequestAttributes;
 
-public class ConnectFourServletTest implements SessionKeys, RequestAttributeKeys {
+public class ConnectFourServletTest {
 
   // Object under test
   private ConnectFourServlet servlet;
@@ -36,7 +36,7 @@ public class ConnectFourServletTest implements SessionKeys, RequestAttributeKeys
     game = mock(Game.class);
 
     session = mock(HttpSession.class);
-    when(session.getAttribute(SESSION_GAME_KEY)).thenReturn(game);
+    when(session.getAttribute(ConnectFourSession.GAME_KEY)).thenReturn(game);
 
     req = mock(HttpServletRequest.class);
     when(req.getSession()).thenReturn(session);
@@ -44,11 +44,11 @@ public class ConnectFourServletTest implements SessionKeys, RequestAttributeKeys
 
   @Test
   public void testPageBeginEmptySession() {
-    when(session.getAttribute(SESSION_GAME_KEY)).thenReturn(null);
+    when(session.getAttribute(ConnectFourSession.GAME_KEY)).thenReturn(null);
 
     servlet.handleRequest(req);
 
-    verify(session).setAttribute(eq(SESSION_GAME_KEY), anyObject());
+    verify(session).setAttribute(eq(ConnectFourSession.GAME_KEY), anyObject());
   }
 
   @Test
@@ -57,7 +57,7 @@ public class ConnectFourServletTest implements SessionKeys, RequestAttributeKeys
 
     servlet.handleRequest(req);
 
-    verify(session).setAttribute(eq(SESSION_GAME_KEY), anyObject());
+    verify(session).setAttribute(eq(ConnectFourSession.GAME_KEY), anyObject());
   }
 
   @Test
@@ -71,8 +71,8 @@ public class ConnectFourServletTest implements SessionKeys, RequestAttributeKeys
     servlet.handleRequest(req);
 
     verify(game).dropDisc(eq(1341));
-    verify(req).setAttribute(ATTR_MAIN_MESSAGE_KEY, "Now playing: Test current player");
-    verify(req).setAttribute(ATTR_SUB_MESSAGE_KEY, "");
+    verify(req).setAttribute(RequestAttributes.MAIN_MESSAGE, "Now playing: Test current player");
+    verify(req).setAttribute(RequestAttributes.SUB_MESSAGE, "");
   }
 
   @Test
@@ -84,8 +84,8 @@ public class ConnectFourServletTest implements SessionKeys, RequestAttributeKeys
 
     servlet.handleRequest(req);
 
-    verify(req).setAttribute(ATTR_MAIN_MESSAGE_KEY, "Test winner won the game.");
-    verify(req).setAttribute(ATTR_SUB_MESSAGE_KEY, "");
+    verify(req).setAttribute(RequestAttributes.MAIN_MESSAGE, "Test winner won the game.");
+    verify(req).setAttribute(RequestAttributes.SUB_MESSAGE, "");
   }
 
   @Test
@@ -94,8 +94,8 @@ public class ConnectFourServletTest implements SessionKeys, RequestAttributeKeys
 
     servlet.handleRequest(req);
 
-    verify(req).setAttribute(ATTR_MAIN_MESSAGE_KEY, "It's a draw game.");
-    verify(req).setAttribute(ATTR_SUB_MESSAGE_KEY, "");
+    verify(req).setAttribute(RequestAttributes.MAIN_MESSAGE, "It's a draw game.");
+    verify(req).setAttribute(RequestAttributes.SUB_MESSAGE, "");
   }
 
 }

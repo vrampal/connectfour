@@ -6,19 +6,19 @@ import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
-import vrampal.connectfour.webjsp.SessionKeys;
+import vrampal.connectfour.webjsp.ConnectFourSession;
 
 /**
  * Used by main-display.jsp to print the board.
  */
-public class BoardPrinter implements SessionKeys {
+public class BoardPrinter {
 
-  public String printBoard(HttpSession session) {
+  public String printBoard(HttpSession ses) {
+    ConnectFourSession session = new ConnectFourSession(ses);
+    Game game = session.getGame();
     String retVal = "";
-    Object candidate = session.getAttribute(SESSION_GAME_KEY);
-    // Protects against null and ClassCastException
-    if (candidate instanceof Game) {
-      retVal = printBoard((Game) candidate);
+    if (game != null) {
+      retVal = printBoard(game);
     }
     return retVal;
   }
@@ -34,9 +34,11 @@ public class BoardPrinter implements SessionKeys {
     if (status == GameStatus.ONGOING) {
       buff.append("<tr>");
       for (int colIdx = 1; colIdx <= width; colIdx++) {
-        buff.append("<td class=\"cfh\"><a href=\"?col=");
-        buff.append(colIdx);
-        buff.append("\">V</a></td>");
+        if (board.isColumnFull(colIdx - 1)) {
+          printEmptyHeader(buff);
+        } else {
+          printPlayHeader(buff, colIdx);
+        }
       }
       buff.append("</tr>");
     }
@@ -44,22 +46,46 @@ public class BoardPrinter implements SessionKeys {
     for (int rowIdx = height; rowIdx > 0; rowIdx--) {
       buff.append("<tr>");
       for (int colIdx = 1; colIdx <= width; colIdx++) {
-        Player content = board.getCell(colIdx - 1, rowIdx - 1);
-        char c = content.getLetter();
-        String clazz = "cfe";
-        if (c == 'R') {
-          clazz = "cfr";
-        } else if (c == 'Y') {
-          clazz = "cfy";
-        }
-        buff.append("<td class=\"");
-        buff.append(clazz);
-        buff.append("\"></td>");
+        Player cellContent = board.getCell(colIdx - 1, rowIdx - 1);
+        printCell(buff, cellContent);
       }
       buff.append("</tr>");
     }
 
     return buff.toString();
+  }
+
+  void printEmptyHeader(StringBuilder buff) {
+    buff.append("<td class=\"cfh\">&nbsp;</td>");
+  }
+
+  void printPlayHeader(StringBuilder buff, int colIdx) {
+    buff.append("<td class=\"cfh\"><a href=\"?col=");
+    buff.append(colIdx);
+    buff.append("\">V</a></td>");
+  }
+
+  void printCell(StringBuilder buff, Player content) {
+    String clazz = selectClassFromPlayer(content);
+    buff.append("<td class=\"");
+    buff.append(clazz);
+    buff.append("\"></td>");
+  }
+
+  String selectClassFromPlayer(Player player) {
+    String clazz;
+    switch (player.getLetter()) {
+    case 'R':
+      clazz = "cfr";
+      break;
+    case 'Y':
+      clazz = "cfy";
+      break;
+    default:
+      clazz = "cfe";
+      break;
+    }
+    return clazz;
   }
 
 }
