@@ -16,7 +16,7 @@ import vrampal.connectfour.core.data.PlayerData;
  * Empty cell use null internally but it use EMPTY_PLAYER externally.
  */
 @Slf4j
-@EqualsAndHashCode(of = { "content" })
+@EqualsAndHashCode(of = { "width", "height", "content" })
 class BoardImpl implements Board, Serializable {
 
   static final Player EMPTY_PLAYER = new PlayerData("Empty", ' ');

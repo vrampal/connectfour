@@ -34,7 +34,7 @@ public class ConnectFourServlet extends HttpServlet {
   public static final String PARAM_PLAY_KEY = "col";
 
   // TODO use dependency injection to avoid dependency on implementation
-  private static final GameFactory GAME_FACTORY = GameFactoryImpl.getInstance();
+  GameFactory gameFactory = GameFactoryImpl.getInstance();
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,7 +55,7 @@ public class ConnectFourServlet extends HttpServlet {
     String resetStr = req.getParameter(PARAM_RESET_KEY);
     if ((game == null) || (resetStr != null)) {
       // TODO use dependency injection to avoid dependency on implementation
-      game = GAME_FACTORY.createGame();
+      game = gameFactory.createGame();
       game.begin();
     }
 

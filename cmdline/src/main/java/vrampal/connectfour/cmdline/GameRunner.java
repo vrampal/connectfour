@@ -14,7 +14,7 @@ import vrampal.connectfour.core.impl.GameFactoryImpl;
 public class GameRunner {
 
   // TODO use dependency injection to avoid dependency on implementation
-  private static final GameFactory GAME_FACTORY = GameFactoryImpl.getInstance();
+  static GameFactory gameFactory = GameFactoryImpl.getInstance();
 
   @Getter
   private final Game game;
@@ -32,7 +32,7 @@ public class GameRunner {
   }
 
   public GameRunner(PlayerInterface yellowItf, PlayerInterface redItf) {
-    this(GAME_FACTORY.createGame(), yellowItf, redItf);
+    this(gameFactory.createGame(), yellowItf, redItf);
   }
 
   public void addMonitor(GameMonitor monitor) {
