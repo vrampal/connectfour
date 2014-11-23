@@ -8,7 +8,7 @@ import vrampal.connectfour.core.Game;
 
 public class DummyBotPlayerInterface implements PlayerInterface {
 
-  private static final Random RAND = new Random();
+  private final Random RAND = new Random();
 
   @Override
   public int selectPlayColumn(Game game) {

@@ -115,7 +115,7 @@
                 <option>-allowaccessmodification</option>
                 <option>-keep public class vrampal.connectfour.core.* { public *; }</option>
                 <option>-keep public class vrampal.connectfour.core.data.* { public *; }</option>
-                <option>-keep public class vrampal.connectfour.core.impl.GameFactoryImpl { public *; }</option>
+                <option>-keep public class vrampal.connectfour.core.impl.GameImpl { public *; }</option>
               </options>
               <libs>
                 <lib>${java.home}/lib/rt.jar</lib>

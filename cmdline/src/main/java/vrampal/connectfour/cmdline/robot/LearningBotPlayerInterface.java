@@ -21,8 +21,6 @@ import vrampal.connectfour.core.Player;
  */
 class LearningBotPlayerInterface implements PlayerInterface, GameMonitor {
 
-  private static final Random RAND = new Random();
-
   public static void main(String[] args) throws ClassNotFoundException, IOException {
     ConsoleDiplay consoleDisplay = new ConsoleDiplay();
     HumanPlayerInterface player1Itf = new HumanPlayerInterface();
@@ -36,6 +34,8 @@ class LearningBotPlayerInterface implements PlayerInterface, GameMonitor {
 
     consoleGame.run();
   }
+
+  private final Random RAND = new Random();
 
   private final String robotPlayerName;
 

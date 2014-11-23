@@ -6,15 +6,11 @@ import java.util.Collection;
 import lombok.Getter;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Game;
-import vrampal.connectfour.core.GameFactory;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
-import vrampal.connectfour.core.impl.GameFactoryImpl;
+import vrampal.connectfour.core.impl.GameImpl;
 
 public class GameRunner {
-
-  // TODO use dependency injection to avoid dependency on implementation
-  static GameFactory gameFactory = GameFactoryImpl.getInstance();
 
   @Getter
   private final Game game;
@@ -32,7 +28,8 @@ public class GameRunner {
   }
 
   public GameRunner(PlayerInterface yellowItf, PlayerInterface redItf) {
-    this(gameFactory.createGame(), yellowItf, redItf);
+    // TODO use dependency injection to avoid dependency on implementation
+    this(new GameImpl(), yellowItf, redItf);
   }
 
   public void addMonitor(GameMonitor monitor) {

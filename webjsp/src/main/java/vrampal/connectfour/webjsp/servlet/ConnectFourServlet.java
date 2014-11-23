@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Game;
-import vrampal.connectfour.core.GameFactory;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
-import vrampal.connectfour.core.impl.GameFactoryImpl;
+import vrampal.connectfour.core.impl.GameImpl;
 import vrampal.connectfour.webjsp.ConnectFourSession;
 import vrampal.connectfour.webjsp.RequestAttributes;
 
@@ -32,9 +31,6 @@ public class ConnectFourServlet extends HttpServlet {
   public static final String PARAM_RESET_KEY = "reset";
 
   public static final String PARAM_PLAY_KEY = "col";
-
-  // TODO use dependency injection to avoid dependency on implementation
-  GameFactory gameFactory = GameFactoryImpl.getInstance();
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,7 +51,7 @@ public class ConnectFourServlet extends HttpServlet {
     String resetStr = req.getParameter(PARAM_RESET_KEY);
     if ((game == null) || (resetStr != null)) {
       // TODO use dependency injection to avoid dependency on implementation
-      game = gameFactory.createGame();
+      game = new GameImpl();
       game.begin();
     }
 

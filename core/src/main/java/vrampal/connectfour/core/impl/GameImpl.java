@@ -24,7 +24,7 @@ import vrampal.connectfour.core.data.PlayerData;
 @Slf4j
 @EqualsAndHashCode
 @ToString(of = { "id" })
-class GameImpl implements Game, GameEndListener, Serializable {
+public class GameImpl implements Game, GameEndListener, Serializable {
 
   public static final String LOG_STATS_NAME = "connectfour.game.stats";
 
@@ -53,18 +53,18 @@ class GameImpl implements Game, GameEndListener, Serializable {
   @Getter
   private Player winner = null;
 
-  GameImpl() {
+  public GameImpl() {
     this(generateShortId(), 2);
     players.add(YELLOW);
     players.add(RED);
   }
 
-  GameImpl(List<Player> playerList) {
+  public GameImpl(List<Player> playerList) {
     this(generateShortId(), playerList.size());
     players.addAll(playerList);
   }
 
-  GameImpl(String id, int nbPlayers) {
+  public GameImpl(String id, int nbPlayers) {
     this.id = id;
 
     players = new ArrayList<>(nbPlayers);
