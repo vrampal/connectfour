@@ -1,22 +1,60 @@
-# Maven build directory
-target/
+# Windows binary
+*.exe
+*.dll
 
-# Binary files
+# C / Linux binary
+*.o
+*.a
+*.so
+
+# Java binary
 *.class
 *.jar
 *.war
 *.ear
 
+# Android binary
+*.apk
+*.ap_
+*.dex
+
+# Python binary
+*.pyc
+
+# Maven build directory
+target/
+
+# Gradle build
+build/
+.gradle
+
+# Generated files (Eclipse and/or Android SDK)
+bin/
+gen/
+
 # Eclipse generated files
 .settings/
-.project
 .classpath
+.project
+
+# InteliJ generated files
+.idea/
+*.iml
 
 # Logs and temporary files
+log/
+logs/
+tmp/
+temp/
+*~
 *.log
 *.log.*
 *.tmp
 
-# VM crash log and heap dump
+# Thumnail cache
+.DS_Store
+Thumbs.db
+
+# JVM crash log and heap dump
 hs_err_pid*
 *.hprof
