@@ -10,8 +10,4 @@ public class ConnectFourConsole {
     consoleGame.run();
   }
 
-  private ConnectFourConsole() {
-    // Disabled default constructor.
-  }
-
 }

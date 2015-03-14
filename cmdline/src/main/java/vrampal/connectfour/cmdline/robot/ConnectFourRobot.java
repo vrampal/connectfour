@@ -14,8 +14,4 @@ public class ConnectFourRobot {
     consoleGame.run();
   }
 
-  private ConnectFourRobot() {
-    // Disabled default constructor.
-  }
-
 }
