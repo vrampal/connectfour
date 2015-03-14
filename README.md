@@ -2,11 +2,11 @@ ConnectFour Demo
 ===============
 This project is a implementation of the [Connect Four game](http://en.wikipedia.org/wiki/Connect_Four) to show some java related technology.
 
-![CodeShip status](https://www.codeship.io/projects/1d88ad50-af84-0131-1f7f-52f111de9aa7/status)
+![CodeShip status](https://codeship.com/projects/1d88ad50-af84-0131-1f7f-52f111de9aa7/status?branch=master)
 
 [![Travis Status](https://travis-ci.org/vrampal/connectfour.svg)](https://travis-ci.org/vrampal/connectfour)
 
-[![Coveralls Status](https://coveralls.io/repos/vrampal/connectfour/badge.png)](https://coveralls.io/r/vrampal/connectfour) (only for core module, not yet automated)
+[![Coveralls Status](https://coveralls.io/repos/vrampal/connectfour/badge.svg?branch=master)](https://coveralls.io/r/vrampal/connectfour?branch=master) (only for core module, not yet automated)
 
 Warning: master repository is in [BitBucket](https://bitbucket.org/vrampal/connectfour), not in [GitHub](https://github.com/vrampal/connectfour).
 
@@ -84,6 +84,6 @@ License
 -------
 
 [MIT license](http://opensource.org/licenses/MIT)
-Copyright (c) 2014 Vincent RAMPAL
+Copyright (c) 2014-2015 Vincent RAMPAL
 
 
