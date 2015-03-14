@@ -40,7 +40,7 @@ public class ConnectFourServlet extends HttpServlet {
   }
 
   /**
-   * This method simplify testing, no need to mock response, request dispatcher
+   * Typed request handlers simplify testing, no need to mock http response, request dispatcher
    * or to handle exceptions.
    */
   String handleRequest(ConnectFourRequest req) {
