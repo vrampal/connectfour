@@ -21,6 +21,7 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <!-- version in parent POM -->
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -39,11 +40,13 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <!-- version in parent POM -->
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <!-- version in parent POM -->
+      <scope>test</scope>
     </dependency>
 
     <!-- Only for optional JBehave tests -->
@@ -51,6 +54,7 @@
       <groupId>org.jbehave</groupId>
       <artifactId>jbehave-core</artifactId>
       <!-- version in parent POM -->
+      <scope>test</scope>
     </dependency>
 
     <!-- Enable logs for tests -->

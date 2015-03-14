@@ -32,6 +32,7 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <!-- version in parent POM -->
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -52,17 +53,20 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-jdk14</artifactId>
       <!-- version in parent POM -->
+      <scope>runtime</scope>
     </dependency>
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <!-- version in parent POM -->
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <!-- version in parent POM -->
+      <scope>test</scope>
     </dependency>
 
     <!-- Only for optional Selenium tests -->
@@ -70,11 +74,25 @@
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-api</artifactId>
       <!-- version in parent POM -->
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-firefox-driver</artifactId>
       <!-- version in parent POM -->
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-chrome-driver</artifactId>
+      <!-- version in parent POM -->
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-ie-driver</artifactId>
+      <!-- version in parent POM -->
+      <scope>test</scope>
     </dependency>
 
   </dependencies>
