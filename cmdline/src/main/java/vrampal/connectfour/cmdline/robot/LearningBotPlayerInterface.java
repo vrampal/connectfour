@@ -35,7 +35,7 @@ class LearningBotPlayerInterface implements PlayerInterface, GameMonitor {
     consoleGame.run();
   }
 
-  private final Random RAND = new Random();
+  private final Random random = new Random();
 
   private final String robotPlayerName;
 
@@ -99,7 +99,7 @@ class LearningBotPlayerInterface implements PlayerInterface, GameMonitor {
 
     int randIdx = 0;
     if (bestMatchs.size() > 1) {
-      randIdx = RAND.nextInt(bestMatchs.size());
+      randIdx = random.nextInt(bestMatchs.size());
     }
 
     return bestMatchs.get(randIdx);
