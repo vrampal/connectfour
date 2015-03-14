@@ -14,8 +14,8 @@ import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
 import vrampal.connectfour.core.impl.GameImpl;
+import vrampal.connectfour.webjsp.ConnectFourRequest;
 import vrampal.connectfour.webjsp.ConnectFourSession;
-import vrampal.connectfour.webjsp.RequestAttributes;
 
 /**
  * Does all the main logic, creating game, handling play request.
@@ -34,7 +34,8 @@ public class ConnectFourServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    String targetPage = handleRequest(req);
+    ConnectFourRequest conReq = new ConnectFourRequest(req);
+    String targetPage = handleRequest(conReq);
     req.getRequestDispatcher(targetPage).forward(req, resp);
   }
 
@@ -42,9 +43,9 @@ public class ConnectFourServlet extends HttpServlet {
    * This method simplify testing, no need to mock response, request dispatcher
    * or to handle exceptions.
    */
-  String handleRequest(HttpServletRequest req) {
+  String handleRequest(ConnectFourRequest req) {
     // Get elements from the session
-    ConnectFourSession session = new ConnectFourSession(req.getSession());
+    ConnectFourSession session = req.getSession();
     Game game = session.getGame();
 
     // Create game or reset it if necessary
@@ -86,9 +87,9 @@ public class ConnectFourServlet extends HttpServlet {
     }
 
     // Save request attributes for the view
-    req.setAttribute(RequestAttributes.MAIN_MESSAGE, mainMessage);
-    req.setAttribute(RequestAttributes.SUB_MESSAGE, subMessage);
-    req.setAttribute(RequestAttributes.GAME_ID, game.getId());
+    req.setMainMessage(mainMessage);
+    req.setSubMessage(subMessage);
+    req.setGameId(game.getId());
 
     // Save elements in the session
     session.setGame(game);

@@ -8,6 +8,9 @@ import vrampal.connectfour.core.Game;
 @RequiredArgsConstructor
 public class ConnectFourSession {
 
+  /**
+   * Type: Game
+   */
   public static final String GAME_KEY = "game";
 
   private final HttpSession session;

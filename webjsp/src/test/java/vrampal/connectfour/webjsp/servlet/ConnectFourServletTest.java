@@ -15,9 +15,10 @@ import org.junit.Test;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
+import vrampal.connectfour.webjsp.ConnectFourRequest;
 import vrampal.connectfour.webjsp.ConnectFourSession;
-import vrampal.connectfour.webjsp.RequestAttributes;
 
+// TODO this test could be simplified with new ConnectFourRequest design
 public class ConnectFourServletTest {
 
   // Object under test
@@ -28,6 +29,8 @@ public class ConnectFourServletTest {
   private HttpSession session;
 
   private HttpServletRequest req;
+
+  private ConnectFourRequest conReq;
 
   @Before
   public void setUp() {
@@ -40,13 +43,15 @@ public class ConnectFourServletTest {
 
     req = mock(HttpServletRequest.class);
     when(req.getSession()).thenReturn(session);
+
+    conReq = new ConnectFourRequest(req);
   }
 
   @Test
   public void testPageBeginEmptySession() {
     when(session.getAttribute(ConnectFourSession.GAME_KEY)).thenReturn(null);
 
-    servlet.handleRequest(req);
+    servlet.handleRequest(conReq);
 
     verify(session).setAttribute(eq(ConnectFourSession.GAME_KEY), anyObject());
   }
@@ -55,7 +60,7 @@ public class ConnectFourServletTest {
   public void testPageBeginReset() {
     when(req.getParameter(ConnectFourServlet.PARAM_RESET_KEY)).thenReturn("bla bla bla");
 
-    servlet.handleRequest(req);
+    servlet.handleRequest(conReq);
 
     verify(session).setAttribute(eq(ConnectFourSession.GAME_KEY), anyObject());
   }
@@ -68,11 +73,11 @@ public class ConnectFourServletTest {
     when(game.getStatus()).thenReturn(GameStatus.ONGOING);
     when(req.getParameter(ConnectFourServlet.PARAM_PLAY_KEY)).thenReturn("1342");
 
-    servlet.handleRequest(req);
+    servlet.handleRequest(conReq);
 
     verify(game).dropDisc(eq(1341));
-    verify(req).setAttribute(RequestAttributes.MAIN_MESSAGE, "Now playing: Test current player");
-    verify(req).setAttribute(RequestAttributes.SUB_MESSAGE, "");
+    verify(req).setAttribute(ConnectFourRequest.MAIN_MESSAGE, "Now playing: Test current player");
+    verify(req).setAttribute(ConnectFourRequest.SUB_MESSAGE, "");
   }
 
   @Test
@@ -82,20 +87,20 @@ public class ConnectFourServletTest {
     when(game.getWinner()).thenReturn(player);
     when(game.getStatus()).thenReturn(GameStatus.FINISHED);
 
-    servlet.handleRequest(req);
+    servlet.handleRequest(conReq);
 
-    verify(req).setAttribute(RequestAttributes.MAIN_MESSAGE, "Test winner won the game.");
-    verify(req).setAttribute(RequestAttributes.SUB_MESSAGE, "");
+    verify(req).setAttribute(ConnectFourRequest.MAIN_MESSAGE, "Test winner won the game.");
+    verify(req).setAttribute(ConnectFourRequest.SUB_MESSAGE, "");
   }
 
   @Test
   public void testPageDraw() {
     when(game.getStatus()).thenReturn(GameStatus.FINISHED);
 
-    servlet.handleRequest(req);
+    servlet.handleRequest(conReq);
 
-    verify(req).setAttribute(RequestAttributes.MAIN_MESSAGE, "It's a draw game.");
-    verify(req).setAttribute(RequestAttributes.SUB_MESSAGE, "");
+    verify(req).setAttribute(ConnectFourRequest.MAIN_MESSAGE, "It's a draw game.");
+    verify(req).setAttribute(ConnectFourRequest.SUB_MESSAGE, "");
   }
 
 }
