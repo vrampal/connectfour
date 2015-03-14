@@ -1,6 +1,8 @@
 package vrampal.connectfour.core;
 
-public interface Player {
+import java.io.Serializable;
+
+public interface Player extends Serializable {
 
   String getName();
 

@@ -1,6 +1,5 @@
 package vrampal.connectfour.core.impl;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +23,7 @@ import vrampal.connectfour.core.data.PlayerData;
 @Slf4j
 @EqualsAndHashCode
 @ToString(of = { "id" })
-public class GameImpl implements Game, GameEndListener, Serializable {
+public class GameImpl implements Game, GameEndListener {
 
   public static final String LOG_STATS_NAME = "connectfour.game.stats";
 

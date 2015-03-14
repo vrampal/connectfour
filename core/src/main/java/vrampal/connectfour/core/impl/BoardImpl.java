@@ -1,7 +1,5 @@
 package vrampal.connectfour.core.impl;
 
-import java.io.Serializable;
-
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,7 +15,7 @@ import vrampal.connectfour.core.data.PlayerData;
  */
 @Slf4j
 @EqualsAndHashCode(of = { "width", "height", "content" })
-class BoardImpl implements Board, Serializable {
+class BoardImpl implements Board {
 
   static final Player EMPTY_PLAYER = new PlayerData("Empty", ' ');
 

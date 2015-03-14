@@ -1,7 +1,5 @@
 package vrampal.connectfour.core.data;
 
-import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,7 +15,7 @@ import vrampal.connectfour.core.Player;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString(of = { "name" })
-public class PlayerData implements Player, Serializable {
+public class PlayerData implements Player, NoCycleSerializable {
 
   @Getter
   @Setter
