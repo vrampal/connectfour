@@ -24,17 +24,22 @@ public class ConnectFourRequest {
 
   private final HttpServletRequest req;
 
+  // ----- Session -----
+
   public ConnectFourSession getSession() {
-    // TODO should we have a cache ?
     return new ConnectFourSession(req.getSession());
   }
+
+  // ----- Request parameters -----
 
   public String getParameter(String name) {
     return req.getParameter(name);
   }
 
+  // ----- Request attributes -----
+
   public String getMainMessage() {
-    return req.getParameter(MAIN_MESSAGE);
+    return (String) req.getAttribute(MAIN_MESSAGE);
   }
 
   public void setMainMessage(String mainMessage) {
@@ -42,7 +47,7 @@ public class ConnectFourRequest {
   }
 
   public String getSubMessage() {
-    return req.getParameter(SUB_MESSAGE);
+    return (String) req.getAttribute(SUB_MESSAGE);
   }
 
   public void setSubMessage(String subMessage) {
@@ -50,7 +55,7 @@ public class ConnectFourRequest {
   }
 
   public String getGameId() {
-    return req.getParameter(GAME_ID);
+    return (String) req.getAttribute(GAME_ID);
   }
 
   public void setGameId(String gameId) {
