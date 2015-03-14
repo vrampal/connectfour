@@ -56,7 +56,7 @@
         </configuration>
       </plugin>
 
-      <!-- Disable because it erase everything in the jar
+      <!-- Disable ProGuard until jar can be run with dependencies
       <plugin>
         <groupId>com.github.wvengen</groupId>
         <artifactId>proguard-maven-plugin</artifactId>
@@ -70,8 +70,7 @@
               <options>
                 <option>-optimizationpasses 9</option>
                 <option>-allowaccessmodification</option>
-                <option>-keep public class vrampal.connectfour.cmdline.ConnectFourConsole {
-                  public static void main(String[]); }</option>
+                <option>-keep public class vrampal.connectfour.cmdline.ConnectFourConsole { public *; }</option>
               </options>
               <libs>
                 <lib>${java.home}/lib/rt.jar</lib>

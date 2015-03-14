@@ -109,6 +109,37 @@
         <!-- version in parent POM -->
       </plugin>
 
+      <!-- Disable ProGuard until better support of WebAps
+      <plugin>
+        <groupId>com.github.wvengen</groupId>
+        <artifactId>proguard-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>proguard</goal>
+            </goals>
+            <configuration>
+              <injar>${webapp.name}.war</injar>
+              <outjar>${webapp.name}-obf.war</outjar>
+              <includeDependency>false</includeDependency>
+              <options>
+                <option>-ignorewarnings</option>
+                <option>-optimizationpasses 9</option>
+                <option>-allowaccessmodification</option>
+                <option>-keep public class vrampal.connectfour.webjsp.* { public *; }</option>
+                <option>-keep public class vrampal.connectfour.webjsp.view.* { public *; }</option>
+              </options>
+              <libs>
+                <lib>${java.home}/lib/rt.jar</lib>
+                <lib>${env.CATALINA_HOME}/lib/servlet-api.jar</lib>
+              </libs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      -->
+
       <plugin>
         <!-- Enable Tomcat for this module -->
         <groupId>org.apache.tomcat.maven</groupId>
