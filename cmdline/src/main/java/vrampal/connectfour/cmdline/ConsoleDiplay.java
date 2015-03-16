@@ -1,16 +1,16 @@
 package vrampal.connectfour.cmdline;
 
-import java.io.PrintStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import vrampal.connectfour.core.Board;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.GameReadOnly;
 import vrampal.connectfour.core.Player;
 
-// TODO move to logger ?
 public class ConsoleDiplay implements GameMonitor {
 
-  private static final PrintStream OUT = System.out;
+  private static final Logger CONSOLE = LoggerFactory.getLogger("connectfour.console");
 
   @Override
   public void onBegin(GameReadOnly game) {
@@ -27,7 +27,7 @@ public class ConsoleDiplay implements GameMonitor {
     int height = board.getHeight();
     int width = board.getWidth();
 
-    println();
+    println("");
 
     // Print content
     StringBuilder buff;
@@ -52,7 +52,7 @@ public class ConsoleDiplay implements GameMonitor {
     }
     println(buff.toString());
 
-    println();
+    println("");
   }
 
   @Override
@@ -70,12 +70,8 @@ public class ConsoleDiplay implements GameMonitor {
     println("Error: " + expection.getMessage());
   }
 
-  private void println() {
-    OUT.println();
-  }
-
   private void println(String message) {
-    OUT.println(message);
+    CONSOLE.info(message);
   }
 
 }

@@ -25,9 +25,7 @@ import vrampal.connectfour.core.data.PlayerData;
 @ToString(of = { "id" })
 public class GameImpl implements Game, GameEndListener {
 
-  public static final String LOG_STATS_NAME = "connectfour.game.stats";
-
-  private static final Logger LOG_STATS = LoggerFactory.getLogger(LOG_STATS_NAME);
+  private static final Logger LOG_STATS = LoggerFactory.getLogger("connectfour.game.stats");
 
   private static final Player YELLOW = new PlayerData("Yellow", 'Y');
 
