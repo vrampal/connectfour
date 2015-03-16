@@ -1,5 +1,6 @@
 package vrampal.connectfour.webjsp.servlet;
 
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
+import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
 import vrampal.connectfour.core.Player;
@@ -23,6 +25,8 @@ public class ConnectFourServletTest {
 
   // Object under test
   private ConnectFourServlet servlet;
+
+  private Player player;
 
   private Game game;
 
@@ -36,6 +40,9 @@ public class ConnectFourServletTest {
   public void setUp() {
     servlet = new ConnectFourServlet();
 
+    player = mock(Player.class);
+    when(player.getName()).thenReturn("Test player");
+
     game = mock(Game.class);
 
     session = mock(HttpSession.class);
@@ -48,7 +55,7 @@ public class ConnectFourServletTest {
   }
 
   @Test
-  public void testPageBeginEmptySession() {
+  public void testHandleRequestEmptySession() {
     when(session.getAttribute(ConnectFourSession.GAME_KEY)).thenReturn(null);
 
     servlet.handleRequest(conReq);
@@ -57,8 +64,8 @@ public class ConnectFourServletTest {
   }
 
   @Test
-  public void testPageBeginReset() {
-    when(req.getParameter(ConnectFourServlet.PARAM_RESET_KEY)).thenReturn("bla bla bla");
+  public void testHandleRequestReset() {
+    when(req.getParameter(ConnectFourServlet.PARAM_RESET_KEY)).thenReturn("defined");
 
     servlet.handleRequest(conReq);
 
@@ -66,30 +73,55 @@ public class ConnectFourServletTest {
   }
 
   @Test
-  public void testPageBeginPlayingGame() {
-    Player currentPlayer = mock(Player.class);
-    when(currentPlayer.getName()).thenReturn("Test current player");
-    when(game.getCurrentPlayer()).thenReturn(currentPlayer);
+  public void testHandleRequestOngoingGame() {
     when(game.getStatus()).thenReturn(GameStatus.ONGOING);
+    when(game.getCurrentPlayer()).thenReturn(player);
+
     when(req.getParameter(ConnectFourServlet.PARAM_PLAY_KEY)).thenReturn("1342");
 
     servlet.handleRequest(conReq);
 
     verify(game).dropDisc(eq(1341));
-    verify(req).setAttribute(ConnectFourRequest.MAIN_MESSAGE, "Now playing: Test current player");
+    verify(req).setAttribute(ConnectFourRequest.MAIN_MESSAGE, "Now playing: Test player");
     verify(req).setAttribute(ConnectFourRequest.SUB_MESSAGE, "");
   }
 
   @Test
-  public void testPageBeginVictory() {
-    Player player = mock(Player.class);
-    when(player.getName()).thenReturn("Test winner");
-    when(game.getWinner()).thenReturn(player);
-    when(game.getStatus()).thenReturn(GameStatus.FINISHED);
+  public void testHandleRequestInvalidColumn() {
+    when(game.getStatus()).thenReturn(GameStatus.ONGOING);
+    when(game.getCurrentPlayer()).thenReturn(player);
+
+    when(req.getParameter(ConnectFourServlet.PARAM_PLAY_KEY)).thenReturn("invalid value");
 
     servlet.handleRequest(conReq);
 
-    verify(req).setAttribute(ConnectFourRequest.MAIN_MESSAGE, "Test winner won the game.");
+    verify(req).setAttribute(ConnectFourRequest.MAIN_MESSAGE, "Now playing: Test player");
+    verify(req).setAttribute(ConnectFourRequest.SUB_MESSAGE, "Invalid parameter col: invalid value");
+  }
+
+  @Test
+  public void testHandleRequestInvalidPlay() {
+    when(game.getStatus()).thenReturn(GameStatus.ONGOING);
+    when(game.getCurrentPlayer()).thenReturn(player);
+    when(game.dropDisc(anyInt())).thenThrow(new ConnectFourException("Invalid play"));
+
+    when(req.getParameter(ConnectFourServlet.PARAM_PLAY_KEY)).thenReturn("1342");
+
+    servlet.handleRequest(conReq);
+
+    verify(game).dropDisc(eq(1341));
+    verify(req).setAttribute(ConnectFourRequest.MAIN_MESSAGE, "Now playing: Test player");
+    verify(req).setAttribute(ConnectFourRequest.SUB_MESSAGE, "Invalid play");
+  }
+
+  @Test
+  public void testHandleRequestVictory() {
+    when(game.getStatus()).thenReturn(GameStatus.FINISHED);
+    when(game.getWinner()).thenReturn(player);
+
+    servlet.handleRequest(conReq);
+
+    verify(req).setAttribute(ConnectFourRequest.MAIN_MESSAGE, "Test player won the game.");
     verify(req).setAttribute(ConnectFourRequest.SUB_MESSAGE, "");
   }
 
