@@ -8,16 +8,16 @@ import vrampal.connectfour.core.Game;
 
 public class DummyBotPlayerInterface implements PlayerInterface {
 
-  private final Random random = new Random();
+  private static final Random RANDOM = new Random();
 
   @Override
   public int selectPlayColumn(Game game) {
     Board board = game.getBoard();
     int width = board.getWidth();
 
-    int colIdx = random.nextInt(width);
+    int colIdx = RANDOM.nextInt(width);
     while (board.isColumnFull(colIdx)) {
-      colIdx = random.nextInt(width);
+      colIdx = RANDOM.nextInt(width);
     }
 
     return colIdx;

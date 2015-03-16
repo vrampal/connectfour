@@ -33,7 +33,7 @@ public class GameImpl implements Game, GameEndListener {
 
   private static final Player RED = new PlayerData("Red", 'R');
 
-  private static final Random RAND = new Random();
+  private static final Random RANDOM = new Random();
 
   @Getter
   private final String id;
@@ -82,7 +82,7 @@ public class GameImpl implements Game, GameEndListener {
    */
   private static String generateShortId() {
     byte[] randData = new byte[6];
-    RAND.nextBytes(randData);
+    RANDOM.nextBytes(randData);
     return Base64.encodeBase64URLSafeString(randData);
   }
 
