@@ -65,19 +65,20 @@ public class ConnectFourServlet extends HttpServlet {
         game.dropDisc(colIdx - 1);
       } catch (NumberFormatException e) {
         subMessage = "Invalid parameter col: " + colStr;
-        log.error("Invalid column", e);
+        log.error(subMessage);
       } catch (ConnectFourException e) {
         subMessage = e.getMessage();
-        log.error("Unable to play", e);
+        log.error(subMessage);
       }
     }
 
     // Build main message
     String mainMessage = "";
-    if (game.getStatus() == GameStatus.ONGOING) {
+    GameStatus gameStatus = game.getStatus();
+    if (gameStatus == GameStatus.ONGOING) {
       Player player = game.getCurrentPlayer();
       mainMessage = "Now playing: " + player.getName();
-    } else if (game.getStatus() == GameStatus.FINISHED) {
+    } else if (gameStatus == GameStatus.FINISHED) {
       Player winner = game.getWinner();
       if (winner != null) {
         mainMessage = winner.getName() + " won the game.";
