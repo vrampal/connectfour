@@ -6,6 +6,10 @@ import vrampal.connectfour.cmdline.PlayerInterface;
 
 public class ConnectFourRobot {
 
+  private ConnectFourRobot() {
+    // Disable default constructor.
+  }
+
   public static void main(String[] args) {
     ConsoleDiplay consoleDisplay = new ConsoleDiplay();
     PlayerInterface playerItf = new DummyBotPlayerInterface();
