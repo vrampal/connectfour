@@ -167,47 +167,6 @@
       <plugins>
 
         <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.7.4.201502262128</version>
-          <executions>
-            <execution>
-              <id>add-jacoco-agent</id>
-              <goals>
-                <goal>prepare-agent</goal>
-              </goals>
-              <configuration>
-                <includes>
-                  <include>vrampal.connectfour.**</include>
-                </includes>
-                <excludes>
-                  <exclude>**ByMockito**</exclude>
-                </excludes>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-
-        <plugin>
-          <groupId>org.eluder.coveralls</groupId>
-          <artifactId>coveralls-maven-plugin</artifactId>
-          <version>3.0.1</version>
-        </plugin>
-
-        <plugin>
           <groupId>com.github.wvengen</groupId>
           <artifactId>proguard-maven-plugin</artifactId>
           <version>2.0.8</version>
@@ -221,17 +180,6 @@
           </dependencies>
         </plugin>
 
-        <plugin>
-          <groupId>org.apache.tomcat.maven</groupId>
-          <artifactId>tomcat7-maven-plugin</artifactId>
-          <version>2.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.jetty</groupId>
-          <artifactId>jetty-maven-plugin</artifactId>
-          <version>9.1.4.v20140401</version>
-        </plugin>
-
       </plugins>
     </pluginManagement>
 
@@ -239,11 +187,33 @@
 
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <!-- version in pluginManagement -->
+        <version>3.1</version>
         <configuration>
           <source>${jdk.version}</source>
           <target>${jdk.version}</target>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.7.4.201502262128</version>
+        <executions>
+          <execution>
+            <id>add-jacoco-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>vrampal.connectfour.*</include>
+              </includes>
+              <excludes>
+                <exclude>*ByMockito*</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
     </plugins>

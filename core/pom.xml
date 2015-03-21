@@ -91,17 +91,10 @@
     <plugins>
 
       <plugin>
-        <!-- Enable JaCoCo for this module -->
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <!-- version in parent POM -->
-      </plugin>
-
-      <plugin>
         <!-- Activate Coveralls for this module -->
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
-        <!-- version in parent POM -->
+        <version>3.0.1</version>
       </plugin>
 
       <!-- Temporary disable ProGuard for Java Visual VM demo

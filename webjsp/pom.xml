@@ -102,13 +102,6 @@
 
     <plugins>
 
-      <plugin>
-        <!-- Enable JaCoCo for this module -->
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <!-- version in parent POM -->
-      </plugin>
-
       <!-- Disable JSP pre-compile cause it does not speedup webapp start
       <plugin>
         <groupId>org.jasig.mojo.jspc</groupId>
@@ -168,7 +161,7 @@
         <!-- Enable Tomcat for this module -->
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
-        <!-- version in parent POM -->
+        <version>2.2</version>
         <configuration>
           <path>/${webapp.name}</path>
         </configuration>
@@ -178,7 +171,7 @@
         <!-- Enable Jetty for this module -->
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <!-- version in parent POM -->
+        <version>9.1.4.v20140401</version>
         <configuration>
           <webApp>
             <contextPath>/${webapp.name}</contextPath>
