@@ -16,15 +16,15 @@ import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
 @Slf4j
-public class SerializeTester {
+public class GenericSerializeTester {
 
   private final boolean printOutput;
 
-  public SerializeTester() {
+  public GenericSerializeTester() {
     this(false);
   }
 
-  public SerializeTester(boolean printOutput) {
+  public GenericSerializeTester(boolean printOutput) {
     this.printOutput = printOutput;
   }
 

@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import vrampal.connectfour.core.SerializeTester;
+import vrampal.connectfour.core.GenericSerializeTester;
 
 /**
  * Simple demonstrator for Google GSON (JSON), Jackson (JSON) and Xtream (XML)
@@ -24,28 +24,28 @@ public class BoardSerializeTest {
 
   @Test
   public void testJavaSerialize() throws IOException, ClassNotFoundException {
-    SerializeTester serializeTester = new SerializeTester();
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testJavaSerialize(board, BoardImpl.class);
   }
 
   @Test
   @Ignore("This is an object model with circular references, auto serialize does not work")
   public void testGoogleGson() {
-    SerializeTester serializeTester = new SerializeTester();
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testGoogleGson(board, BoardImpl.class);
   }
 
   @Test
   @Ignore("This is an object model with circular references, auto serialize does not work")
   public void testJackson() throws IOException {
-    SerializeTester serializeTester = new SerializeTester();
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testJackson(board, BoardImpl.class);
   }
 
   @Test
   @Ignore("This is an object model with circular references, auto serialize does not work")
   public void testXstream() {
-    SerializeTester serializeTester = new SerializeTester();
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testXstream(board, BoardImpl.class);
   }
 

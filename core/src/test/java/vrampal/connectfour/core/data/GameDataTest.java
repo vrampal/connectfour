@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import vrampal.connectfour.core.Game;
-import vrampal.connectfour.core.SerializeTester;
+import vrampal.connectfour.core.GenericSerializeTester;
 import vrampal.connectfour.core.impl.GameImpl;
 
 /**
@@ -46,25 +46,25 @@ public class GameDataTest {
 
   @Test
   public void testJavaSerialize() throws IOException, ClassNotFoundException {
-    SerializeTester serializeTester = new SerializeTester();
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testJavaSerialize(gameData, GameData.class);
   }
 
   @Test
   public void testGoogleGson() {
-    SerializeTester serializeTester = new SerializeTester();
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testGoogleGson(gameData, GameData.class);
   }
 
   @Test
   public void testJackson() throws IOException {
-    SerializeTester serializeTester = new SerializeTester();
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testJackson(gameData, GameData.class);
   }
 
   @Test
   public void testXstream() {
-    SerializeTester serializeTester = new SerializeTester();
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testXstream(gameData, GameData.class);
   }
 
