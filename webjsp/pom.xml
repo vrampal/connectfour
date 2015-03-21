@@ -101,6 +101,15 @@
     <finalName>${webapp.name}</finalName>
 
     <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.12.4</version>
+        <configuration>
+          <systemPropertyVariables>
+            <java.util.logging.config.file>src/test/resources/logging.properties</java.util.logging.config.file>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
 
       <!-- Disable JSP pre-compile cause it does not speedup webapp start
       <plugin>
