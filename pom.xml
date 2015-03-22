@@ -54,7 +54,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>1.7</jdk.version>
-    <!-- Versions are defined here only if they are use in multiple partefacts -->
+    <!-- Versions are defined here only if they are use in multiple artefacts -->
     <slf4j.version>1.7.10</slf4j.version>
     <selenium.version>2.45.0</selenium.version>
   </properties>
