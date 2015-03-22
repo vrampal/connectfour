@@ -54,12 +54,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>1.7</jdk.version>
+    <!-- Versions are defined here only if they are use in multiple partefacts -->
     <slf4j.version>1.7.10</slf4j.version>
     <selenium.version>2.45.0</selenium.version>
   </properties>
 
   <dependencyManagement>
-    <!-- Middleware version management -->
+    <!-- Shared middleware dependency management -->
     <dependencies>
 
       <dependency>
@@ -96,7 +97,8 @@
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.10</version>
+        <!-- Downgraded to v1.9 to have it provided when running in TomEE -->
+        <version>1.9</version>
       </dependency>
 
       <dependency>
@@ -127,12 +129,14 @@
         <version>1.10.19</version>
         <scope>test</scope>
       </dependency>
+
       <dependency>
         <groupId>org.jbehave</groupId>
         <artifactId>jbehave-core</artifactId>
         <version>3.9.5</version>
         <scope>test</scope>
       </dependency>
+
       <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>selenium-api</artifactId>
