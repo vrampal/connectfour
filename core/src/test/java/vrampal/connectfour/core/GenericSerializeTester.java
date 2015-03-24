@@ -42,6 +42,7 @@ public class GenericSerializeTester {
     ObjectInputStream oiStream = new ObjectInputStream(baiStream);
 
     // Control we can de-serialize
+    @SuppressWarnings("unchecked")
     T testObj2 = (T) oiStream.readObject();
 
     // Control same object fields
