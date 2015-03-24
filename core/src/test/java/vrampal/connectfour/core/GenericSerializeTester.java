@@ -112,6 +112,7 @@ public class GenericSerializeTester {
     }
 
     // Control we can de-serialize
+    @SuppressWarnings("unchecked")
     T testObj2 = (T) xstream.fromXML(xmlStr);
 
     // Control same object fields
