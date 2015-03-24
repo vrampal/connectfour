@@ -28,7 +28,7 @@
         <role>architect</role>
         <role>developer</role>
       </roles>
-      <timezone>+1</timezone>
+      <timezone>Europe/Paris</timezone>
     </developer>
   </developers>
 
@@ -62,7 +62,6 @@
   <dependencyManagement>
     <!-- Shared middleware dependency management -->
     <dependencies>
-
       <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
@@ -165,7 +164,6 @@
         <version>${selenium.version}</version>
         <scope>test</scope>
       </dependency>
-
     </dependencies>
   </dependencyManagement>
 

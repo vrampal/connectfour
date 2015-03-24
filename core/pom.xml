@@ -97,34 +97,43 @@
         <version>3.0.1</version>
       </plugin>
 
-      <!-- Temporary disable ProGuard for Java Visual VM demo
-      <plugin>
-        <groupId>com.github.wvengen</groupId>
-        <artifactId>proguard-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>proguard</goal>
-            </goals>
-            <configuration>
-              <options>
-                <option>-optimizationpasses 9</option>
-                <option>-allowaccessmodification</option>
-                <option>-keep public class vrampal.connectfour.core.* { public *; }</option>
-                <option>-keep public class vrampal.connectfour.core.data.* { public *; }</option>
-                <option>-keep public class vrampal.connectfour.core.impl.GameImpl { public *; }</option>
-              </options>
-              <libs>
-                <lib>${java.home}/lib/rt.jar</lib>
-              </libs>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      -->
-
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>obfuscate</id>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>com.github.wvengen</groupId>
+            <artifactId>proguard-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>proguard</goal>
+                </goals>
+                <configuration>
+                  <options>
+                    <option>-optimizationpasses 9</option>
+                    <option>-allowaccessmodification</option>
+                    <option>-keep public class vrampal.connectfour.core.* { public *; }</option>
+                    <option>-keep public class vrampal.connectfour.core.data.* { public *; }</option>
+                    <option>-keep public class vrampal.connectfour.core.impl.GameImpl { public *; }</option>
+                  </options>
+                  <libs>
+                    <lib>${java.home}/lib/rt.jar</lib>
+                  </libs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

@@ -56,31 +56,6 @@
         </configuration>
       </plugin>
 
-      <!-- Disable ProGuard until jar can be run with dependencies
-      <plugin>
-        <groupId>com.github.wvengen</groupId>
-        <artifactId>proguard-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>proguard</goal>
-            </goals>
-            <configuration>
-              <options>
-                <option>-optimizationpasses 9</option>
-                <option>-allowaccessmodification</option>
-                <option>-keep public class vrampal.connectfour.cmdline.ConnectFourConsole { public *; }</option>
-              </options>
-              <libs>
-                <lib>${java.home}/lib/rt.jar</lib>
-              </libs>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      -->
-
       <plugin>
         <!-- run "mvn assembly:single" to have a jar with all dependencies -->
         <artifactId>maven-assembly-plugin</artifactId>
@@ -94,5 +69,39 @@
 
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>obfuscate</id>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>com.github.wvengen</groupId>
+            <artifactId>proguard-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>proguard</goal>
+                </goals>
+                <configuration>
+                  <options>
+                    <option>-optimizationpasses 9</option>
+                    <option>-allowaccessmodification</option>
+                    <option>-keep public class vrampal.connectfour.cmdline.ConnectFourConsole { public *; }</option>
+                  </options>
+                  <libs>
+                    <lib>${java.home}/lib/rt.jar</lib>
+                  </libs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

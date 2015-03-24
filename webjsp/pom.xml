@@ -111,61 +111,6 @@
         </configuration>
       </plugin>
 
-      <!-- Disable JSP pre-compile cause it does not speedup webapp start
-      <plugin>
-        <groupId>org.jasig.mojo.jspc</groupId>
-        <artifactId>jspc-maven-plugin</artifactId>
-        <version>2.0.0</version>
-        <executions>
-          <execution>
-            <id>pre-compile-jsp</id>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-            <phase>test</phase>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.jasig.mojo.jspc</groupId>
-            <artifactId>jspc-compiler-tomcat7</artifactId>
-            <version>2.0.0</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      -->
-
-      <!-- Disable ProGuard until better support of WebAps
-      <plugin>
-        <groupId>com.github.wvengen</groupId>
-        <artifactId>proguard-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>proguard</goal>
-            </goals>
-            <configuration>
-              <injar>${webapp.name}.war</injar>
-              <outjar>${webapp.name}-obf.war</outjar>
-              <includeDependency>false</includeDependency>
-              <options>
-                <option>-ignorewarnings</option>
-                <option>-optimizationpasses 9</option>
-                <option>-allowaccessmodification</option>
-                <option>-keep public class vrampal.connectfour.webjsp.* { public *; }</option>
-                <option>-keep public class vrampal.connectfour.webjsp.view.* { public *; }</option>
-              </options>
-              <libs>
-                <lib>${java.home}/lib/rt.jar</lib>
-                <lib>${env.CATALINA_HOME}/lib/servlet-api.jar</lib>
-              </libs>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      -->
-
       <plugin>
         <!-- Enable Tomcat for this module -->
         <groupId>org.apache.tomcat.maven</groupId>
@@ -190,5 +135,74 @@
 
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>compilejsp</id>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.jasig.mojo.jspc</groupId>
+            <artifactId>jspc-maven-plugin</artifactId>
+            <version>2.0.0</version>
+            <executions>
+              <execution>
+                <id>pre-compile-jsp</id>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+                <phase>test</phase>
+              </execution>
+            </executions>
+            <dependencies>
+              <dependency>
+                <groupId>org.jasig.mojo.jspc</groupId>
+                <artifactId>jspc-compiler-tomcat7</artifactId>
+                <version>2.0.0</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>obfuscate</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.wvengen</groupId>
+            <artifactId>proguard-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>proguard</goal>
+                </goals>
+                <configuration>
+                  <injar>${webapp.name}.war</injar>
+                  <outjar>${webapp.name}-obf.war</outjar>
+                  <includeDependency>false</includeDependency>
+                  <options>
+                    <option>-ignorewarnings</option>
+                    <option>-optimizationpasses 9</option>
+                    <option>-allowaccessmodification</option>
+                    <option>-keep public class vrampal.connectfour.webjsp.* { public *; }</option>
+                    <option>-keep public class vrampal.connectfour.webjsp.view.* { public *; }</option>
+                  </options>
+                  <libs>
+                    <lib>${java.home}/lib/rt.jar</lib>
+                    <lib>${env.CATALINA_HOME}/lib/servlet-api.jar</lib>
+                  </libs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
