@@ -17,6 +17,8 @@ import vrampal.connectfour.core.data.PlayerData;
 @EqualsAndHashCode(of = { "width", "height", "content" })
 class BoardImpl implements Board {
 
+  private static final long serialVersionUID = 1L;
+
   static final Player EMPTY_PLAYER = new PlayerData("Empty", ' ');
 
   private static final int DEFAULT_WIDTH = 7;

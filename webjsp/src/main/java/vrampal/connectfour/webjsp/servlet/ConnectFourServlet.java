@@ -24,6 +24,8 @@ import vrampal.connectfour.webjsp.ConnectFourSession;
 @WebServlet(urlPatterns = { ConnectFourServlet.MAIN_URL })
 public class ConnectFourServlet extends HttpServlet {
 
+  private static final long serialVersionUID = 1L;
+
   public static final String MAIN_URL = "/index.html";
 
   public static final String MAIN_DISPLAY_JSP = "/main-display.jsp";

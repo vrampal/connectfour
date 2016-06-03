@@ -5,15 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
-
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import vrampal.connectfour.core.ConnectFourException;
 import vrampal.connectfour.core.Game;
 import vrampal.connectfour.core.GameStatus;
@@ -24,6 +23,8 @@ import vrampal.connectfour.core.data.PlayerData;
 @EqualsAndHashCode
 @ToString(of = { "id" })
 public class GameImpl implements Game, GameEndListener {
+
+  private static final long serialVersionUID = 1L;
 
   private static final Logger LOG_STATS = LoggerFactory.getLogger("connectfour.game.stats");
 

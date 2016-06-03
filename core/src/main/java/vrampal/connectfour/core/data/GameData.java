@@ -20,6 +20,8 @@ import vrampal.connectfour.core.Player;
 @ToString(of = { "id" })
 public class GameData implements NoCycleSerializable {
 
+  private static final long serialVersionUID = 1L;
+
   @Getter
   @Setter
   private String id;

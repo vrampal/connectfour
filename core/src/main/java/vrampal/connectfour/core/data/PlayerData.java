@@ -17,6 +17,8 @@ import vrampal.connectfour.core.Player;
 @ToString(of = { "name" })
 public class PlayerData implements Player, NoCycleSerializable {
 
+  private static final long serialVersionUID = 1L;
+
   @Getter
   @Setter
   private String name;
