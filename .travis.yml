@@ -2,7 +2,8 @@ language: java
 sudo: false
 jdk:
   - oraclejdk8
-install:
-  - mvn -B -V -DskipTests install
+cache:
+  directories:
+    - $HOME/.m2/repository
 script:
-  - mvn -B test
+  - mvn -B -V clean org.jacoco:jacoco-maven-plugin:prepare-agent verify

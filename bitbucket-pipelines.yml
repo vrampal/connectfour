@@ -5,5 +5,4 @@ pipelines:
         caches:
           - maven
         script:
-          - mvn -B -V -DskipTests install
-          - mvn -B test
+          - mvn -B -V clean org.jacoco:jacoco-maven-plugin:prepare-agent verify
