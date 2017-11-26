@@ -96,17 +96,18 @@ class GamesData implements Serializable {
   }
 
   void saveToDisk(String fileName) throws IOException {
-    FileOutputStream foStream = new FileOutputStream(fileName);
-    ObjectOutputStream ooStream = new ObjectOutputStream(foStream);
-    ooStream.writeObject(this);
-    ooStream.close();
+    try (FileOutputStream foStream = new FileOutputStream(fileName);
+        ObjectOutputStream ooStream = new ObjectOutputStream(foStream);) {
+      ooStream.writeObject(this);
+    }
   }
 
   static GamesData loadFromDisk(String fileName) throws IOException, ClassNotFoundException {
-    FileInputStream fiStream = new FileInputStream(fileName);
-    ObjectInputStream oiStream = new ObjectInputStream(fiStream);
-    GamesData gamesData = (GamesData) oiStream.readObject();
-    oiStream.close();
+    GamesData gamesData = null;
+    try(FileInputStream fiStream = new FileInputStream(fileName);
+        ObjectInputStream oiStream = new ObjectInputStream(fiStream);) {
+      gamesData = (GamesData) oiStream.readObject();
+    }
     return gamesData;
   }
 
