@@ -1,0 +1,10 @@
+image: maven:3.5-jdk-8-slim
+
+cache:
+  paths:
+    - $HOME/.m2/repository
+    
+build:
+  stage: build
+  script:
+    - mvn -B -V clean org.jacoco:jacoco-maven-plugin:prepare-agent verify
