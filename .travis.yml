@@ -4,6 +4,10 @@ sudo: false
 
 jdk:
   - oraclejdk8
+  
+addons:
+  sonarcloud:
+    organization: "vrampal-bitbucket"
 
 cache:
   directories:
@@ -11,4 +15,4 @@ cache:
 
 script:
   - mvn -B -V clean org.jacoco:jacoco-maven-plugin:prepare-agent verify
-  - mvn sonar:sonar -Dsonar.organization=vrampal-bitbucket -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=3cfa5215365fddaab012358aae78fb4008c856c1
+  - mvn sonar:sonar
