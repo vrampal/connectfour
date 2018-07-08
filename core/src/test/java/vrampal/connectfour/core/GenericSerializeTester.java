@@ -12,21 +12,15 @@ import java.io.ObjectOutputStream;
 import lombok.extern.slf4j.Slf4j;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
 @Slf4j
 public class GenericSerializeTester {
 
-  private final boolean printOutput;
-
-  public GenericSerializeTester() {
-    this(false);
-  }
-
-  public GenericSerializeTester(boolean printOutput) {
-    this.printOutput = printOutput;
-  }
+  private static final boolean PRINT_OUTPUT = false;
 
   public <T> void testJavaSerialize(T testObj, Class<T> testClass) throws IOException, ClassNotFoundException {
     ByteArrayOutputStream baoStream = new ByteArrayOutputStream();
@@ -57,7 +51,7 @@ public class GenericSerializeTester {
     String jsonStr = gson.toJson(testObj);
 
     log.info(testClass.getSimpleName() + " - Google GSON length: " + jsonStr.length() + " chars");
-    if (printOutput) {
+    if (PRINT_OUTPUT) {
       log.info(jsonStr);
     }
 
@@ -75,14 +69,64 @@ public class GenericSerializeTester {
     assertEquals(jsonStr, jsonStr2);
   }
 
-  public <T> void testJackson(T testObj, Class<T> testClass) throws IOException {
+  public <T> void testJacksonJson(T testObj, Class<T> testClass) throws IOException {
     ObjectMapper objectMapper = new ObjectMapper();
 
     // Control we can serialize
     String jsonStr = objectMapper.writeValueAsString(testObj);
 
-    log.info(testClass.getSimpleName() + " - Jackson length: " + jsonStr.length() + " chars");
-    if (printOutput) {
+    log.info(testClass.getSimpleName() + " - Jackson JSON length: " + jsonStr.length() + " chars");
+    if (PRINT_OUTPUT) {
+      log.info(jsonStr);
+    }
+
+    // Control we can de-serialize
+    T testObj2 = objectMapper.readValue(jsonStr, testClass);
+
+    // Control same object fields
+    assertEquals(testObj, testObj2);
+    assertNotSame(testObj, testObj2);
+
+    // Serialize again
+    String jsonStr2 = objectMapper.writeValueAsString(testObj);
+
+    // Control no data lost in serialization process
+    assertEquals(jsonStr, jsonStr2);
+  }
+
+  public <T> void testJacksonXml(T testObj, Class<T> testClass) throws IOException {
+    ObjectMapper objectMapper = new XmlMapper();
+
+    // Control we can serialize
+    String jsonStr = objectMapper.writeValueAsString(testObj);
+
+    log.info(testClass.getSimpleName() + " - Jackson XML length: " + jsonStr.length() + " chars");
+    if (PRINT_OUTPUT) {
+      log.info(jsonStr);
+    }
+
+    // Control we can de-serialize
+    T testObj2 = objectMapper.readValue(jsonStr, testClass);
+
+    // Control same object fields
+    assertEquals(testObj, testObj2);
+    assertNotSame(testObj, testObj2);
+
+    // Serialize again
+    String jsonStr2 = objectMapper.writeValueAsString(testObj);
+
+    // Control no data lost in serialization process
+    assertEquals(jsonStr, jsonStr2);
+  }
+
+  public <T> void testJacksonYaml(T testObj, Class<T> testClass) throws IOException {
+    ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+
+    // Control we can serialize
+    String jsonStr = objectMapper.writeValueAsString(testObj);
+
+    log.info(testClass.getSimpleName() + " - Jackson YAML length: " + jsonStr.length() + " chars");
+    if (PRINT_OUTPUT) {
       log.info(jsonStr);
     }
 
@@ -107,7 +151,7 @@ public class GenericSerializeTester {
     String xmlStr = xstream.toXML(testObj);
 
     log.info(testClass.getSimpleName() + " - Xstream length: " + xmlStr.length() + " chars");
-    if (printOutput) {
+    if (PRINT_OUTPUT) {
       log.info(xmlStr);
     }
 

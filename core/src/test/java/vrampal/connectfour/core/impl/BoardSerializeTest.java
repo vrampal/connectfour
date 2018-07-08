@@ -29,7 +29,6 @@ public class BoardSerializeTest {
   }
 
   @Test
-  @Ignore("This is an object model with circular references, auto serialize does not work")
   public void testGoogleGson() {
     GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testGoogleGson(board, BoardImpl.class);
@@ -37,13 +36,26 @@ public class BoardSerializeTest {
 
   @Test
   @Ignore("This is an object model with circular references, auto serialize does not work")
-  public void testJackson() throws IOException {
+  public void testJacksonJson() throws IOException {
     GenericSerializeTester serializeTester = new GenericSerializeTester();
-    serializeTester.testJackson(board, BoardImpl.class);
+    serializeTester.testJacksonJson(board, BoardImpl.class);
   }
 
   @Test
   @Ignore("This is an object model with circular references, auto serialize does not work")
+  public void testJacksonXml() throws IOException {
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
+    serializeTester.testJacksonXml(board, BoardImpl.class);
+  }
+
+  @Test
+  @Ignore("This is an object model with circular references, auto serialize does not work")
+  public void testJacksonYaml() throws IOException {
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
+    serializeTester.testJacksonYaml(board, BoardImpl.class);
+  }
+
+  @Test
   public void testXstream() {
     GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testXstream(board, BoardImpl.class);

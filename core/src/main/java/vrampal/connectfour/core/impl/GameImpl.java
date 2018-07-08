@@ -1,11 +1,11 @@
 package vrampal.connectfour.core.impl;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +27,7 @@ public class GameImpl implements Game, GameEndListener {
   private static final long serialVersionUID = 1L;
 
   private static final Logger LOG_STATS = LoggerFactory.getLogger("connectfour.game.stats");
-
+  
   private static final Player YELLOW = new PlayerData("Yellow", 'Y');
 
   private static final Player RED = new PlayerData("Red", 'R');
@@ -82,7 +82,7 @@ public class GameImpl implements Game, GameEndListener {
   private static String generateShortId() {
     byte[] randData = new byte[6];
     RANDOM.nextBytes(randData);
-    return Base64.encodeBase64URLSafeString(randData);
+    return Base64.getEncoder().encodeToString(randData);
   }
 
   @Override

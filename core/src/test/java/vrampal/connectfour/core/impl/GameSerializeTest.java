@@ -44,13 +44,26 @@ public class GameSerializeTest {
 
   @Test
   @Ignore("This is an object model with circular references, auto serialize does not work")
-  public void testJackson() throws IOException {
+  public void testJacksonJson() throws IOException {
     GenericSerializeTester serializeTester = new GenericSerializeTester();
-    serializeTester.testJackson(game, GameImpl.class);
+    serializeTester.testJacksonJson(game, GameImpl.class);
   }
 
   @Test
   @Ignore("This is an object model with circular references, auto serialize does not work")
+  public void testJacksonXml() throws IOException {
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
+    serializeTester.testJacksonXml(game, GameImpl.class);
+  }
+
+  @Test
+  @Ignore("This is an object model with circular references, auto serialize does not work")
+  public void testJacksonYaml() throws IOException {
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
+    serializeTester.testJacksonYaml(game, GameImpl.class);
+  }
+
+  @Test
   public void testXstream() {
     GenericSerializeTester serializeTester = new GenericSerializeTester();
     serializeTester.testXstream(game, GameImpl.class);

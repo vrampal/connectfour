@@ -42,9 +42,21 @@ public class PlayerDataTest {
   }
 
   @Test
-  public void testJackson() throws IOException {
+  public void testJacksonJson() throws IOException {
     GenericSerializeTester serializeTester = new GenericSerializeTester();
-    serializeTester.testJackson(playerData, PlayerData.class);
+    serializeTester.testJacksonJson(playerData, PlayerData.class);
+  }
+
+  @Test
+  public void testJacksonXml() throws IOException {
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
+    serializeTester.testJacksonXml(playerData, PlayerData.class);
+  }
+
+  @Test
+  public void testJacksonYaml() throws IOException {
+    GenericSerializeTester serializeTester = new GenericSerializeTester();
+    serializeTester.testJacksonYaml(playerData, PlayerData.class);
   }
 
   @Test
