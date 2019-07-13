@@ -1,4 +1,4 @@
-image: maven:3.5-jdk-8-slim
+image: maven:3.6-jdk-8-slim
 
 cache:
   paths:
@@ -7,4 +7,4 @@ cache:
 build:
   stage: build
   script:
-    - mvn -B -V clean org.jacoco:jacoco-maven-plugin:prepare-agent verify
+    - mvn -B -V clean verify
