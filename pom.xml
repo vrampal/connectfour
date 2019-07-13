@@ -208,7 +208,7 @@
             </goals>
             <configuration>
               <includes>
-                <include>vrampal.connectfour.*</include>
+                <include>vrampal.*</include>
               </includes>
               <excludes>
                 <exclude>*ByMockito*</exclude>
