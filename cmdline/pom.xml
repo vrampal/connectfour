@@ -59,7 +59,7 @@
       <plugin>
         <!-- run "mvn assembly:single" to have a jar with all dependencies -->
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.4</version>
+        <version>2.6</version>
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
