@@ -9,13 +9,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import lombok.extern.slf4j.Slf4j;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class GenericSerializeTester {
@@ -146,7 +149,8 @@ public class GenericSerializeTester {
 
   public <T> void testXstream(T testObj, Class<T> testClass) {
     XStream xstream = new XStream();
-
+    xstream.allowTypesByWildcard(new String[] { "vrampal.connectfour.core.**" });
+    
     // Control we can serialize
     String xmlStr = xstream.toXML(testObj);
 
