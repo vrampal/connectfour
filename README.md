@@ -75,6 +75,6 @@ License
 -------
 
 [MIT license](http://opensource.org/licenses/MIT)
-Copyright (c) 2014-2018 Vincent RAMPAL
+Copyright (c) 2014-2021 Vincent RAMPAL
 
 
