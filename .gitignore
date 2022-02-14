@@ -1,3 +1,6 @@
+# Created to match several tools I use
+# see: https://github.com/github/gitignore
+
 # Windows binary
 *.exe
 *.dll
@@ -36,10 +39,22 @@ gen/
 .settings/
 .classpath
 .project
+.pydevproject
 
-# InteliJ generated files
+# Jetbrain generated files
 .idea/
 *.iml
+out/
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
 
 # Logs and temporary files
 log/
@@ -58,3 +73,5 @@ Thumbs.db
 # JVM crash log and heap dump
 hs_err_pid*
 *.hprof
+
+# Project specific files
