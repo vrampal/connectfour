@@ -1,10 +1,10 @@
-name: Basic Maven Build A
+name: Basic Maven Build
 
 on: [push]
 
 jobs:
   build:
-    name: Sonar build B
+    name: Maven build
     runs-on: ubuntu-latest
 
     steps:

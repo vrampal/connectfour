@@ -41,4 +41,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B -V verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=vrampal_connectfour
+        run: mvn -B -V -Dsonar.host.url=https://sonarcloud.io verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=vrampal_connectfour
