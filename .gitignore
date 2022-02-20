@@ -24,6 +24,9 @@
 # Python binary
 *.pyc
 
+# Node.js
+node_modules/
+
 # Maven build directory
 target/
 
