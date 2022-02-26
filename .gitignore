@@ -17,15 +17,16 @@
 *.ear
 
 # Android binary
+.apt_generated/
+.apt_generated_tests/
 *.apk
 *.ap_
 *.dex
 
 # Python binary
+__pycache__/
 *.pyc
-
-# Node.js
-node_modules/
+.pytest_cache/
 
 # Maven build directory
 target/
@@ -33,6 +34,10 @@ target/
 # Gradle build
 build/
 .gradle
+
+# NPM
+node_modules/
+package-lock.json
 
 # Sonar scanner
 .scannerwork/
