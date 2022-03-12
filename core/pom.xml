@@ -93,19 +93,6 @@
 
   </dependencies>
 
-  <build>
-    <plugins>
-
-      <plugin>
-        <!-- Activate Coveralls for this module -->
-        <groupId>org.eluder.coveralls</groupId>
-        <artifactId>coveralls-maven-plugin</artifactId>
-        <version>3.2.1</version>
-      </plugin>
-
-    </plugins>
-  </build>
-
   <profiles>
     <profile>
       <id>obfuscate</id>
