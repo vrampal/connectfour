@@ -1,5 +1,7 @@
 {
   "extends": [
     "config:base"
-  ]
+  ],
+  "schedule": "* 10 * * 4"
+  "branchConcurrentLimit": 20
 }
