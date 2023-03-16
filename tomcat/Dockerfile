@@ -1,4 +1,4 @@
-FROM tomcat:8.5-jre8-slim
+FROM tomcat:9.0-jre8-slim
 
 MAINTAINER Vincent RAMPAL <vincent.rampal@gmail.com>
 
