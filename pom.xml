@@ -45,7 +45,7 @@
     <!-- Versions are defined here only if they are use in multiple artefacts -->
     <slf4j.version>1.7.36</slf4j.version>
     <jackson.version>2.13.2</jackson.version>
-    <selenium.version>3.141.59</selenium.version>
+    <selenium.version>4.18.1</selenium.version>
   </properties>
 
   <dependencyManagement>
