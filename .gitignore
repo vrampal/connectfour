@@ -1,5 +1,15 @@
-# Created to match several tools I use
-# see: https://github.com/github/gitignore
+# Created to block common mistakes for several tools and languages
+# See: https://github.com/github/gitignore
+# See: https://www.toptal.com/developers/gitignore
+
+# Common binary archives
+*.zip
+*.rar
+*.7z
+*.tgz
+*.gz
+*.bz
+*.xz
 
 # Windows binary
 *.exe
@@ -7,8 +17,10 @@
 
 # C / Linux binary
 *.o
+*.obj
 *.a
 *.so
+*.elf
 
 # Java binary
 *.class
@@ -23,12 +35,13 @@
 *.ap_
 *.dex
 
-# Python binary
+# Python build
 __pycache__/
-*.pyc
 .pytest_cache/
+.mypy_cache/
+*.pyc
 
-# Maven build directory
+# Maven build
 target/
 
 # Gradle build
@@ -37,7 +50,6 @@ build/
 
 # NPM
 node_modules/
-package-lock.json
 
 # Sonar scanner
 .scannerwork/
@@ -76,6 +88,7 @@ temp/
 *.log
 *.log.*
 *.tmp
+*.bak
 
 # Thumnail cache
 .DS_Store
