@@ -1,0 +1,36 @@
+# EditorConfig autocofigure your editor
+# Documentation: https://EditorConfig.org
+# Templates: https://github.com/vinibrsl/editorconfig-templates
+
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{json,json5}]
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.md]
+# Trailing whitespace are used to create line return
+trim_trailing_whitespace = false
+
+[*.{htm,html,js,ts,tsx,css,sass,scss,less,svg,vue}]
+indent_size = 2
+
+[*.{xml,config}]
+indent_size = 2
+
+[*.{cmd,bat}]
+end_of_line = crlf
+
+[*.sh]
+# here-document work better with tabs
+indent_style = tab
+end_of_line = lf
