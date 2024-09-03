@@ -125,7 +125,7 @@
         <!-- Enable Jetty for this module -->
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.4.45.v20220203</version>
+        <version>9.4.56.v20240826</version>
         <configuration>
           <webApp>
             <contextPath>/${webapp.name}</contextPath>
